@@ -80,7 +80,15 @@
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
         }
         
-        nav ul li a.active::after {
+        /* Стиль для активного пункта без цвета */
+        nav ul li a.active-no-color {
+            background: transparent !important;
+            color: #f1f1f1 !important;
+            box-shadow: none !important;
+        }
+        
+        nav ul li a.active::after, 
+        nav ul li a.active-no-color::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -215,7 +223,7 @@
         
         /* Вторая секция - изменения */
         #section2 {
-            padding-top: 0px;
+            padding-top: 100px;
         }
         
         .section2-title {
@@ -258,7 +266,7 @@
             position: relative;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1s ease;
+            transition: all 0.5s ease; /* Убрана задержка - уменьшено время анимации */
         }
         
         .single-photo.active {
@@ -290,14 +298,13 @@
             font-size: 18px;
             line-height: 1.8;
             color: #ddd;
-            /* Убрали фон и padding */
             padding: 0;
             background: transparent;
             position: relative;
             z-index: 2;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1s ease 0.3s;
+            transition: all 0.5s ease; /* Убрана задержка - уменьшено время анимации */
         }
         
         .section-description.active {
@@ -352,7 +359,7 @@
                 margin-left: 15px;
             }
             
-            .section-title {
+            .section-title, .section2-title {
                 font-size: 28px;
             }
         }
@@ -365,13 +372,6 @@
             
             nav ul {
                 display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                font-size: 24px;
-                color: #fff;
-                cursor: pointer;
             }
             
             .logo {
@@ -466,7 +466,7 @@
                 
                 // Активация второй секции
                 if (scrollY > viewportHeight * 1.2) {
-                    // Активируем пункт меню 1A без цвета
+                    // Активируем пункт меню 1A без цвета фона
                     navLinks.forEach(link => {
                         link.classList.remove('active');
                         if (link.textContent === '1A') {
@@ -474,15 +474,9 @@
                         }
                     });
                     
-                    // Показываем фото с задержкой
-                    setTimeout(() => {
-                        featuredPhoto.classList.add('active');
-                    }, 300);
-                    
-                    // Показываем описание
-                    setTimeout(() => {
-                        featuredDescription.classList.add('active');
-                    }, 800);
+                    // Показываем фото и описание без задержки
+                    featuredPhoto.classList.add('active');
+                    featuredDescription.classList.add('active');
                 } else {
                     // Активируем пункт Home с цветом
                     navLinks.forEach(link => {
