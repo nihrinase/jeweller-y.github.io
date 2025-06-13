@@ -14,7 +14,7 @@
         
         body {
             overflow-x: hidden;
-            height: calc(200vh - 250px); /* Уменьшенное расстояние между секциями */
+            height: calc(200vh - 250px);
             background: #0a0a1a;
             color: #fff;
         }
@@ -158,7 +158,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 40px;
-            margin-top: -50px; /* Подъем фото на 50px вверх */
+            margin-top: -50px;
         }
         
         .photo-item {
@@ -206,16 +206,39 @@
         
         /* Зазор между секциями */
         #gap-section {
-            height: calc(100vh - 250px); /* Уменьшенное расстояние */
+            height: calc(100vh - 250px);
             position: relative;
             background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600') no-repeat center center/cover;
             z-index: 0;
-            background-attachment: fixed; /* Неподвижное фото на подложке */
+            background-attachment: fixed;
         }
         
-        /* Вторая секция */
+        /* Вторая секция - изменения */
         #section2 {
             padding-top: 100px;
+        }
+        
+        .section2-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section2-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #ff6b6b;
+            border-radius: 2px;
         }
         
         .single-photo-container {
@@ -223,7 +246,7 @@
             width: 189px;
             height: 400px;
             margin: 0 auto;
-            margin-top: 50px; /* Отступ от верха фона */
+            margin-top: 50px;
         }
         
         .single-photo {
@@ -267,9 +290,9 @@
             font-size: 18px;
             line-height: 1.8;
             color: #ddd;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 20px;
+            /* Убрали фон и padding */
+            padding: 0;
+            background: transparent;
             position: relative;
             z-index: 2;
             opacity: 0;
@@ -414,7 +437,7 @@
         <div class="section-bg" id="bg2"></div>
         
         <div class="section-content">
-            <h2 class="section-title">Шедевр Месяца</h2>
+            <h2 class="section2-title">Шедевр Месяца</h2>
             
             <div class="single-photo-container">
                 <div class="single-photo" id="featured-photo">
@@ -443,11 +466,11 @@
                 
                 // Активация второй секции
                 if (scrollY > viewportHeight * 1.2) {
-                    // Активируем пункт меню
+                    // Активируем пункт меню 1A без цвета
                     navLinks.forEach(link => {
                         link.classList.remove('active');
                         if (link.textContent === '1A') {
-                            link.classList.add('active');
+                            link.classList.add('active-no-color');
                         }
                     });
                     
@@ -461,9 +484,10 @@
                         featuredDescription.classList.add('active');
                     }, 800);
                 } else {
-                    // Активируем пункт Home
+                    // Активируем пункт Home с цветом
                     navLinks.forEach(link => {
                         link.classList.remove('active');
+                        link.classList.remove('active-no-color');
                         if (link.textContent === 'Home') {
                             link.classList.add('active');
                         }
