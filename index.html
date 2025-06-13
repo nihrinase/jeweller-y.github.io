@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Одностраничный резиновый сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            overflow-x: hidden;
+            height: 200vh; /* Две высоты экрана */
+            background: #1a1a2e;
+            color: #fff;
+        }
+        
+        /* Подложка из двух фото */
+        #background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200vh;
+            z-index: -1;
+        }
+        
+        .background-layer {
+            width: 100%;
+            height: 100vh;
+        }
+        
+        #bg-layer1 {
+            background: linear-gradient(45deg, #0f3460, #1a1a2e);
+        }
+        
+        #bg-layer2 {
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+        }
+        
+        /* Фон поверх подложки */
+        #overlay-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 30, 0.95);
+            z-index: 0;
+            transition: transform 0.8s ease;
+        }
+        
+        /* Шапка с лого и меню */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #e94560;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a.active, nav ul li a:hover {
+            background: #e94560;
+            color: #fff;
+        }
+        
+        /* Основной контент */
+        #content-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding-top: 120px;
+        }
+        
+        /* Секция с пятью фото */
+        #photos-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .photos-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .photo-item {
+            width: 189px;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Секция с одной фото */
+        #single-photo-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        #single-photo-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .single-photo {
+            width: 189px;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+        }
+        
+        .section-description {
+            max-width: 500px;
+            text-align: center;
+            margin: 40px auto;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        /* Анимации */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Декоративные элементы */
+        .decor-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(233, 69, 96, 0.1);
+            z-index: -1;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            right: 10%;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            .photos-row {
+                gap: 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .photos-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .logo {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Подложка из двух фото -->
+    <div id="background-container">
+        <div class="background-layer" id="bg-layer1"></div>
+        <div class="background-layer" id="bg-layer2"></div>
+    </div>
+    
+    <!-- Фон поверх подложки -->
+    <div id="overlay-background"></div>
+    
+    <!-- Декоративные элементы -->
+    <div class="decor-circle circle-1"></div>
+    <div class="decor-circle circle-2"></div>
+    
+    <!-- Шапка сайта -->
+    <header>
+        <div class="logo">DesignLab</div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#section1a">1A</a></li>
+                <li><a href="#section2a">2A</a></li>
+                <li><a href="#section3a">3A</a></li>
+                <li><a href="#section4a">4A</a></li>
+                <li><a href="#section5a">5A</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Контент -->
+    <div id="content-container">
+        <!-- Секция с пятью фото -->
+        <section id="photos-section">
+            <h2 class="section-title">Наши работы</h2>
+            <p class="section-subtitle">Лучшие фотографии, созданные с любовью и профессионализмом</p>
+            
+            <div class="photos-row">
+                <div class="photo-item floating" style="animation-delay: 0s;">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 1">
+                </div>
+                <div class="photo-item floating" style="animation-delay: 0.5s;">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 2">
+                </div>
+                <div class="photo-item floating" style="animation-delay: 1s;">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 3">
+                </div>
+                <div class="photo-item floating" style="animation-delay: 1.5s;">
+                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 4">
+                </div>
+                <div class="photo-item floating" style="animation-delay: 2s;">
+                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 5">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Секция с одной фото -->
+        <section id="single-photo-section">
+            <h2 class="section-title">Избранная работа</h2>
+            <p class="section-subtitle">Лучшая фотография месяца по мнению наших клиентов</p>
+            
+            <div class="single-photo">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Избранное фото">
+            </div>
+            
+            <p class="section-description">
+                Эта фотография получила более 500 голосов в нашем ежемесячном конкурсе. 
+                Она сочетает в себе идеальную композицию, цветовую гармонию и эмоциональную глубину.
+            </p>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlayBackground = document.getElementById('overlay-background');
+            const singlePhotoSection = document.getElementById('single-photo-section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            // Обработчик скролла
+            window.addEventListener('scroll', function() {
+                const scrollY = window.scrollY;
+                
+                // Перемещаем фон при скролле
+                overlayBackground.style.transform = `translateY(-${scrollY}px)`;
+                
+                // Показываем вторую секцию при достижении определенной позиции
+                if (scrollY > window.innerHeight * 0.6) {
+                    singlePhotoSection.classList.add('active');
+                    
+                    // Активируем пункт меню
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.textContent === '1A') {
+                            link.classList.add('active');
+                        }
+                    });
+                } else {
+                    singlePhotoSection.classList.remove('active');
+                    
+                    // Активируем пункт Home
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.textContent === 'Home') {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+            
+            // Плавный скролл для меню
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    let targetElement;
+                    
+                    if (targetId === '#home') {
+                        targetElement = document.getElementById('photos-section');
+                    } else if (targetId === '#section1a') {
+                        targetElement = document.getElementById('single-photo-section');
+                    } else {
+                        // Для других пунктов меню (заглушка)
+                        alert(`Раздел ${targetId} в разработке`);
+                        return;
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
