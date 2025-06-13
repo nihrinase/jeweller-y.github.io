@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скролл-эффект с зазором</title>
+    <title>Фотогалерея с эффектами скролла</title>
     <style>
         * {
             margin: 0;
@@ -14,46 +14,9 @@
         
         body {
             overflow-x: hidden;
-            height: 300vh; /* Три высоты экрана */
+            height: 300vh;
             background: #0a0a1a;
             color: #fff;
-        }
-        
-        /* Подложка из двух фото */
-        #background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200vh; /* Две высоты экрана */
-            z-index: -2;
-        }
-        
-        .background-layer {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
-        .background-layer img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Фон поверх подложки */
-        #overlay-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(15, 15, 35, 0.95);
-            z-index: -1;
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
         /* Шапка с лого и меню */
@@ -66,10 +29,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            background: rgba(10, 10, 25, 0.9);
             backdrop-filter: blur(10px);
-            transition: background 0.3s;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .logo {
@@ -78,6 +42,13 @@
             color: #ff6b6b;
             text-transform: uppercase;
             letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 24px;
         }
         
         nav ul {
@@ -100,11 +71,13 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: block;
         }
         
         nav ul li a.active, nav ul li a:hover {
             background: #ff6b6b;
             color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
         }
         
         nav ul li a.active::after {
@@ -119,30 +92,48 @@
             border-radius: 50%;
         }
         
-        /* Основной контент */
-        #content-container {
+        /* Секции */
+        .section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        /* Фон секций */
+        .section-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 10;
-            padding-top: 120px;
+            height: 100%;
+            background: #1a1a2e;
+            z-index: 1;
+            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         
-        /* Секция с пятью фото */
-        #photos-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        /* Контент секций */
+        .section-content {
+            position: relative;
+            z-index: 2;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Первая секция */
+        #section1 {
+            padding-top: 100px;
         }
         
         .section-title {
             text-align: center;
             font-size: 36px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -198,7 +189,7 @@
         }
         
         .photo-item:hover {
-            transform: translateY(-15px) scale(1.03);
+            transform: translateY(-15px);
             box-shadow: 0 25px 50px rgba(255, 107, 107, 0.4);
         }
         
@@ -216,10 +207,18 @@
         /* Зазор между секциями */
         #gap-section {
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             position: relative;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600') no-repeat center center/cover;
+            z-index: 0;
+        }
+        
+        .gap-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
         }
         
         .gap-label {
@@ -228,41 +227,44 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.9);
             background: rgba(0, 0, 0, 0.5);
-            padding: 15px 40px;
+            padding: 20px 50px;
             border-radius: 30px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             z-index: 5;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
-        /* Секция с одной фото */
-        #single-photo-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Вторая секция */
+        #section2 {
+            padding-top: 100px;
+        }
+        
+        .single-photo-container {
             position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-        
-        #single-photo-section.active {
-            opacity: 1;
-            transform: translateY(0);
+            width: 189px;
+            height: 400px;
+            margin: 0 auto;
+            margin-top: 50px; /* Отступ от верха фона */
         }
         
         .single-photo {
-            width: 189px;
-            height: 400px;
+            width: 100%;
+            height: 100%;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 25px 50px rgba(255, 107, 107, 0.5);
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .single-photo.active {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .single-photo::before {
@@ -285,7 +287,7 @@
         .section-description {
             max-width: 600px;
             text-align: center;
-            margin: 40px auto;
+            margin: 60px auto 0;
             font-size: 18px;
             line-height: 1.8;
             color: #ddd;
@@ -294,6 +296,14 @@
             border-radius: 20px;
             position: relative;
             z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.3s;
+        }
+        
+        .section-description.active {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Индикатор скролла */
@@ -309,7 +319,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 100;
+            z-index: 1000;
         }
         
         .scroll-indicator span {
@@ -328,6 +338,43 @@
             60% {
                 transform: translateY(-10px);
             }
+        }
+        
+        /* Декоративные элементы */
+        .decor-element {
+            position: absolute;
+            z-index: 0;
+        }
+        
+        .circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 107, 107, 0.05);
+            top: 20%;
+            right: 10%;
+        }
+        
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 260px solid rgba(26, 82, 118, 0.05);
+            bottom: 15%;
+            left: 5%;
+            transform: rotate(45deg);
+        }
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 8s infinite ease-in-out;
         }
         
         /* Адаптивность */
@@ -365,43 +412,43 @@
             .logo {
                 font-size: 22px;
             }
+            
+            .gap-label {
+                font-size: 18px;
+                padding: 15px 30px;
+                letter-spacing: 3px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Подложка из двух фото -->
-    <div id="background-container">
-        <div class="background-layer" id="bg-layer1">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600" alt="Подложка 1">
-        </div>
-        <div class="background-layer" id="bg-layer2">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600" alt="Подложка 2">
-        </div>
-    </div>
-    
-    <!-- Фон поверх подложки -->
-    <div id="overlay-background"></div>
-    
     <!-- Шапка сайта -->
     <header>
-        <div class="logo">ArtGallery</div>
+        <div class="logo">
+            <span class="logo-icon">📷</span>
+            PhotoArt
+        </div>
         <nav>
             <ul>
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#section1a">1A</a></li>
-                <li><a href="#section2a">2A</a></li>
-                <li><a href="#section3a">3A</a></li>
-                <li><a href="#section4a">4A</a></li>
-                <li><a href="#section5a">5A</a></li>
+                <li><a href="#section1" class="active">Home</a></li>
+                <li><a href="#section2">1A</a></li>
+                <li><a href="#section2">2A</a></li>
+                <li><a href="#section2">3A</a></li>
+                <li><a href="#section2">4A</a></li>
+                <li><a href="#section2">5A</a></li>
             </ul>
         </nav>
     </header>
     
-    <!-- Контент -->
-    <div id="content-container">
-        <!-- Секция с пятью фото -->
-        <section id="photos-section">
-            <h2 class="section-title">Наша Коллекция</h2>
+    <!-- Первая секция с пятью фото -->
+    <section id="section1" class="section">
+        <div class="section-bg" id="bg1"></div>
+        
+        <div class="decor-element circle pulse"></div>
+        <div class="decor-element triangle pulse" style="animation-delay: 1s;"></div>
+        
+        <div class="section-content">
+            <h2 class="section-title">Фотогалерея</h2>
             
             <div class="photos-row">
                 <div class="photo-item">
@@ -420,28 +467,35 @@
                     <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 5">
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    
+    <!-- Зазор между секциями -->
+    <section id="gap-section">
+        <div class="gap-overlay"></div>
+        <div class="gap-label">Продолжайте скроллить</div>
+    </section>
+    
+    <!-- Вторая секция с одной фото -->
+    <section id="section2" class="section">
+        <div class="section-bg" id="bg2"></div>
         
-        <!-- Зазор между секциями -->
-        <section id="gap-section">
-            <div class="gap-label">Прокрутите вниз</div>
-        </section>
-        
-        <!-- Секция с одной фото -->
-        <section id="single-photo-section">
+        <div class="section-content">
             <h2 class="section-title">Избранная работа</h2>
             
-            <div class="single-photo">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Избранное фото">
+            <div class="single-photo-container">
+                <div class="single-photo" id="featured-photo">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Избранное фото">
+                </div>
             </div>
             
-            <p class="section-description">
+            <p class="section-description" id="featured-description">
                 Эта работа была выбрана как лучшая в нашей коллекции. Она представляет собой идеальное сочетание 
                 композиции, света и эмоций. Фотография была сделана в естественных условиях при мягком 
-                закатном освещении.
+                закатном освещении профессиональным фотографом с использованием техники длинной выдержки.
             </p>
-        </section>
-    </div>
+        </div>
+    </section>
 
     <div class="scroll-indicator">
         Скролл вниз
@@ -450,23 +504,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const overlayBackground = document.getElementById('overlay-background');
-            const singlePhotoSection = document.getElementById('single-photo-section');
             const navLinks = document.querySelectorAll('nav a');
-            const header = document.querySelector('header');
+            const featuredPhoto = document.getElementById('featured-photo');
+            const featuredDescription = document.getElementById('featured-description');
             
             // Обработчик скролла
             window.addEventListener('scroll', function() {
                 const scrollY = window.scrollY;
                 const viewportHeight = window.innerHeight;
                 
-                // Перемещаем фон при скролле
-                overlayBackground.style.transform = `translateY(-${scrollY}px)`;
-                
                 // Активация второй секции
-                if (scrollY > viewportHeight * 1.5) {
-                    singlePhotoSection.classList.add('active');
-                    
+                if (scrollY > viewportHeight * 1.7) {
                     // Активируем пункт меню
                     navLinks.forEach(link => {
                         link.classList.remove('active');
@@ -474,9 +522,17 @@
                             link.classList.add('active');
                         }
                     });
-                } else {
-                    singlePhotoSection.classList.remove('active');
                     
+                    // Показываем фото с задержкой
+                    setTimeout(() => {
+                        featuredPhoto.classList.add('active');
+                    }, 300);
+                    
+                    // Показываем описание
+                    setTimeout(() => {
+                        featuredDescription.classList.add('active');
+                    }, 800);
+                } else {
                     // Активируем пункт Home
                     navLinks.forEach(link => {
                         link.classList.remove('active');
@@ -484,15 +540,10 @@
                             link.classList.add('active');
                         }
                     });
-                }
-                
-                // Эффект для шапки при скролле
-                if (scrollY > 50) {
-                    header.style.background = 'rgba(10, 10, 25, 0.9)';
-                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-                } else {
-                    header.style.background = 'rgba(0, 0, 0, 0.4)';
-                    header.style.boxShadow = 'none';
+                    
+                    // Скрываем элементы второй секции
+                    featuredPhoto.classList.remove('active');
+                    featuredDescription.classList.remove('active');
                 }
             });
             
@@ -502,34 +553,32 @@
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('href');
-                    let targetElement;
+                    const targetElement = document.querySelector(targetId);
                     
-                    if (targetId === '#home') {
-                        targetElement = document.getElementById('photos-section');
-                    } else if (targetId === '#section1a') {
-                        targetElement = document.getElementById('single-photo-section');
-                    } else {
-                        // Для других пунктов меню
-                        alert(`Раздел ${targetId} в разработке`);
-                        return;
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
                     }
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
                 });
             });
             
-            // Параллакс эффект для подложки
+            // Параллакс для заднего фона
             window.addEventListener('scroll', function() {
                 const scrollY = window.scrollY;
-                const bgLayer1 = document.getElementById('bg-layer1');
-                const bgLayer2 = document.getElementById('bg-layer2');
+                const bg1 = document.getElementById('bg1');
+                const bg2 = document.getElementById('bg2');
                 
-                // Эффект параллакса для подложки
-                bgLayer1.style.transform = `translateY(${scrollY * 0.2}px)`;
-                bgLayer2.style.transform = `translateY(${scrollY * 0.1}px)`;
+                // Первый фон
+                if (bg1) {
+                    bg1.style.transform = `translateY(${scrollY * 0.2}px)`;
+                }
+                
+                // Второй фон
+                if (bg2) {
+                    bg2.style.transform = `translateY(${scrollY * 0.1}px)`;
+                }
             });
         });
     </script>
