@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фотогалерея с эффектами скролла</title>
+    <title>Фотогалерея Premium</title>
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         
         body {
             overflow-x: hidden;
-            height: 300vh;
+            height: calc(200vh - 250px); /* Уменьшенное расстояние между секциями */
             background: #0a0a1a;
             color: #fff;
         }
@@ -30,7 +30,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(10, 10, 25, 0.9);
+            background: rgba(10, 10, 25, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -158,7 +158,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 40px;
-            margin-top: 20px;
+            margin-top: -50px; /* Подъем фото на 50px вверх */
         }
         
         .photo-item {
@@ -206,35 +206,10 @@
         
         /* Зазор между секциями */
         #gap-section {
-            height: 100vh;
+            height: calc(100vh - 250px); /* Уменьшенное расстояние */
             position: relative;
             background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600') no-repeat center center/cover;
             z-index: 0;
-        }
-        
-        .gap-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-        }
-        
-        .gap-label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px 50px;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            z-index: 5;
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
         /* Вторая секция */
@@ -304,40 +279,6 @@
         .section-description.active {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        /* Индикатор скролла */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .scroll-indicator span {
-            display: block;
-            margin-top: 10px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
         }
         
         /* Декоративные элементы */
@@ -412,12 +353,6 @@
             .logo {
                 font-size: 22px;
             }
-            
-            .gap-label {
-                font-size: 18px;
-                padding: 15px 30px;
-                letter-spacing: 3px;
-            }
         }
     </style>
 </head>
@@ -448,40 +383,37 @@
         <div class="decor-element triangle pulse" style="animation-delay: 1s;"></div>
         
         <div class="section-content">
-            <h2 class="section-title">Фотогалерея</h2>
+            <h2 class="section-title">Премиум Галерея</h2>
             
             <div class="photos-row">
                 <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 1">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Архитектура">
                 </div>
                 <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 2">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Кухня">
                 </div>
                 <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 3">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фрукты">
                 </div>
                 <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 4">
+                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Завтрак">
                 </div>
                 <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фото 5">
+                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Стейк">
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Зазор между секциями -->
-    <section id="gap-section">
-        <div class="gap-overlay"></div>
-        <div class="gap-label">Продолжайте скроллить</div>
-    </section>
+    <section id="gap-section"></section>
     
     <!-- Вторая секция с одной фото -->
     <section id="section2" class="section">
         <div class="section-bg" id="bg2"></div>
         
         <div class="section-content">
-            <h2 class="section-title">Избранная работа</h2>
+            <h2 class="section-title">Шедевр Месяца</h2>
             
             <div class="single-photo-container">
                 <div class="single-photo" id="featured-photo">
@@ -490,31 +422,34 @@
             </div>
             
             <p class="section-description" id="featured-description">
-                Эта работа была выбрана как лучшая в нашей коллекции. Она представляет собой идеальное сочетание 
-                композиции, света и эмоций. Фотография была сделана в естественных условиях при мягком 
-                закатном освещении профессиональным фотографом с использованием техники длинной выдержки.
+                Эта работа была признана лучшей в текущем месяце. Она демонстрирует идеальное сочетание 
+                композиции, света и эмоций. Фотография сделана в естественных условиях при мягком 
+                закатном освещении с использованием профессиональной техники съемки.
             </p>
         </div>
     </section>
-
-    <div class="scroll-indicator">
-        Скролл вниз
-        <span>▼</span>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('nav a');
             const featuredPhoto = document.getElementById('featured-photo');
             const featuredDescription = document.getElementById('featured-description');
+            const gapSection = document.getElementById('gap-section');
             
             // Обработчик скролла
             window.addEventListener('scroll', function() {
                 const scrollY = window.scrollY;
                 const viewportHeight = window.innerHeight;
                 
+                // Анимация для зазора (появление подложки)
+                if (scrollY > viewportHeight * 0.3) {
+                    gapSection.style.opacity = 1;
+                } else {
+                    gapSection.style.opacity = 0;
+                }
+                
                 // Активация второй секции
-                if (scrollY > viewportHeight * 1.7) {
+                if (scrollY > viewportHeight * 1.2) {
                     // Активируем пункт меню
                     navLinks.forEach(link => {
                         link.classList.remove('active');
