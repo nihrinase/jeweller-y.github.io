@@ -210,6 +210,7 @@
             position: relative;
             background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600') no-repeat center center/cover;
             z-index: 0;
+            background-attachment: fixed; /* Неподвижное фото на подложке */
         }
         
         /* Вторая секция */
@@ -434,19 +435,11 @@
             const navLinks = document.querySelectorAll('nav a');
             const featuredPhoto = document.getElementById('featured-photo');
             const featuredDescription = document.getElementById('featured-description');
-            const gapSection = document.getElementById('gap-section');
             
             // Обработчик скролла
             window.addEventListener('scroll', function() {
                 const scrollY = window.scrollY;
                 const viewportHeight = window.innerHeight;
-                
-                // Анимация для зазора (появление подложки)
-                if (scrollY > viewportHeight * 0.3) {
-                    gapSection.style.opacity = 1;
-                } else {
-                    gapSection.style.opacity = 0;
-                }
                 
                 // Активация второй секции
                 if (scrollY > viewportHeight * 1.2) {
