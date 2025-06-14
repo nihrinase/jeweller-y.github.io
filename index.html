@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ювелирные украшения - Одностраничный сайт</title>
+    <title>Одностраничный сайт - Шапка с логотипом и меню</title>
     <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,16 +14,17 @@
 
         body {
             background-color: #afe0c9;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAhElEQVRoQ+3XwQ0AIAgDwJb+0z0G3EElQvG0mR9mTg9J9yMiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi8gUvQ1sXHqP0LQAAAABJRU5ErkJggg==');
-            background-size: cover;
-            background-attachment: fixed;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23afe0c9"/><path d="M0 50 Q25 30,50 50 T100 50" fill="none" stroke="%2385c7b2" stroke-width="2"/><path d="M0 30 Q25 10,50 30 T100 30" fill="none" stroke="%2385c7b2" stroke-width="1.5"/><path d="M0 70 Q25 90,50 70 T100 70" fill="none" stroke="%2385c7b2" stroke-width="1.5"/></svg>');
+            background-size: 300px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            line-height: 1.6;
         }
 
-        .container {
+        .header-container {
             max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
             padding: 20px;
         }
@@ -37,7 +38,7 @@
             align-items: center;
             flex-wrap: wrap;
             border-radius: 10px;
-            margin-bottom: 30px;
+            margin-top: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -78,127 +79,60 @@
             text-decoration: underline;
         }
 
-        /* Основной контент */
+        /* Контент для демонстрации */
         .content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .main-content {
-            flex: 3;
-            min-width: 300px;
-        }
-
-        .sidebar {
             flex: 1;
-            min-width: 250px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .card h2 {
-            color: #d31d6a;
-            margin-bottom: 15px;
-            font-size: 28px;
-        }
-
-        .card h3 {
-            color: #16126b;
-            margin: 15px 0 10px;
-        }
-
-        .card p {
-            margin-bottom: 15px;
-        }
-
-        /* Галерея */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .gallery-item {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item .caption {
-            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
             text-align: center;
-            font-size: 14px;
-            color: #16126b;
+            color: #333;
         }
-
-        /* Футер */
-        footer {
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-
-        /* Форма */
-        .form-group {
+        
+        .content h1 {
+            font-size: 2.5rem;
             margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
             color: #16126b;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+        
+        .content p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .highlight {
+            color: #d31d6a;
             font-weight: bold;
         }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
-
-        .btn {
-            background: #d31d6a;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
+        
+        .info-box h2 {
+            color: #16126b;
+            margin-bottom: 15px;
         }
-
-        .btn:hover {
-            background: #b01a5b;
+        
+        .info-box ul {
+            text-align: left;
+            margin-left: 20px;
         }
-
+        
+        .info-box li {
+            margin-bottom: 10px;
+        }
+        
         /* Адаптивность */
         @media (max-width: 768px) {
             header {
@@ -218,6 +152,10 @@
             nav ul li {
                 margin: 5px 8px;
             }
+            
+            .content h1 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -228,11 +166,15 @@
             nav ul li a {
                 font-size: 16px;
             }
+            
+            .content h1 {
+                font-size: 1.7rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header-container">
         <header>
             <div class="logo">одностраничный сайт</div>
             <nav>
@@ -246,81 +188,24 @@
                 </ul>
             </nav>
         </header>
+    </div>
+    
+    <div class="content">
+        <h1>Шапка сайта с логотипом и меню</h1>
+        <p>Этот пример реализует <span class="highlight">только то, что было в задании</span> - фон, логотип и меню.</p>
         
-        <div class="content">
-            <div class="main-content">
-                <div class="card">
-                    <h2>Добро пожаловать в мир ювелирных украшений</h2>
-                    <p>Мы создаем уникальные украшения ручной работы, которые подчеркнут вашу индивидуальность и станут изюминкой любого образа. Каждое изделие создается с любовью и вниманием к деталям.</p>
-                    
-                    <h3>Наша философия</h3>
-                    <p>Мы верим, что ювелирные украшения - это не просто аксессуары, а произведения искусства, которые несут в себе эмоции и историю. Наши мастера вдохновляются природой, архитектурой и культурным наследием, создавая уникальные дизайны.</p>
-                    
-                    <h3>Почему выбирают нас</h3>
-                    <ul>
-                        <li>Эксклюзивные дизайны</li>
-                        <li>Использование высококачественных материалов</li>
-                        <li>Ручная работа</li>
-                        <li>Индивидуальный подход к каждому клиенту</li>
-                        <li>Экологичное производство</li>
-                    </ul>
-                </div>
-                
-                <div class="card">
-                    <h2>Новые поступления</h2>
-                    <div class="gallery">
-                        <div class="gallery-item">
-                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3ccircle cx='100' cy='100' r='80' fill='%23f7d9e3'/%3e%3ccircle cx='100' cy='100' r='50' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Кольцо">
-                            <div class="caption">Кольцо "Нежность"</div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3cpath d='M50,100 L150,100 L150,120 L50,120 Z' fill='%23f7d9e3'/%3e%3cellipse cx='100' cy='80' rx='20' ry='10' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Серьги">
-                            <div class="caption">Серьги "Рассвет"</div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3cpath d='M100,50 Q150,80 100,150 Q50,80 100,50 Z' fill='%23f7d9e3'/%3e%3ccircle cx='100' cy='100' r='15' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Подвеска">
-                            <div class="caption">Подвеска "Мечта"</div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3crect x='60' y='80' width='80' height='40' fill='%23f7d9e3'/%3e%3ccircle cx='80' cy='100' r='10' fill='%23d31d6a'/%3e%3ccircle cx='120' cy='100' r='10' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Браслет">
-                            <div class="caption">Браслет "Гармония"</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sidebar">
-                <div class="card">
-                    <h2>Специальное предложение</h2>
-                    <p>При заказе от 10 000 рублей - скидка 15% на все украшения из коллекции "Весеннее настроение".</p>
-                    <p>Предложение действует до 30 июня.</p>
-                    <button class="btn">Подробнее</button>
-                </div>
-                
-                <div class="card">
-                    <h2>Свяжитесь с нами</h2>
-                    <p>Есть вопросы? Мы с радостью на них ответим!</p>
-                    <div class="form-group">
-                        <label for="name">Имя</label>
-                        <input type="text" id="name" placeholder="Ваше имя">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Ваш email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Сообщение</label>
-                        <textarea id="message" rows="4" placeholder="Ваше сообщение"></textarea>
-                    </div>
-                    <button class="btn">Отправить</button>
-                </div>
-            </div>
+        <div class="info-box">
+            <h2>Реализованные требования:</h2>
+            <ul>
+                <li>Фон страницы: цвет <span style="background-color:#afe0c9; padding:2px 5px; border-radius:3px;">#afe0c9</span> с декоративным узором</li>
+                <li>Логотип: "одностраничный сайт" с заданными стилями</li>
+                <li>Меню из 6 пунктов: home, rings, earrings, necklaces, oeuvre, contact</li>
+                <li>Активное меню (home) выделено цветом <span style="color:#16126b; font-weight:bold;">#16126b</span></li>
+                <li>Неактивные пункты меню: белого цвета (#FFF)</li>
+                <li>При наведении на неактивное меню появляется подчеркивание</li>
+                <li>Шрифт меню: 18px Segoe, "Segoe UI", Verdana, sans-serif</li>
+            </ul>
         </div>
-        
-        <footer>
-            <p>© 2023 Ювелирные украшения. Все права защищены.</p>
-            <p>Телефон: +7 (999) 123-45-67 | Email: info@jewelry-art.ru</p>
-        </footer>
     </div>
 
     <script>
@@ -334,17 +219,6 @@
                 
                 // Добавляем класс active текущему элементу
                 this.classList.add('active');
-            });
-        });
-        
-        // Анимация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 200 * index);
             });
         });
     </script>
