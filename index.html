@@ -48,7 +48,7 @@
             flex-direction: column;
             justify-content: flex-end;
             height: 100%;
-            transform: translateY(-15px);
+            transform: translateY(-5px); /* Изменено с -15px на -5px */
         }
 
         /* Логотип */
@@ -69,6 +69,8 @@
             letter-spacing: 2px;
             margin-top: 5px;
             text-align: left;
+            /* Опускаем надпись на 20px */
+            transform: translateY(20px);
         }
 
         .portfolio-text span {
@@ -82,8 +84,7 @@
             align-items: flex-end;
             justify-content: flex-end;
             height: 100%;
-            /* Поднимаем меню на 5px вверх */
-            transform: translateY(-5px);
+            transform: translateY(-20px);
         }
 
         /* Меню */
@@ -152,12 +153,13 @@
                 font-size: 36px;
             }
             
-            .nav-container {
-                align-items: center;
+            .portfolio-text {
+                transform: none;
+                text-align: center;
             }
             
-            .portfolio-text {
-                text-align: center;
+            .nav-container {
+                align-items: center;
             }
         }
 
