@@ -35,7 +35,7 @@
         /* Шапка */
         header {
             background: transparent;
-            padding: 15px 30px;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -48,6 +48,7 @@
             flex-direction: column;
             justify-content: flex-end;
             height: 100%;
+            width: 50%;
         }
 
         /* Логотип */
@@ -81,7 +82,7 @@
             align-items: flex-end;
             justify-content: flex-end;
             height: 100%;
-            transform: translateY(-20px);
+            width: 50%;
         }
 
         /* Меню */
@@ -90,17 +91,18 @@
             list-style: none;
             flex-wrap: wrap;
             margin-bottom: 10px;
+            justify-content: flex-end;
         }
 
         nav ul li {
-            margin: 0 12px;
+            margin: 0 10.5px; /* Расстояние между пунктами 21px */
         }
 
         nav ul li a {
             text-decoration: none;
             font: 18px 'Segoe UI', Verdana, sans-serif;
             color: #FFF;
-            padding: 8px 5px;
+            padding: 8px 0;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -129,10 +131,10 @@
         /* Галерея украшений */
         .gallery {
             display: flex;
-            justify-content: center;
-            gap: 5px;
+            justify-content: space-between;
             margin-top: 30px;
             flex-wrap: wrap;
+            width: 100%;
             max-width: 1200px;
             padding: 0 20px;
         }
@@ -157,7 +159,45 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        /* Выравнивающие линии */
+        .alignment-line {
+            position: absolute;
+            height: 100vh;
+            top: 0;
+            width: 1px;
+            background-color: rgba(255, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .alignment-left {
+            left: calc((100% - 1200px) / 2 + 20px);
+        }
+
+        .alignment-right {
+            left: calc((100% - 1200px) / 2 + 1200px - 20px);
+        }
+
+        .alignment-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #16126b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+            z-index: 1001;
+        }
+
         /* Адаптивность */
+        @media (max-width: 1200px) {
+            .alignment-line {
+                display: none;
+            }
+        }
+
         @media (max-width: 1100px) {
             .gallery {
                 gap: 10px;
@@ -187,7 +227,6 @@
                 align-items: center;
                 width: 100%;
                 margin-bottom: 20px;
-                transform: none;
             }
             
             .logo {
@@ -260,12 +299,16 @@
     </style>
 </head>
 <body>
+    <button class="alignment-toggle" onclick="toggleAlignment()">Показать линии выравнивания</button>
+    <div class="alignment-line alignment-left"></div>
+    <div class="alignment-line alignment-right"></div>
+
     <div class="header-container">
         <header>
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    <span>p</span>ortfolio
+                    /<span>p</span>ortfolio
                 </div>
             </div>
             
@@ -310,5 +353,21 @@
             <img src="images/oeuvre2.jpg" alt="Украшение">
         </div>
     </div>
+
+    <script>
+        function toggleAlignment() {
+            const lines = document.querySelectorAll('.alignment-line');
+            lines.forEach(line => {
+                line.style.display = line.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+        
+        // Инициализация - линии скрыты
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.alignment-line').forEach(line => {
+                line.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
