@@ -129,6 +129,8 @@
             max-width: 965px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Галерея украшений */
@@ -163,19 +165,13 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Секция-обертка для эффекта прокрутки */
-        .section-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
         /* Фон первой секции */
         .section-bg {
-            position: absolute;
-            top: 0;
+            position: fixed;
+            top: 150px;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
@@ -185,15 +181,15 @@
 
         /* Окно между секциями */
         .window-gap {
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 100vh;
             left: 0;
             width: 100%;
             height: 310px;
             background: url('images/back_1.jpg') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
-            z-index: 2;
+            z-index: 1;
         }
 
         /* Новая секция Rings */
@@ -206,8 +202,8 @@
             align-items: center;
             padding: 50px 0;
             position: relative;
-            z-index: 3;
-            margin-top: 310px; /* Высота окна */
+            z-index: 2;
+            margin-top: calc(100vh + 310px);
         }
 
         .rings-container {
@@ -324,7 +320,11 @@
             }
             
             #rings-section {
-                margin-top: 200px;
+                margin-top: calc(100vh + 200px);
+            }
+            
+            .window-gap {
+                height: 200px;
             }
         }
 
@@ -376,7 +376,11 @@
             }
             
             #rings-section {
-                margin-top: 150px;
+                margin-top: calc(100vh + 150px);
+            }
+            
+            .window-gap {
+                height: 150px;
             }
         }
     </style>
@@ -388,7 +392,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    <span>p</span>ortfolio
+                    /<span>p</span>ortfolio
                 </div>
             </div>
             
@@ -415,34 +419,31 @@
         </header>
     </div>
     
-    <!-- Обертка для эффекта прокрутки -->
-    <div class="section-wrapper">
-        <!-- Фон первой секции -->
-        <div class="section-bg"></div>
-        
-        <!-- Секция с галереей -->
-        <div class="content-container">
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="images/ring22.jpg" alt="Кольцо">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/bracelet1.jpg" alt="Браслет">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pendant.jpg" alt="Кулон">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/earring.jpg" alt="Серьги">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/oeuvre2.jpg" alt="Украшение">
-                </div>
+    <!-- Фон первой секции -->
+    <div class="section-bg"></div>
+    
+    <!-- Окно между секциями -->
+    <div class="window-gap"></div>
+    
+    <!-- Секция с галереей -->
+    <div class="content-container">
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="images/ring22.jpg" alt="Кольцо">
+            </div>
+            <div class="gallery-item">
+                <img src="images/bracelet1.jpg" alt="Браслет">
+            </div>
+            <div class="gallery-item">
+                <img src="images/pendant.jpg" alt="Кулон">
+            </div>
+            <div class="gallery-item">
+                <img src="images/earring.jpg" alt="Серьги">
+            </div>
+            <div class="gallery-item">
+                <img src="images/oeuvre2.jpg" alt="Украшение">
             </div>
         </div>
-        
-        <!-- Окно между секциями -->
-        <div class="window-gap"></div>
     </div>
     
     <!-- Секция Rings -->
@@ -462,7 +463,6 @@
     <script>
         // Функция для отслеживания скролла и изменения активного пункта меню
         document.addEventListener('DOMContentLoaded', function() {
-            const sectionWrapper = document.querySelector('.section-wrapper');
             const sectionBg = document.querySelector('.section-bg');
             const ringsSection = document.getElementById('rings-section');
             const ringsNavItem = document.querySelector('nav ul li:nth-child(2)');
@@ -481,7 +481,7 @@
             window.addEventListener('scroll', function() {
                 // Эффект смещения фона
                 const scrollPosition = window.scrollY;
-                sectionBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                sectionBg.style.transform = `translateY(-${scrollPosition * 0.5}px)`;
                 
                 // Переключение активного пункта меню
                 if (isInViewport(ringsSection)) {
