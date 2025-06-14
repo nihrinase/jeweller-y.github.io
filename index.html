@@ -27,7 +27,7 @@
         /* Основной контейнер */
         .site-container {
             width: 100%;
-            max-width: 965px; /* Ширина галереи + отступы */
+            max-width: 965px; /* Ширина галереи (5*189 + 4*5) */
             padding: 0 10px;
         }
 
@@ -130,7 +130,6 @@
         /* Галерея украшений */
         .gallery {
             display: flex;
-			gap: 5px;
             justify-content: space-between;
             margin-top: 30px;
             width: 100%;
@@ -142,6 +141,10 @@
             border: 1px solid #16126b;
             overflow: hidden;
             transition: all 0.3s ease;
+        }
+
+        .gallery-item:not(:last-child) {
+            margin-right: 5px; /* Расстояние 5px между фото */
         }
 
         .gallery-item img {
@@ -173,6 +176,10 @@
             .gallery-item {
                 width: 180px;
                 height: 380px;
+            }
+            
+            .gallery-item:not(:last-child) {
+                margin-right: 0;
             }
         }
 
@@ -264,7 +271,7 @@
                 <div class="logo-container">
                     <div class="logo">Одностраничный Сайт</div>
                     <div class="portfolio-text">
-                        <span>p</span>ortfolio
+                        /<span>p</span>ortfolio
                     </div>
                 </div>
                 
