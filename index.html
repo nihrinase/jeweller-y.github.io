@@ -36,14 +36,19 @@
         header {
             background: transparent;
             padding: 15px 30px;
-        }
-
-        /* Верхняя строка - лого и меню */
-        .header-top {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
             flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        /* Контейнер логотипа */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 100%;
+            transform: translateY(-15px);
         }
 
         /* Логотип */
@@ -55,7 +60,30 @@
             margin: 0;
             white-space: nowrap;
             line-height: 1;
-            transform: translateY(-15px);
+        }
+
+        /* Надпись под логотипом */
+        .portfolio-text {
+            font: 18px 'Segoe UI', Verdana, sans-serif;
+            color: #FFF;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .portfolio-text span {
+            color: #292d75;
+        }
+
+        /* Контейнер навигации */
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            height: 100%;
+            /* Поднимаем меню на 20px вверх */
+            transform: translateY(-20px);
         }
 
         /* Меню */
@@ -63,6 +91,7 @@
             display: flex;
             list-style: none;
             flex-wrap: wrap;
+            margin-bottom: 10px;
         }
 
         nav ul li {
@@ -87,33 +116,6 @@
             text-decoration: underline;
         }
 
-        /* Нижняя строка - надпись portfolio и картинка */
-        .header-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 20px; /* Увеличенный отступ между строками */
-        }
-
-        /* Надпись под логотипом */
-        .portfolio-text {
-            font: 18px 'Segoe UI', Verdana, sans-serif;
-            color: #FFF;
-            letter-spacing: 2px;
-            margin-top: 5px;
-            text-align: left;
-        }
-
-        .portfolio-text span {
-            color: #292d75;
-        }
-
-        /* Контейнер для картинки */
-        .nav-image-container {
-            display: flex;
-            justify-content: flex-end;
-        }
-
         /* Картинка под меню */
         .nav-image {
             width: 40px;
@@ -128,16 +130,17 @@
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            .header-top {
+            header {
                 flex-direction: column;
                 text-align: center;
                 align-items: center;
             }
             
-            .logo {
+            .logo-container, .nav-container {
+                align-items: center;
+                width: 100%;
+                margin-bottom: 20px;
                 transform: none;
-                font-size: 36px;
-                margin-bottom: 15px;
             }
             
             nav ul {
@@ -145,14 +148,16 @@
                 margin: 15px 0;
             }
             
-            .header-bottom {
-                flex-direction: column;
+            .logo {
+                font-size: 36px;
+            }
+            
+            .nav-container {
                 align-items: center;
             }
             
             .portfolio-text {
                 text-align: center;
-                margin-bottom: 15px;
             }
         }
 
@@ -178,9 +183,14 @@
 <body>
     <div class="header-container">
         <header>
-            <!-- Верхняя строка: лого и меню -->
-            <div class="header-top">
+            <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
+                <div class="portfolio-text">
+                    /<span>p</span>ortfolio
+                </div>
+            </div>
+            
+            <div class="nav-container">
                 <nav>
                     <ul>
                         <li class="active"><a href="#">home</a></li>
@@ -191,22 +201,14 @@
                         <li><a href="#">contact</a></li>
                     </ul>
                 </nav>
-            </div>
-            
-            <!-- Нижняя строка: надпись portfolio и картинка -->
-            <div class="header-bottom">
-                <div class="portfolio-text">
-                    <span>p</span>ortfolio
-                </div>
-                <div class="nav-image-container">
-                    <a href="#">
-                        <img src="images/3d.png" 
-                             alt="3D Icon" 
-                             class="nav-image"
-                             onmouseover="this.src='images/3dd.png'"
-                             onmouseout="this.src='images/3d.png'">
-                    </a>
-                </div>
+                
+                <a href="#">
+                    <img src="images/3d.png" 
+                         alt="3D Icon" 
+                         class="nav-image"
+                         onmouseover="this.src='images/3dd.png'"
+                         onmouseout="this.src='images/3d.png'">
+                </a>
             </div>
         </header>
     </div>
