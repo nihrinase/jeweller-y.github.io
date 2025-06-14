@@ -164,11 +164,11 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Первая секция с фоном - ДОБАВЛЕН PADDING */
+        /* Первая секция с фоном */
         .first-section {
             position: relative;
             min-height: 100vh;
-            padding: 160px 0 10px 0; /* Было padding-top: 150px */
+            padding: 160px 0 10px 0;
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
@@ -185,16 +185,31 @@
             z-index: 2;
         }
 
-        /* Новая секция Rings - ДОБАВЛЕН PADDING */
+        /* Новая секция Rings - ПЕРЕКРЫВАЕТ ШАПКУ */
         #rings-section {
+            position: relative;
             min-height: 100vh;
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
             display: flex;
             align-items: center;
-            padding: 60px 0 10px 0; /* Было padding: 50px 0 */
-            position: relative;
+            padding: 70px 0 10px 0; /* Увеличен отступ сверху */
+            z-index: 3;
+            margin-top: -10px; /* Перекрываем шапку */
+        }
+
+        /* Псевдоэлемент для перекрытия шапки */
+        #rings-section::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: #afe0c9;
+            background-image: url('images/back29.png');
+            background-repeat: repeat;
             z-index: 3;
         }
 
@@ -310,6 +325,12 @@
             .window-gap {
                 height: 200px;
             }
+            
+            /* Адаптация для секции Rings */
+            #rings-section {
+                margin-top: -10px;
+                padding: 60px 0 10px 0;
+            }
         }
 
         @media (max-width: 600px) {
@@ -358,6 +379,12 @@
             .window-gap {
                 height: 150px;
             }
+            
+            /* Адаптация для секции Rings */
+            #rings-section {
+                margin-top: -10px;
+                padding: 50px 0 10px 0;
+            }
         }
     </style>
 </head>
@@ -368,7 +395,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    ////<span>p</span>ortfolio
+                    <span>p</span>ortfolio
                 </div>
             </div>
             
@@ -474,8 +501,9 @@
                         const targetElement = document.querySelector(targetId);
                         
                         if (targetElement) {
+                            // Прокрутка с учетом перекрытия шапки
                             window.scrollTo({
-                                top: targetElement.offsetTop - 120,
+                                top: targetElement.offsetTop - 110,
                                 behavior: 'smooth'
                             });
                         }
