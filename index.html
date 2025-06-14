@@ -13,29 +13,12 @@
         }
 
         body {
-            background: 
-                /* Основной фон */
-                url('images/back29.png') repeat,
-                /* Фоновое изображение для "окна" */
-                url('images/back_1.jpg') no-repeat center center fixed;
-            background-size: auto, cover;
+            background-color: #afe0c9;
+            background-image: url('images/back29.png');
+            background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-top: 150px;
-            position: relative;
-        }
-
-        /* Создаем маску для окна */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/back29.png') repeat;
-            z-index: -1;
-            pointer-events: none;
+            padding-top: 150px; /* Отступ для фиксированной шапки */
         }
 
         /* Фиксированная шапка */
@@ -49,11 +32,10 @@
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
-            border-bottom: 1px solid #16126b;
+            border-bottom: 1px solid #16126b; /* Разделитель 1px */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Остальные стили остаются без изменений */
         header {
             max-width: 965px;
             margin: 0 auto;
@@ -63,12 +45,14 @@
             align-items: flex-end;
         }
 
+        /* Контейнер логотипа */
         .logo-container {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
 
+        /* Логотип */
         .logo {
             font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
@@ -80,6 +64,7 @@
             margin-bottom: 20px;
         }
 
+        /* Надпись под логотипом */
         .portfolio-text {
             font: 18px 'Segoe UI', Verdana, sans-serif;
             color: #FFF;
@@ -91,12 +76,14 @@
             color: #292d75;
         }
 
+        /* Контейнер навигации */
         .nav-container {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
         }
 
+        /* Меню */
         nav ul {
             display: flex;
             list-style: none;
@@ -105,7 +92,7 @@
         }
 
         nav ul li {
-            margin: 0 10.5px;
+            margin: 0 10.5px; /* Расстояние между пунктами 21px */
         }
 
         nav ul li a {
@@ -126,6 +113,7 @@
             text-decoration: underline;
         }
 
+        /* Картинка под меню */
         .nav-image {
             width: 40px;
             height: 30px;
@@ -137,12 +125,14 @@
             opacity: 0.9;
         }
 
+        /* Основной контент */
         .content-container {
             max-width: 965px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* Галерея украшений */
         .gallery {
             display: flex;
             justify-content: space-between;
@@ -159,7 +149,7 @@
         }
 
         .gallery-item:not(:last-child) {
-            margin-right: 5px;
+            margin-right: 5px; /* Расстояние 5px между фото */
         }
 
         .gallery-item img {
@@ -177,14 +167,14 @@
         /* Окно между секциями */
         .window-between {
             height: 310px;
+            background: url('images/back_1.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed; /* Фон остаётся неподвижным */
             position: relative;
-            z-index: 2;
-            background: transparent;
-            margin: 50px 0;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            z-index: 1;
         }
 
-        /* Секция Rings */
+        /* Новая секция Rings */
         #rings-section {
             min-height: 100vh;
             background-color: #afe0c9;
@@ -193,8 +183,6 @@
             display: flex;
             align-items: center;
             padding: 50px 0;
-            position: relative;
-            z-index: 3;
         }
 
         .rings-container {
@@ -309,6 +297,10 @@
             .ring-image {
                 height: 50vh;
             }
+            
+            .window-between {
+                height: 200px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -357,6 +349,10 @@
             .ring-image {
                 height: 40vh;
             }
+            
+            .window-between {
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -367,7 +363,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    <span>p</span>ortfolio
+                    /<span>p</span>ortfolio
                 </div>
             </div>
             
@@ -433,11 +429,13 @@
     </section>
     
     <script>
+        // Функция для отслеживания скролла и изменения активного пункта меню
         document.addEventListener('DOMContentLoaded', function() {
             const ringsSection = document.getElementById('rings-section');
-            const ringsNavItem = document.querySelector('nav ul li:nth-child(2)');
-            const homeNavItem = document.querySelector('nav ul li:first-child');
+            const ringsNavItem = document.querySelector('nav ul li:nth-child(2)'); // Второй пункт меню - rings
+            const homeNavItem = document.querySelector('nav ul li:first-child'); // Первый пункт меню - home
             
+            // Функция для проверки видимости секции
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
                 return (
@@ -446,16 +444,20 @@
                 );
             }
             
+            // Обработчик скролла
             window.addEventListener('scroll', function() {
                 if (isInViewport(ringsSection)) {
+                    // Добавляем класс active к rings и удаляем у home
                     ringsNavItem.classList.add('active');
                     homeNavItem.classList.remove('active');
                 } else {
+                    // Возвращаем активное состояние к home
                     ringsNavItem.classList.remove('active');
                     homeNavItem.classList.add('active');
                 }
             });
             
+            // Обработчик кликов по меню для плавной прокрутки
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     if (this.getAttribute('href').startsWith('#')) {
