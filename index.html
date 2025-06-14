@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ювелирные украшения - Галерея</title>
+    <title>Ювелирные украшения - Галерея колец</title>
     <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -185,21 +185,18 @@
             z-index: 2;
         }
 
-        /* Новая секция Rings - ПЕРЕКРЫВАЕТ ШАПКУ */
+        /* Секция Rings - Обновленный стиль */
         #rings-section {
             position: relative;
             min-height: 100vh;
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
-            display: flex;
-            align-items: center;
-            padding: 70px 0 10px 0; /* Увеличен отступ сверху */
+            padding: 70px 0 10px 0;
             z-index: 3;
-            margin-top: -10px; /* Перекрываем шапку */
+            margin-top: -10px;
         }
 
-        /* Псевдоэлемент для перекрытия шапки */
         #rings-section::before {
             content: '';
             position: absolute;
@@ -220,31 +217,96 @@
             width: 100%;
         }
 
-        .rings-content {
+        /* Контролы галереи */
+        .gallery-controls {
             display: flex;
-            justify-content: space-between;
-            gap: 30px;
+            justify-content: flex-end;
+            margin-top: 10px;
+            margin-bottom: 12px;
         }
 
-        .ring-image {
+        .gallery-btn {
+            background: #292d75;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .gallery-btn:hover {
+            background: #16126b;
+            transform: translateY(-2px);
+        }
+
+        .gallery-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Контейнер галереи */
+        .gallery-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Миниатюры */
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(3, 75px);
+            grid-template-rows: repeat(4, 75px);
+            gap: 6px;
+            width: calc(75px * 3 + 6px * 2);
+        }
+
+        .thumbnail {
+            width: 75px;
+            height: 75px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #d31d6a;
+        }
+
+        .thumbnail.active {
+            border-color: #16126b;
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Большое изображение */
+        .large-image-container {
             flex: 1;
-            height: 80vh;
-            max-height: 700px;
-            border: 1px solid #16126b;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .ring-image img {
+        .large-image {
+            width: 500px;
+            height: 350px;
+            border: 1px solid #16126b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .large-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-        }
-
-        .ring-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Адаптивность */
@@ -268,6 +330,15 @@
             
             .gallery-item:not(:last-child) {
                 margin-right: 0;
+            }
+            
+            .gallery-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .thumbnails {
+                margin-bottom: 20px;
             }
         }
 
@@ -314,14 +385,6 @@
                 height: 360px;
             }
             
-            .rings-content {
-                flex-direction: column;
-            }
-            
-            .ring-image {
-                height: 50vh;
-            }
-            
             .window-gap {
                 height: 200px;
             }
@@ -330,6 +393,11 @@
             #rings-section {
                 margin-top: -10px;
                 padding: 60px 0 10px 0;
+            }
+            
+            .large-image {
+                width: 100%;
+                max-width: 500px;
             }
         }
 
@@ -341,6 +409,10 @@
             .gallery-item {
                 width: 150px;
                 height: 320px;
+            }
+            
+            .gallery-controls {
+                justify-content: center;
             }
         }
 
@@ -372,10 +444,6 @@
                 height: 400px;
             }
             
-            .ring-image {
-                height: 40vh;
-            }
-            
             .window-gap {
                 height: 150px;
             }
@@ -384,6 +452,21 @@
             #rings-section {
                 margin-top: -10px;
                 padding: 50px 0 10px 0;
+            }
+            
+            .gallery-btn {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .thumbnails {
+                grid-template-columns: repeat(3, 70px);
+                grid-template-rows: repeat(4, 70px);
+            }
+            
+            .thumbnail {
+                width: 70px;
+                height: 70px;
             }
         }
     </style>
@@ -448,15 +531,28 @@
     <!-- Окно между секциями -->
     <div class="window-gap"></div>
     
-    <!-- Секция Rings -->
+    <!-- Секция Rings - Обновленная -->
     <section id="rings-section">
         <div class="rings-container">
-            <div class="rings-content">
-                <div class="ring-image">
-                    <img src="images/section_2.jpg" alt="Кольцо 1">
+            <!-- Кнопки управления -->
+            <div class="gallery-controls">
+                <button class="gallery-btn" id="play-btn">Play Slideshow</button>
+                <button class="gallery-btn" id="prev-btn">&lt; Previous Photo</button>
+                <button class="gallery-btn" id="next-btn">Next Photo &gt;</button>
+            </div>
+            
+            <!-- Контейнер галереи -->
+            <div class="gallery-content">
+                <!-- Миниатюры -->
+                <div class="thumbnails" id="thumbnails">
+                    <!-- Миниатюры будут добавлены через JavaScript -->
                 </div>
-                <div class="ring-image">
-                    <img src="images/section_22.jpg" alt="Кольцо 2">
+                
+                <!-- Большое изображение -->
+                <div class="large-image-container">
+                    <div class="large-image">
+                        <img id="large-img" src="" alt="Выбранное кольцо">
+                    </div>
                 </div>
             </div>
         </div>
@@ -501,7 +597,6 @@
                         const targetElement = document.querySelector(targetId);
                         
                         if (targetElement) {
-                            // Прокрутка с учетом перекрытия шапки
                             window.scrollTo({
                                 top: targetElement.offsetTop - 110,
                                 behavior: 'smooth'
@@ -509,6 +604,94 @@
                         }
                     }
                 });
+            });
+            
+            // Галлерея колец
+            const totalRings = 24;
+            let currentRing = 1;
+            let slideshowInterval = null;
+            
+            // Элементы управления
+            const thumbnailsContainer = document.getElementById('thumbnails');
+            const largeImage = document.getElementById('large-img');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const playBtn = document.getElementById('play-btn');
+            
+            // Создание миниатюр
+            function createThumbnails() {
+                thumbnailsContainer.innerHTML = '';
+                
+                for (let i = 1; i <= totalRings; i++) {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'thumbnail';
+                    thumbnail.dataset.id = i;
+                    
+                    const img = document.createElement('img');
+                    img.src = `images/rings/${i}s.jpg`;
+                    img.alt = `Кольцо ${i}`;
+                    
+                    thumbnail.appendChild(img);
+                    thumbnailsContainer.appendChild(thumbnail);
+                    
+                    // Обработчик клика на миниатюру
+                    thumbnail.addEventListener('click', function() {
+                        showRing(parseInt(this.dataset.id));
+                    });
+                }
+            }
+            
+            // Показать кольцо
+            function showRing(id) {
+                currentRing = id;
+                largeImage.src = `images/rings/${id}.jpg`;
+                
+                // Обновление активной миниатюры
+                document.querySelectorAll('.thumbnail').forEach(thumb => {
+                    thumb.classList.remove('active');
+                    if (parseInt(thumb.dataset.id) === id) {
+                        thumb.classList.add('active');
+                    }
+                });
+            }
+            
+            // Предыдущее фото
+            function prevPhoto() {
+                currentRing = currentRing > 1 ? currentRing - 1 : totalRings;
+                showRing(currentRing);
+            }
+            
+            // Следующее фото
+            function nextPhoto() {
+                currentRing = currentRing < totalRings ? currentRing + 1 : 1;
+                showRing(currentRing);
+            }
+            
+            // Запуск/остановка слайд-шоу
+            function toggleSlideshow() {
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                    slideshowInterval = null;
+                    playBtn.textContent = 'Play Slideshow';
+                } else {
+                    slideshowInterval = setInterval(nextPhoto, 3000);
+                    playBtn.textContent = 'Stop Slideshow';
+                }
+            }
+            
+            // Инициализация галереи
+            createThumbnails();
+            showRing(1); // Показать первое кольцо
+            
+            // Назначение обработчиков
+            prevBtn.addEventListener('click', prevPhoto);
+            nextBtn.addEventListener('click', nextPhoto);
+            playBtn.addEventListener('click', toggleSlideshow);
+            
+            // Навигация клавиатурой
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'ArrowRight') nextPhoto();
             });
         });
     </script>
