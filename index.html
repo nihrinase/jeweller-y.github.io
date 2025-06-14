@@ -38,14 +38,18 @@
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             flex-wrap: wrap;
+            /* Выравнивание по нижнему краю */
+            align-items: flex-end;
         }
 
         /* Контейнер логотипа */
         .logo-container {
             display: flex;
             flex-direction: column;
+            /* Выравнивание по нижнему краю */
+            justify-content: flex-end;
+            height: 100%;
         }
 
         /* Логотип */
@@ -56,7 +60,7 @@
             text-shadow: 2px 2px 2px #d31d6a;
             margin: 0;
             white-space: nowrap;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         /* Надпись под логотипом */
@@ -77,6 +81,9 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            /* Выравнивание по нижнему краю */
+            justify-content: flex-end;
+            height: 100%;
         }
 
         /* Меню */
@@ -113,11 +120,12 @@
         .nav-image {
             width: 40px;
             height: 30px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .nav-image:hover {
             transform: scale(1.1);
+            opacity: 0.9;
         }
 
         /* Адаптивность */
@@ -125,11 +133,13 @@
             header {
                 flex-direction: column;
                 text-align: center;
+                align-items: center;
             }
             
             .logo-container, .nav-container {
                 align-items: center;
                 width: 100%;
+                margin-bottom: 20px;
             }
             
             nav ul {
@@ -162,6 +172,10 @@
             nav ul li {
                 margin: 5px 8px;
             }
+            
+            .portfolio-text {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -171,7 +185,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    <span>p</span>ortfolio
+                    /<span>p</span>ortfolio
                 </div>
             </div>
             
