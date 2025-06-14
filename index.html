@@ -14,11 +14,10 @@
 
         body {
             background-color: #afe0c9;
-            background-image: url('images/back29.png');
-            background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding-top: 150px;
+            overflow-x: hidden;
         }
 
         /* Фиксированная шапка */
@@ -45,12 +44,14 @@
             align-items: flex-end;
         }
 
+        /* Контейнер логотипа */
         .logo-container {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
         }
 
+        /* Логотип */
         .logo {
             font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
@@ -62,6 +63,7 @@
             margin-bottom: 20px;
         }
 
+        /* Надпись под логотипом */
         .portfolio-text {
             font: 18px 'Segoe UI', Verdana, sans-serif;
             color: #FFF;
@@ -73,12 +75,14 @@
             color: #292d75;
         }
 
+        /* Контейнер навигации */
         .nav-container {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
         }
 
+        /* Меню */
         nav ul {
             display: flex;
             list-style: none;
@@ -108,6 +112,7 @@
             text-decoration: underline;
         }
 
+        /* Картинка под меню */
         .nav-image {
             width: 40px;
             height: 30px;
@@ -119,12 +124,14 @@
             opacity: 0.9;
         }
 
+        /* Основной контент */
         .content-container {
             max-width: 965px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* Галерея украшений */
         .gallery {
             display: flex;
             justify-content: space-between;
@@ -156,25 +163,37 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Окно между секциями */
-        .window-section {
-            height: 310px;
+        /* Секция-обертка для эффекта прокрутки */
+        .section-wrapper {
             position: relative;
-            margin-top: 63px; /* Смещение на 63px относительно первой секции */
             overflow: hidden;
-            z-index: 2;
         }
 
-        .window-background {
+        /* Фон первой секции */
+        .section-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-color: #afe0c9;
+            background-image: url('images/back29.png');
+            background-repeat: repeat;
+            z-index: -1;
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Окно между секциями */
+        .window-gap {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 310px;
             background: url('images/back_1.jpg') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
-            z-index: 1;
+            z-index: 2;
         }
 
         /* Новая секция Rings */
@@ -188,6 +207,7 @@
             padding: 50px 0;
             position: relative;
             z-index: 3;
+            margin-top: 310px; /* Высота окна */
         }
 
         .rings-container {
@@ -303,8 +323,8 @@
                 height: 50vh;
             }
             
-            .window-section {
-                height: 200px;
+            #rings-section {
+                margin-top: 200px;
             }
         }
 
@@ -355,8 +375,8 @@
                 height: 40vh;
             }
             
-            .window-section {
-                height: 150px;
+            #rings-section {
+                margin-top: 150px;
             }
         }
     </style>
@@ -368,7 +388,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    <span>p</span>ortfolio
+                    /<span>p</span>ortfolio
                 </div>
             </div>
             
@@ -395,30 +415,34 @@
         </header>
     </div>
     
-    <!-- Секция с галереей -->
-    <div class="content-container">
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="images/ring22.jpg" alt="Кольцо">
-            </div>
-            <div class="gallery-item">
-                <img src="images/bracelet1.jpg" alt="Браслет">
-            </div>
-            <div class="gallery-item">
-                <img src="images/pendant.jpg" alt="Кулон">
-            </div>
-            <div class="gallery-item">
-                <img src="images/earring.jpg" alt="Серьги">
-            </div>
-            <div class="gallery-item">
-                <img src="images/oeuvre2.jpg" alt="Украшение">
+    <!-- Обертка для эффекта прокрутки -->
+    <div class="section-wrapper">
+        <!-- Фон первой секции -->
+        <div class="section-bg"></div>
+        
+        <!-- Секция с галереей -->
+        <div class="content-container">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/ring22.jpg" alt="Кольцо">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/bracelet1.jpg" alt="Браслет">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pendant.jpg" alt="Кулон">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/earring.jpg" alt="Серьги">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/oeuvre2.jpg" alt="Украшение">
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Окно между секциями -->
-    <div class="window-section">
-        <div class="window-background"></div>
+        
+        <!-- Окно между секциями -->
+        <div class="window-gap"></div>
     </div>
     
     <!-- Секция Rings -->
@@ -438,6 +462,8 @@
     <script>
         // Функция для отслеживания скролла и изменения активного пункта меню
         document.addEventListener('DOMContentLoaded', function() {
+            const sectionWrapper = document.querySelector('.section-wrapper');
+            const sectionBg = document.querySelector('.section-bg');
             const ringsSection = document.getElementById('rings-section');
             const ringsNavItem = document.querySelector('nav ul li:nth-child(2)');
             const homeNavItem = document.querySelector('nav ul li:first-child');
@@ -453,12 +479,15 @@
             
             // Обработчик скролла
             window.addEventListener('scroll', function() {
+                // Эффект смещения фона
+                const scrollPosition = window.scrollY;
+                sectionBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                
+                // Переключение активного пункта меню
                 if (isInViewport(ringsSection)) {
-                    // Добавляем класс active к rings и удаляем у home
                     ringsNavItem.classList.add('active');
                     homeNavItem.classList.remove('active');
                 } else {
-                    // Возвращаем активное состояние к home
                     ringsNavItem.classList.remove('active');
                     homeNavItem.classList.add('active');
                 }
