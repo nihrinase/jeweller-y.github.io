@@ -18,29 +18,27 @@
             background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
+            padding-top: 150px; /* Отступ для фиксированной шапки */
         }
 
-        /* Основной контейнер */
-        .site-container {
-            width: 100%;
-            max-width: 965px; /* Ширина галереи (5*189 + 4*5) */
-            padding: 0 10px;
-        }
-
-        /* Контейнер шапки */
+        /* Фиксированная шапка */
         .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 18px;
+            z-index: 1000;
+            padding: 15px 20px;
+            background-color: #afe0c9;
+            background-image: url('images/back29.png');
+            background-repeat: repeat;
+            border-bottom: 1px solid #16126b; /* Разделитель 1px */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Шапка */
         header {
-            background: transparent;
-            padding: 15px 0;
+            max-width: 965px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -127,6 +125,13 @@
             opacity: 0.9;
         }
 
+        /* Основной контент */
+        .content-container {
+            max-width: 965px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         /* Галерея украшений */
         .gallery {
             display: flex;
@@ -161,7 +166,7 @@
 
         /* Адаптивность */
         @media (max-width: 1000px) {
-            .site-container {
+            .content-container {
                 padding: 0 20px;
             }
         }
@@ -184,6 +189,14 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding-top: 180px;
+            }
+            
+            .header-container {
+                padding: 10px 15px;
+            }
+            
             header {
                 flex-direction: column;
                 text-align: center;
@@ -192,7 +205,7 @@
             
             .logo-container, .nav-container {
                 align-items: center;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
             
             .logo {
@@ -202,7 +215,7 @@
             
             nav ul {
                 justify-content: center;
-                margin: 15px 0;
+                margin: 10px 0;
             }
             
             .nav-container {
@@ -235,6 +248,10 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding-top: 200px;
+            }
+            
             .logo {
                 font-size: 28px;
             }
@@ -265,40 +282,41 @@
     </style>
 </head>
 <body>
-    <div class="site-container">
-        <div class="header-container">
-            <header>
-                <div class="logo-container">
-                    <div class="logo">Одностраничный Сайт</div>
-                    <div class="portfolio-text">
-                        <span>p</span>ortfolio
-                    </div>
+    <!-- Фиксированная шапка -->
+    <div class="header-container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">Одностраничный Сайт</div>
+                <div class="portfolio-text">
+                    <span>p</span>ortfolio
                 </div>
+            </div>
+            
+            <div class="nav-container">
+                <nav>
+                    <ul>
+                        <li class="active"><a href="#">home</a></li>
+                        <li><a href="#">rings</a></li>
+                        <li><a href="#">earrings</a></li>
+                        <li><a href="#">necklaces</a></li>
+                        <li><a href="#">oeuvre</a></li>
+                        <li><a href="#">contact</a></li>
+                    </ul>
+                </nav>
                 
-                <div class="nav-container">
-                    <nav>
-                        <ul>
-                            <li class="active"><a href="#">home</a></li>
-                            <li><a href="#">rings</a></li>
-                            <li><a href="#">earrings</a></li>
-                            <li><a href="#">necklaces</a></li>
-                            <li><a href="#">oeuvre</a></li>
-                            <li><a href="#">contact</a></li>
-                        </ul>
-                    </nav>
-                    
-                    <a href="#">
-                        <img src="images/3d.png" 
-                             alt="3D Icon" 
-                             class="nav-image"
-                             onmouseover="this.src='images/3dd.png'"
-                             onmouseout="this.src='images/3d.png'">
-                    </a>
-                </div>
-            </header>
-        </div>
-        
-        <!-- Галерея украшений -->
+                <a href="#">
+                    <img src="images/3d.png" 
+                         alt="3D Icon" 
+                         class="nav-image"
+                         onmouseover="this.src='images/3dd.png'"
+                         onmouseout="this.src='images/3d.png'">
+                </a>
+            </div>
+        </header>
+    </div>
+    
+    <!-- Секция с галереей -->
+    <div class="content-container">
         <div class="gallery">
             <div class="gallery-item">
                 <img src="images/ring22.jpg" alt="Кольцо">
