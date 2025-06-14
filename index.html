@@ -96,7 +96,8 @@
         nav ul li a {
             text-decoration: none;
             font: 18px 'Segoe UI', Verdana, sans-serif;
-            color: #FFF;
+            /* Изменение цвета меню на синий */
+            color: #16126b;
             padding: 8px 0;
             transition: all 0.3s ease;
             position: relative;
@@ -107,6 +108,7 @@
             font-weight: bold;
         }
 
+        /* Подчеркивание при наведении для верхнего меню */
         nav ul li:not(.active) a:hover {
             text-decoration: underline;
         }
@@ -192,7 +194,8 @@
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
-            padding: 70px 0 10px 0;
+            /* Поднятие контента на 25px */
+            padding: 45px 0 10px 0;
             z-index: 3;
             margin-top: -10px;
         }
@@ -220,7 +223,8 @@
         /* Контролы галереи */
         .gallery-controls {
             display: flex;
-            justify-content: flex-end;
+            /* Расположение по центру лево галереи */
+            justify-content: flex-start;
             margin-top: 10px;
             margin-bottom: 12px;
         }
@@ -236,6 +240,8 @@
             font-size: 16px;
             border-radius: 4px;
             transition: all 0.3s;
+            /* Надписи в одну строку */
+            white-space: nowrap;
         }
 
         .gallery-btn:hover {
@@ -316,8 +322,10 @@
             background: #16126b;
         }
 
+        /* Активная кнопка белого цвета */
         .page-btn.active {
-            background: #d31d6a;
+            background: white;
+            color: #16126b;
         }
 
         /* Большое изображение */
@@ -326,6 +334,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            /* Центрирование по правому краю */
+            margin-left: auto;
         }
 
         .large-image {
@@ -391,6 +401,11 @@
             .thumbnails {
                 margin-bottom: 20px;
             }
+            
+            /* Центрирование правого блока на маленьких экранах */
+            .large-image-container {
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -443,12 +458,17 @@
             /* Адаптация для секции Rings */
             #rings-section {
                 margin-top: -10px;
-                padding: 60px 0 10px 0;
+                padding: 40px 0 10px 0;
             }
             
             .large-image {
                 width: 100%;
                 max-width: 500px;
+            }
+            
+            /* Центрирование кнопок управления на мобильных */
+            .gallery-controls {
+                justify-content: center;
             }
         }
 
@@ -460,10 +480,6 @@
             .gallery-item {
                 width: 150px;
                 height: 320px;
-            }
-            
-            .gallery-controls {
-                justify-content: center;
             }
         }
 
@@ -502,7 +518,7 @@
             /* Адаптация для секции Rings */
             #rings-section {
                 margin-top: -10px;
-                padding: 50px 0 10px 0;
+                padding: 35px 0 10px 0;
             }
             
             .gallery-btn {
