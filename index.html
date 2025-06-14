@@ -48,7 +48,6 @@
             flex-direction: column;
             justify-content: flex-end;
             height: 100%;
-            transform: translateY(-5px); /* Изменено с -15px на -5px */
         }
 
         /* Логотип */
@@ -60,6 +59,7 @@
             margin: 0;
             white-space: nowrap;
             line-height: 1;
+            margin-bottom: 20px; /* Увеличенный зазор между логотипом и надписью */
         }
 
         /* Надпись под логотипом */
@@ -67,10 +67,7 @@
             font: 18px 'Segoe UI', Verdana, sans-serif;
             color: #FFF;
             letter-spacing: 2px;
-            margin-top: 5px;
             text-align: left;
-            /* Опускаем надпись на 20px */
-            transform: translateY(20px);
         }
 
         .portfolio-text span {
@@ -151,15 +148,15 @@
             
             .logo {
                 font-size: 36px;
-            }
-            
-            .portfolio-text {
-                transform: none;
-                text-align: center;
+                margin-bottom: 10px; /* Уменьшаем зазор на мобильных */
             }
             
             .nav-container {
                 align-items: center;
+            }
+            
+            .portfolio-text {
+                text-align: center;
             }
         }
 
@@ -188,7 +185,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    /<span>p</span>ortfolio
+                    <span>p</span>ortfolio
                 </div>
             </div>
             
