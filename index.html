@@ -3,528 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фотогалерея Premium</title>
+    <title>Ювелирные украшения - Одностраничный сайт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            overflow-x: hidden;
-            height: calc(200vh - 250px);
-            background: #1a1a2e;
-            color: #fff;
+            background-color: #afe0c9;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAhElEQVRoQ+3XwQ0AIAgDwJb+0z0G3EElQvG0mR9mTg9J9yMiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIi8gUvQ1sXHqP0LQAAAABJRU5ErkJggg==');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
         }
-        
-        /* Шапка с лого и меню */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Шапка */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 5%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            background: #1a1a2e;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ff6b6b;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            display: flex;
-            align-items: center;
+            font-size: 44px;
+            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+            color: #FFF;
+            text-shadow: 2px 2px 2px #d31d6a;
+            margin: 10px 0;
         }
-        
-        .logo-icon {
-            margin-right: 10px;
-            font-size: 24px;
-        }
-        
+
+        /* Меню */
         nav ul {
             display: flex;
             list-style: none;
+            flex-wrap: wrap;
         }
-        
+
         nav ul li {
-            margin-left: 30px;
+            margin: 0 12px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font: 18px 'Segoe UI', Verdana, sans-serif;
+            color: #FFF;
+            padding: 8px 5px;
+            transition: all 0.3s ease;
             position: relative;
         }
-        
-        nav ul li a {
-            color: #f1f1f1;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+        nav ul li.active a {
+            color: #16126b;
+            font-weight: bold;
+        }
+
+        nav ul li:not(.active) a:hover {
+            text-decoration: underline;
+        }
+
+        /* Основной контент */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            flex: 3;
+            min-width: 300px;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #d31d6a;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .card h3 {
+            color: #16126b;
+            margin: 15px 0 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+        }
+
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
             display: block;
         }
-        
-        nav ul li a.active, nav ul li a:hover {
-            background: #ff6b6b;
+
+        .gallery-item .caption {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #16126b;
+        }
+
+        /* Футер */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
             color: #fff;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        
-        /* Стиль для активного пункта без цвета */
-        nav ul li a.active-no-color {
-            background: transparent !important;
-            color: #f1f1f1 !important;
-            box-shadow: none !important;
-        }
-        
-        nav ul li a.active::after, 
-        nav ul li a.active-no-color::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: #ff6b6b;
-            border-radius: 50%;
-        }
-        
-        /* Секции */
-        .section {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        
-        /* Фон секций */
-        .section-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1a1a2e;
-            z-index: 1;
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        
-        /* Контент секций */
-        .section-content {
-            position: relative;
-            z-index: 2;
+            text-align: center;
             padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
+            border-radius: 10px;
+            margin-top: 30px;
         }
-        
-        /* Первая секция */
-        #section1 {
-            padding-top: 100px;
+
+        /* Форма */
+        .form-group {
+            margin-bottom: 20px;
         }
-        
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            padding-bottom: 20px;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #16126b;
+            font-weight: bold;
         }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #ff6b6b;
-            border-radius: 2px;
-        }
-        
-        .photos-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: -50px;
-        }
-        
-        .photo-item {
-            width: 189px;
-            height: 400px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-        
-        .photo-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 70%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
         }
-        
-        .photo-item:hover::before {
-            opacity: 1;
+
+        .btn {
+            background: #d31d6a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
         }
-        
-        .photo-item:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(255, 107, 107, 0.4);
+
+        .btn:hover {
+            background: #b01a5b;
         }
-        
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .photo-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        /* Зазор между секциями */
-        #gap-section {
-            height: calc(100vh - 250px);
-            position: relative;
-            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&w=1600') no-repeat center center/cover;
-            z-index: 0;
-            background-attachment: fixed;
-        }
-        
-        /* Вторая секция - изменения */
-        #section2 {
-            padding-top: 100px;
-        }
-        
-        .section2-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            padding-bottom: 20px;
-        }
-        
-        .section2-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #ff6b6b;
-            border-radius: 2px;
-        }
-        
-        .single-photo-container {
-            position: relative;
-            width: 189px;
-            height: 400px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-        
-        .single-photo {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(255, 107, 107, 0.5);
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s ease; /* Убрана задержка - уменьшено время анимации */
-        }
-        
-        .single-photo.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .single-photo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 107, 107, 0.3), transparent);
-            z-index: 1;
-        }
-        
-        .single-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .section-description {
-            max-width: 600px;
-            text-align: center;
-            margin: 60px auto 0;
-            font-size: 18px;
-            line-height: 1.8;
-            color: #ddd;
-            padding: 0;
-            background: transparent;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s ease; /* Убрана задержка - уменьшено время анимации */
-        }
-        
-        .section-description.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Декоративные элементы */
-        .decor-element {
-            position: absolute;
-            z-index: 0;
-        }
-        
-        .circle {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: rgba(255, 107, 107, 0.05);
-            top: 20%;
-            right: 10%;
-        }
-        
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 260px solid rgba(26, 82, 118, 0.05);
-            bottom: 15%;
-            left: 5%;
-            transform: rotate(45deg);
-        }
-        
-        /* Анимации */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 8s infinite ease-in-out;
-        }
-        
+
         /* Адаптивность */
-        @media (max-width: 900px) {
-            .photos-row {
-                gap: 20px;
-            }
-            
-            nav ul li {
-                margin-left: 15px;
-            }
-            
-            .section-title, .section2-title {
-                font-size: 28px;
-            }
-        }
-        
-        @media (max-width: 700px) {
-            .photos-row {
+        @media (max-width: 768px) {
+            header {
                 flex-direction: column;
-                align-items: center;
+                text-align: center;
             }
             
             nav ul {
-                display: none;
+                justify-content: center;
+                margin-top: 15px;
             }
             
             .logo {
-                font-size: 22px;
+                font-size: 36px;
+            }
+            
+            nav ul li {
+                margin: 5px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 28px;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header>
-        <div class="logo">
-            <span class="logo-icon">📷</span>
-            PhotoArt
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#section1" class="active">Home</a></li>
-                <li><a href="#section2">1A</a></li>
-                <li><a href="#section2">2A</a></li>
-                <li><a href="#section2">3A</a></li>
-                <li><a href="#section2">4A</a></li>
-                <li><a href="#section2">5A</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- Первая секция с пятью фото -->
-    <section id="section1" class="section">
-        <div class="section-bg" id="bg1"></div>
+    <div class="container">
+        <header>
+            <div class="logo">одностраничный сайт</div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#">home</a></li>
+                    <li><a href="#">rings</a></li>
+                    <li><a href="#">earrings</a></li>
+                    <li><a href="#">necklaces</a></li>
+                    <li><a href="#">oeuvre</a></li>
+                    <li><a href="#">contact</a></li>
+                </ul>
+            </nav>
+        </header>
         
-        <div class="decor-element circle pulse"></div>
-        <div class="decor-element triangle pulse" style="animation-delay: 1s;"></div>
-        
-        <div class="section-content">
-            <h2 class="section-title">Премиум Галерея</h2>
-            
-            <div class="photos-row">
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Архитектура">
+        <div class="content">
+            <div class="main-content">
+                <div class="card">
+                    <h2>Добро пожаловать в мир ювелирных украшений</h2>
+                    <p>Мы создаем уникальные украшения ручной работы, которые подчеркнут вашу индивидуальность и станут изюминкой любого образа. Каждое изделие создается с любовью и вниманием к деталям.</p>
+                    
+                    <h3>Наша философия</h3>
+                    <p>Мы верим, что ювелирные украшения - это не просто аксессуары, а произведения искусства, которые несут в себе эмоции и историю. Наши мастера вдохновляются природой, архитектурой и культурным наследием, создавая уникальные дизайны.</p>
+                    
+                    <h3>Почему выбирают нас</h3>
+                    <ul>
+                        <li>Эксклюзивные дизайны</li>
+                        <li>Использование высококачественных материалов</li>
+                        <li>Ручная работа</li>
+                        <li>Индивидуальный подход к каждому клиенту</li>
+                        <li>Экологичное производство</li>
+                    </ul>
                 </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Кухня">
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Фрукты">
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Завтрак">
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Стейк">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Зазор между секциями -->
-    <section id="gap-section"></section>
-    
-    <!-- Вторая секция с одной фото -->
-    <section id="section2" class="section">
-        <div class="section-bg" id="bg2"></div>
-        
-        <div class="section-content">
-            <h2 class="section2-title">Шедевр Месяца</h2>
-            
-            <div class="single-photo-container">
-                <div class="single-photo" id="featured-photo">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=400&w=189" alt="Избранное фото">
+                
+                <div class="card">
+                    <h2>Новые поступления</h2>
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3ccircle cx='100' cy='100' r='80' fill='%23f7d9e3'/%3e%3ccircle cx='100' cy='100' r='50' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Кольцо">
+                            <div class="caption">Кольцо "Нежность"</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3cpath d='M50,100 L150,100 L150,120 L50,120 Z' fill='%23f7d9e3'/%3e%3cellipse cx='100' cy='80' rx='20' ry='10' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Серьги">
+                            <div class="caption">Серьги "Рассвет"</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3cpath d='M100,50 Q150,80 100,150 Q50,80 100,50 Z' fill='%23f7d9e3'/%3e%3ccircle cx='100' cy='100' r='15' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Подвеска">
+                            <div class="caption">Подвеска "Мечта"</div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3e%3crect x='60' y='80' width='80' height='40' fill='%23f7d9e3'/%3e%3ccircle cx='80' cy='100' r='10' fill='%23d31d6a'/%3e%3ccircle cx='120' cy='100' r='10' fill='%23d31d6a'/%3e%3c/svg%3e" alt="Браслет">
+                            <div class="caption">Браслет "Гармония"</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <p class="section-description" id="featured-description">
-                Эта работа была признана лучшей в текущем месяце. Она демонстрирует идеальное сочетание 
-                композиции, света и эмоций. Фотография сделана в естественных условиях при мягком 
-                закатном освещении с использованием профессиональной техники съемки.
-            </p>
+            <div class="sidebar">
+                <div class="card">
+                    <h2>Специальное предложение</h2>
+                    <p>При заказе от 10 000 рублей - скидка 15% на все украшения из коллекции "Весеннее настроение".</p>
+                    <p>Предложение действует до 30 июня.</p>
+                    <button class="btn">Подробнее</button>
+                </div>
+                
+                <div class="card">
+                    <h2>Свяжитесь с нами</h2>
+                    <p>Есть вопросы? Мы с радостью на них ответим!</p>
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Ваш email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" rows="4" placeholder="Ваше сообщение"></textarea>
+                    </div>
+                    <button class="btn">Отправить</button>
+                </div>
+            </div>
         </div>
-    </section>
+        
+        <footer>
+            <p>© 2023 Ювелирные украшения. Все права защищены.</p>
+            <p>Телефон: +7 (999) 123-45-67 | Email: info@jewelry-art.ru</p>
+        </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('nav a');
-            const featuredPhoto = document.getElementById('featured-photo');
-            const featuredDescription = document.getElementById('featured-description');
-            
-            // Обработчик скролла
-            window.addEventListener('scroll', function() {
-                const scrollY = window.scrollY;
-                const viewportHeight = window.innerHeight;
-                
-                // Активация второй секции
-                if (scrollY > viewportHeight * 1.2) {
-                    // Активируем пункт меню 1A без цвета фона
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.textContent === '1A') {
-                            link.classList.add('active-no-color');
-                        }
-                    });
-                    
-                    // Показываем фото и описание без задержки
-                    featuredPhoto.classList.add('active');
-                    featuredDescription.classList.add('active');
-                } else {
-                    // Активируем пункт Home с цветом
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        link.classList.remove('active-no-color');
-                        if (link.textContent === 'Home') {
-                            link.classList.add('active');
-                        }
-                    });
-                    
-                    // Скрываем элементы второй секции
-                    featuredPhoto.classList.remove('active');
-                    featuredDescription.classList.remove('active');
-                }
-            });
-            
-            // Плавный скролл для меню
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
+        // Добавляем обработчики событий для меню
+        document.querySelectorAll('nav ul li').forEach(item => {
+            item.addEventListener('click', function() {
+                // Удаляем класс active у всех элементов
+                document.querySelectorAll('nav ul li').forEach(li => {
+                    li.classList.remove('active');
                 });
+                
+                // Добавляем класс active текущему элементу
+                this.classList.add('active');
             });
-            
-            // Параллакс для заднего фона
-            window.addEventListener('scroll', function() {
-                const scrollY = window.scrollY;
-                const bg1 = document.getElementById('bg1');
-                const bg2 = document.getElementById('bg2');
-                
-                // Первый фон
-                if (bg1) {
-                    bg1.style.transform = `translateY(${scrollY * 0.2}px)`;
-                }
-                
-                // Второй фон
-                if (bg2) {
-                    bg2.style.transform = `translateY(${scrollY * 0.1}px)`;
-                }
+        });
+        
+        // Анимация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * index);
             });
         });
     </script>
