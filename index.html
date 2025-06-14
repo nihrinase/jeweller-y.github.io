@@ -39,7 +39,6 @@
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            /* Выравнивание по нижнему краю */
             align-items: flex-end;
         }
 
@@ -47,9 +46,10 @@
         .logo-container {
             display: flex;
             flex-direction: column;
-            /* Выравнивание по нижнему краю */
             justify-content: flex-end;
             height: 100%;
+            /* Приподнимаем логотип на 20px */
+            transform: translateY(-20px);
         }
 
         /* Логотип */
@@ -81,7 +81,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            /* Выравнивание по нижнему краю */
             justify-content: flex-end;
             height: 100%;
         }
@@ -140,6 +139,7 @@
                 align-items: center;
                 width: 100%;
                 margin-bottom: 20px;
+                transform: none;
             }
             
             nav ul {
@@ -185,7 +185,7 @@
             <div class="logo-container">
                 <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
-                    /<span>p</span>ortfolio
+                    <span>p</span>ortfolio
                 </div>
             </div>
             
