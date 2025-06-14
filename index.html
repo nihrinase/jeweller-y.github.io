@@ -14,20 +14,21 @@
 
         body {
             background-color: #afe0c9;
-            background-image: url(../images/back29.png);
+            background-image: url('../images/back29.png');
             background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
 
         /* Контейнер шапки */
         .header-container {
             width: 100%;
             max-width: 1200px;
-            padding: 20px;
+            padding: 0 20px;
+            margin-top: 18px;
         }
 
         /* Шапка */
@@ -49,6 +50,7 @@
             text-shadow: 2px 2px 2px #d31d6a;
             margin: 10px 0;
             white-space: nowrap;
+            text-transform: capitalize;
         }
 
         /* Меню */
@@ -105,13 +107,17 @@
             nav ul li a {
                 font-size: 16px;
             }
+            
+            nav ul li {
+                margin: 5px 8px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header-container">
         <header>
-            <div class="logo">одностраничный сайт</div>
+            <div class="logo">Одностраничный Сайт</div>
             <nav>
                 <ul>
                     <li class="active"><a href="#">home</a></li>
