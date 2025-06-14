@@ -164,6 +164,15 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        /* Окно между секциями */
+        .window-between {
+            height: 310px;
+            background: url('images/back_1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+
         /* Новая секция Rings */
         #rings-section {
             min-height: 100vh;
@@ -173,7 +182,6 @@
             display: flex;
             align-items: center;
             padding: 50px 0;
-            margin-top: 50px;
         }
 
         .rings-container {
@@ -394,7 +402,10 @@
         </div>
     </div>
     
-    <!-- Новая секция Rings -->
+    <!-- Окно между секциями -->
+    <div class="window-between"></div>
+    
+    <!-- Секция Rings -->
     <section id="rings-section">
         <div class="rings-container">
             <div class="rings-content">
