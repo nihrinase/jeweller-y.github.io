@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Одностраничный сайт - Шапка</title>
+    <title>Одностраничный сайт - Ювелирные украшения</title>
     <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,7 +14,7 @@
 
         body {
             background-color: #afe0c9;
-            background-image: url('images/back29.png');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23afe0c9" opacity="0.7"/><path d="M0 50 Q25 30,50 50 T100 50" fill="none" stroke="%2385c7b2" stroke-width="2" stroke-opacity="0.4"/><path d="M0 30 Q25 10,50 30 T100 30" fill="none" stroke="%2385c7b2" stroke-width="1.5" stroke-opacity="0.4"/><path d="M0 70 Q25 90,50 70 T100 70" fill="none" stroke="%2385c7b2" stroke-width="1.5" stroke-opacity="0.4"/></svg>');
             background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,7 +39,12 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border-radius: 10px;
+        }
+
+        /* Контейнер логотипа */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
         }
 
         /* Логотип */
@@ -48,9 +53,29 @@
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             color: #FFF;
             text-shadow: 2px 2px 2px #d31d6a;
-            margin: 10px 0;
+            margin: 0;
             white-space: nowrap;
-            text-transform: capitalize;
+            line-height: 1.2;
+        }
+
+        /* Надпись под логотипом */
+        .portfolio-text {
+            font: 18px 'Segoe UI', Verdana, sans-serif;
+            color: #FFF;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .portfolio-text span.p-letter {
+            color: #292d75;
+            font-weight: bold;
+        }
+
+        /* Контейнер навигации */
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
 
         /* Меню */
@@ -58,6 +83,7 @@
             display: flex;
             list-style: none;
             flex-wrap: wrap;
+            margin-bottom: 10px;
         }
 
         nav ul li {
@@ -82,6 +108,17 @@
             text-decoration: underline;
         }
 
+        /* Картинка под меню */
+        .nav-image {
+            width: 40px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-image:hover {
+            transform: scale(1.1);
+        }
+
         /* Адаптивность */
         @media (max-width: 768px) {
             header {
@@ -89,13 +126,22 @@
                 text-align: center;
             }
             
+            .logo-container, .nav-container {
+                align-items: center;
+                width: 100%;
+            }
+            
             nav ul {
                 justify-content: center;
-                margin-top: 15px;
+                margin: 15px 0;
             }
             
             .logo {
                 font-size: 36px;
+            }
+            
+            .nav-container {
+                align-items: center;
             }
         }
 
@@ -117,17 +163,33 @@
 <body>
     <div class="header-container">
         <header>
-            <div class="logo">Одностраничный Сайт</div>
-            <nav>
-                <ul>
-                    <li class="active"><a href="#">home</a></li>
-                    <li><a href="#">rings</a></li>
-                    <li><a href="#">earrings</a></li>
-                    <li><a href="#">necklaces</a></li>
-                    <li><a href="#">oeuvre</a></li>
-                    <li><a href="#">contact</a></li>
-                </ul>
-            </nav>
+            <div class="logo-container">
+                <div class="logo">Одностраничный Сайт</div>
+                <div class="portfolio-text">
+                    <span class="p-letter">p</span>ortfolio
+                </div>
+            </div>
+            
+            <div class="nav-container">
+                <nav>
+                    <ul>
+                        <li class="active"><a href="#">home</a></li>
+                        <li><a href="#">rings</a></li>
+                        <li><a href="#">earrings</a></li>
+                        <li><a href="#">necklaces</a></li>
+                        <li><a href="#">oeuvre</a></li>
+                        <li><a href="#">contact</a></li>
+                    </ul>
+                </nav>
+                
+                <a href="#">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='30' viewBox='0 0 40 30'><rect width='40' height='30' fill='%23d31d6a' rx='5'/><path d='M10 8 L20 15 L10 22 Z' fill='%23FFF'/><path d='M20 8 L30 15 L20 22 Z' fill='%23FFF'/></svg>" 
+                         alt="3D Icon" 
+                         class="nav-image"
+                         onmouseover="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"30\" viewBox=\"0 0 40 30\"><rect width=\"40\" height=\"30\" fill=\"%2316126b\" rx=\"5\"/><path d=\"M10 8 L20 15 L10 22 Z\" fill=\"%23FFF\"/><path d=\"M20 8 L30 15 L20 22 Z\" fill=\"%23FFF\"/></svg>'"
+                         onmouseout="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;40&quot; height=&quot;30&quot; viewBox=&quot;0 0 40 30&quot;><rect width=&quot;40&quot; height=&quot;30&quot; fill=&quot;%23d31d6a&quot; rx=&quot;5&quot;/><path d=&quot;M10 8 L20 15 L10 22 Z&quot; fill=&quot;%23FFF&quot;/><path d=&quot;M20 8 L30 15 L20 22 Z&quot; fill=&quot;%23FFF&quot;/></svg>'">
+                </a>
+            </div>
         </header>
     </div>
 </body>
