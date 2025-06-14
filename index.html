@@ -18,24 +18,29 @@
             background-repeat: repeat;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-top: 150px; /* Отступ для фиксированной шапки */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
         }
 
-        /* Фиксированная шапка */
-        .header-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Основной контейнер */
+        .site-container {
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            padding: 15px 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 965px; /* Ширина галереи (5*189 + 4*5) */
+            padding: 0 10px;
         }
 
+        /* Контейнер шапки */
+        .header-container {
+            width: 100%;
+            margin-top: 18px;
+        }
+
+        /* Шапка */
         header {
-            max-width: 965px;
-            margin: 0 auto;
+            background: transparent;
+            padding: 15px 0;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
@@ -126,9 +131,8 @@
         .gallery {
             display: flex;
             justify-content: space-between;
-            max-width: 965px;
-            margin: 30px auto;
-            padding: 0 10px;
+            margin-top: 30px;
+            width: 100%;
         }
 
         .gallery-item {
@@ -140,7 +144,7 @@
         }
 
         .gallery-item:not(:last-child) {
-            margin-right: 5px;
+            margin-right: 5px; /* Расстояние 5px между фото */
         }
 
         .gallery-item img {
@@ -155,68 +159,9 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Секция Rings */
-        #rings {
-            background-color: #afe0c9;
-            background-image: url('images/back29.png');
-            background-repeat: repeat;
-            padding: 310px 0 50px;
-            text-align: center;
-            display: none; /* Сначала скрыта */
-        }
-
-        .rings-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .rings-title {
-            font-size: 48px;
-            font-family: 'Economica', sans-serif;
-            color: #16126b;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .rings-text {
-            font-size: 20px;
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .rings-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .ring-item {
-            width: 250px;
-            height: 250px;
-            border: 2px solid #d31d6a;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .ring-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .ring-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         /* Адаптивность */
         @media (max-width: 1000px) {
-            .gallery {
+            .site-container {
                 padding: 0 20px;
             }
         }
@@ -239,10 +184,6 @@
         }
 
         @media (max-width: 768px) {
-            .header-container {
-                padding: 10px 15px;
-            }
-            
             header {
                 flex-direction: column;
                 text-align: center;
@@ -251,7 +192,7 @@
             
             .logo-container, .nav-container {
                 align-items: center;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
             
             .logo {
@@ -261,7 +202,7 @@
             
             nav ul {
                 justify-content: center;
-                margin: 10px 0;
+                margin: 15px 0;
             }
             
             .nav-container {
@@ -280,10 +221,6 @@
                 width: 170px;
                 height: 360px;
             }
-            
-            #rings {
-                padding-top: 250px;
-            }
         }
 
         @media (max-width: 600px) {
@@ -295,17 +232,9 @@
                 width: 150px;
                 height: 320px;
             }
-            
-            #rings {
-                padding-top: 200px;
-            }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding-top: 180px;
-            }
-            
             .logo {
                 font-size: 28px;
             }
@@ -332,157 +261,61 @@
                 width: 189px;
                 height: 400px;
             }
-            
-            #rings {
-                padding-top: 150px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Фиксированная шапка -->
-    <div class="header-container">
-        <header>
-            <div class="logo-container">
-                <div class="logo">Одностраничный Сайт</div>
-                <div class="portfolio-text">
-                    <span>p</span>ortfolio
+    <div class="site-container">
+        <div class="header-container">
+            <header>
+                <div class="logo-container">
+                    <div class="logo">Одностраничный Сайт</div>
+                    <div class="portfolio-text">
+                        /<span>p</span>ortfolio
+                    </div>
                 </div>
-            </div>
-            
-            <div class="nav-container">
-                <nav>
-                    <ul>
-                        <li class="active"><a href="#" data-section="home">home</a></li>
-                        <li><a href="#" data-section="rings">rings</a></li>
-                        <li><a href="#" data-section="earrings">earrings</a></li>
-                        <li><a href="#" data-section="necklaces">necklaces</a></li>
-                        <li><a href="#" data-section="oeuvre">oeuvre</a></li>
-                        <li><a href="#" data-section="contact">contact</a></li>
-                    </ul>
-                </nav>
                 
-                <a href="#">
-                    <img src="images/3d.png" 
-                         alt="3D Icon" 
-                         class="nav-image"
-                         onmouseover="this.src='images/3dd.png'"
-                         onmouseout="this.src='images/3d.png'">
-                </a>
+                <div class="nav-container">
+                    <nav>
+                        <ul>
+                            <li class="active"><a href="#">home</a></li>
+                            <li><a href="#">rings</a></li>
+                            <li><a href="#">earrings</a></li>
+                            <li><a href="#">necklaces</a></li>
+                            <li><a href="#">oeuvre</a></li>
+                            <li><a href="#">contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <a href="#">
+                        <img src="images/3d.png" 
+                             alt="3D Icon" 
+                             class="nav-image"
+                             onmouseover="this.src='images/3dd.png'"
+                             onmouseout="this.src='images/3d.png'">
+                    </a>
+                </div>
+            </header>
+        </div>
+        
+        <!-- Галерея украшений -->
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="images/ring22.jpg" alt="Кольцо">
             </div>
-        </header>
+            <div class="gallery-item">
+                <img src="images/bracelet1.jpg" alt="Браслет">
+            </div>
+            <div class="gallery-item">
+                <img src="images/pendant.jpg" alt="Кулон">
+            </div>
+            <div class="gallery-item">
+                <img src="images/earring.jpg" alt="Серьги">
+            </div>
+            <div class="gallery-item">
+                <img src="images/oeuvre2.jpg" alt="Украшение">
+            </div>
+        </div>
     </div>
-    
-    <!-- Галерея украшений -->
-    <div class="gallery">
-        <div class="gallery-item">
-            <img src="images/ring22.jpg" alt="Кольцо">
-        </div>
-        <div class="gallery-item">
-            <img src="images/bracelet1.jpg" alt="Браслет">
-        </div>
-        <div class="gallery-item">
-            <img src="images/pendant.jpg" alt="Кулон">
-        </div>
-        <div class="gallery-item">
-            <img src="images/earring.jpg" alt="Серьги">
-        </div>
-        <div class="gallery-item">
-            <img src="images/oeuvre2.jpg" alt="Украшение">
-        </div>
-    </div>
-    
-    <!-- Секция Rings -->
-    <section id="rings">
-        <div class="rings-content">
-            <h2 class="rings-title">Коллекция колец</h2>
-            <p class="rings-text">Эксклюзивные кольца ручной работы, созданные с любовью и вниманием к деталям. Каждое кольцо - уникальное произведение искусства, которое подчеркнёт вашу индивидуальность.</p>
-            
-            <div class="rings-gallery">
-                <div class="ring-item">
-                    <img src="https://via.placeholder.com/250x250/16126b/ffffff?text=Ring+1" alt="Кольцо 1">
-                </div>
-                <div class="ring-item">
-                    <img src="https://via.placeholder.com/250x250/d31d6a/ffffff?text=Ring+2" alt="Кольцо 2">
-                </div>
-                <div class="ring-item">
-                    <img src="https://via.placeholder.com/250x250/292d75/ffffff?text=Ring+3" alt="Кольцо 3">
-                </div>
-                <div class="ring-item">
-                    <img src="https://via.placeholder.com/250x250/afe0c9/333333?text=Ring+4" alt="Кольцо 4">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Пустое пространство для демонстрации скроллинга -->
-    <div style="height: 1000px;"></div>
-
-    <script>
-        // Функция для обработки скролла
-        function handleScroll() {
-            const scrollPosition = window.scrollY;
-            const gallery = document.querySelector('.gallery');
-            const ringsSection = document.getElementById('rings');
-            
-            // Если проскроллили больше 300px, показываем секцию Rings
-            if (scrollPosition > 300) {
-                ringsSection.style.display = 'block';
-                
-                // Меняем активный пункт меню
-                document.querySelectorAll('nav ul li').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelector('a[data-section="rings"]').parentElement.classList.add('active');
-                
-                // Смещаем галерею вверх
-                gallery.style.transform = `translateY(${-scrollPosition/10}px)`;
-                gallery.style.opacity = 1 - (scrollPosition/1000);
-            } else {
-                ringsSection.style.display = 'none';
-                
-                // Возвращаем активный пункт меню "home"
-                document.querySelectorAll('nav ul li').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelector('a[data-section="home"]').parentElement.classList.add('active');
-                
-                // Возвращаем галерею в исходное положение
-                gallery.style.transform = 'translateY(0)';
-                gallery.style.opacity = 1;
-            }
-        }
-        
-        // Обработчик скролла
-        window.addEventListener('scroll', handleScroll);
-        
-        // Обработчик кликов по меню
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const sectionId = this.getAttribute('data-section');
-                
-                // Убираем активный класс у всех пунктов
-                document.querySelectorAll('nav ul li').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                // Добавляем активный класс текущему пункту
-                this.parentElement.classList.add('active');
-                
-                // Прокрутка к нужной секции
-                if (sectionId === 'rings') {
-                    document.getElementById('rings').scrollIntoView({ behavior: 'smooth' });
-                }
-                // Здесь можно добавить обработку других пунктов меню
-            });
-        });
-        
-        // Инициализация при загрузке
-        document.addEventListener('DOMContentLoaded', function() {
-            // Устанавливаем начальное состояние
-            handleScroll();
-        });
-    </script>
 </body>
 </html>
