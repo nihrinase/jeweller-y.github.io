@@ -339,8 +339,9 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Выравнивание по левому краю */
-            margin-left: 60px; /* Сдвиг вправо */
+            align-items: flex-end; /* Выравнивание по правому краю */
+            margin-left: auto; /* Сдвиг вправо */
+            max-width: 500px;
         }
 
         .large-image {
@@ -362,7 +363,6 @@
         .image-titles {
             text-align: left;
             width: 100%;
-            max-width: 500px;
         }
 
         .title-top {
@@ -642,7 +642,7 @@
                 </div>
             </div>
             
-            <!-- Пагинация -->
+            <!-- Пагинация - расположена под галереей миниатюр -->
             <div class="pagination" id="pagination">
                 <!-- Кнопки пагинации будут добавлены через JavaScript -->
             </div>
