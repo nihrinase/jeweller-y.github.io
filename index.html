@@ -50,9 +50,8 @@
             justify-content: flex-end;
         }
 
-        /* Логотип с уменьшенным расстоянием и шириной букв */
+        /* Логотип с уменьшенной шириной букв */
         .logo {
-            font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             color: #FFF;
             text-shadow: 2px 2px 2px #d31d6a;
@@ -60,15 +59,10 @@
             white-space: nowrap;
             line-height: 1;
             margin-bottom: 20px;
-            letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
-        }
-
-        /* Специальный класс для уменьшения ширины букв */
-        .narrow-letters {
-            display: inline-block;
-            transform: scaleX(0.7); /* Уменьшение ширины на 30% */
-            transform-origin: left;
             letter-spacing: 2px;
+            transform: scaleX(0.5); /* Уменьшение ширины на 50% */
+            transform-origin: left;
+            font-size: 88px; /* Увеличенный размер для компенсации */
         }
 
         /* Надпись под логотипом */
@@ -401,9 +395,8 @@
             overflow: hidden;
         }
 
-        /* ВЕРХНИЙ ЗАГОЛОВОК ИДЕНТИЧЕН ЛОГОТИПУ В ШАПКЕ */
+        /* ВЕРХНИЙ ЗАГОЛОВОК С УМЕНЬШЕННОЙ ШИРИНОЙ БУКВ */
         .title-top {
-            font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             font-weight: normal;
             color: #d31d6a;
@@ -414,7 +407,10 @@
             text-overflow: ellipsis;
             line-height: 1;
             margin-bottom: 5px;
-            letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
+            letter-spacing: 2px;
+            transform: scaleX(0.5); /* Уменьшение ширины на 50% */
+            transform-origin: left;
+            font-size: 88px; /* Увеличенный размер для компенсации */
         }
 
         .title-bottom {
@@ -487,7 +483,8 @@
             
             .logo {
                 margin-bottom: 10px;
-                font-size: 36px;
+                font-size: 72px; /* Уменьшенный размер */
+                transform: scaleX(0.5); /* Сохраняем сжатие */
             }
             
             nav ul {
@@ -535,7 +532,7 @@
             
             /* Адаптация заголовков для мобильных */
             .title-top {
-                font-size: 36px;
+                font-size: 72px; /* Уменьшенный размер */
                 text-align: center;
             }
             
@@ -554,11 +551,19 @@
                 width: 150px;
                 height: 320px;
             }
+            
+            .logo {
+                font-size: 56px; /* Меньший размер */
+            }
+            
+            .title-top {
+                font-size: 56px; /* Меньший размер */
+            }
         }
 
         @media (max-width: 480px) {
             .logo {
-                font-size: 28px;
+                font-size: 44px; /* Ещё меньший размер */
             }
             
             nav ul li a {
@@ -611,7 +616,7 @@
             
             /* Адаптация заголовков для маленьких экранов */
             .title-top {
-                font-size: 28px;
+                font-size: 44px; /* Минимальный размер */
                 line-height: 1.2;
             }
             
@@ -626,9 +631,7 @@
     <div class="header-container">
         <header>
             <div class="logo-container">
-                <div class="logo">
-                    <span class="narrow-letters">Одностраничный Сайт</span>
-                </div>
+                <div class="logo">Одностраничный Сайт</div>
                 <div class="portfolio-text">
                     <span>p</span>ortfolio
                 </div>
