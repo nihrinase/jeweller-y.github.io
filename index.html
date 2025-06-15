@@ -223,6 +223,8 @@
             justify-content: flex-end;
             margin-top: 10px;
             margin-bottom: 12px;
+            /* Смещение кнопок вверх и вправо */
+            transform: translateY(-10px) translateX(15px);
         }
 
         .gallery-btn {
@@ -298,7 +300,8 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 15px;
+            /* Отступ сверху 25px */
+            margin-top: 25px;
         }
 
         .page-btn {
@@ -331,12 +334,13 @@
             text-decoration: none;
         }
 
-        /* Большое изображение */
+        /* Большое изображение сдвинуто вправо */
         .large-image-container {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start; /* Выравнивание по левому краю */
+            margin-left: 60px; /* Сдвиг вправо */
         }
 
         .large-image {
@@ -354,9 +358,11 @@
             display: block;
         }
 
-        /* Заголовки */
+        /* Заголовки выровнены по левому краю */
         .image-titles {
-            text-align: center;
+            text-align: left;
+            width: 100%;
+            max-width: 500px;
         }
 
         .title-top {
@@ -401,6 +407,16 @@
             
             .thumbnails {
                 margin-bottom: 20px;
+            }
+            
+            /* Отмена сдвига для мобильных */
+            .large-image-container {
+                margin-left: 0;
+                align-items: center;
+            }
+            
+            .image-titles {
+                text-align: center;
             }
         }
 
@@ -465,6 +481,7 @@
             /* Центрирование кнопок управления на мобильных */
             .gallery-controls {
                 justify-content: center;
+                transform: none;
             }
         }
 
