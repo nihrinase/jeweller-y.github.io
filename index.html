@@ -192,7 +192,6 @@
             background-color: #afe0c9;
             background-image: url('images/back29.png');
             background-repeat: repeat;
-            /* ЕДИНСТВЕННОЕ ИЗМЕНЕНИЕ: поднятие на 35px */
             padding: 35px 0 10px 0;
             z-index: 3;
             margin-top: -10px;
@@ -218,7 +217,7 @@
             width: 100%;
         }
 
-        /* Контролы галереи */
+        /* Контролы галереи - ТОЛЬКО ВТОРАЯ СЕКЦИЯ */
         .gallery-controls {
             display: flex;
             justify-content: flex-end;
@@ -227,8 +226,9 @@
         }
 
         .gallery-btn {
-            background: #292d75;
-            color: white;
+            /* Убрали фон, добавили синий цвет */
+            background: transparent;
+            color: #16126b;
             border: none;
             padding: 8px 16px;
             margin-left: 10px;
@@ -237,15 +237,19 @@
             font-size: 16px;
             border-radius: 4px;
             transition: all 0.3s;
+            /* Надписи в одну строку */
+            white-space: nowrap;
         }
 
         .gallery-btn:hover {
-            background: #16126b;
-            transform: translateY(-2px);
+            /* Убрали фон, добавили подчеркивание */
+            background: transparent;
+            text-decoration: underline;
+            transform: none;
         }
 
         .gallery-btn:active {
-            transform: translateY(1px);
+            transform: none;
         }
 
         /* Контейнер галереи */
@@ -289,7 +293,7 @@
             object-fit: cover;
         }
 
-        /* Пагинация */
+        /* Пагинация - ТОЛЬКО ВТОРАЯ СЕКЦИЯ */
         .pagination {
             display: flex;
             justify-content: center;
@@ -298,8 +302,9 @@
         }
 
         .page-btn {
-            background: #292d75;
-            color: white;
+            /* Убрали фон, добавили синий цвет */
+            background: transparent;
+            color: #16126b;
             border: none;
             width: 36px;
             height: 36px;
@@ -314,11 +319,16 @@
         }
 
         .page-btn:hover {
-            background: #16126b;
+            /* Убрали фон, добавили подчеркивание */
+            background: transparent;
+            text-decoration: underline;
         }
 
+        /* Активная кнопка - белый цвет */
         .page-btn.active {
-            background: #d31d6a;
+            background: white;
+            color: #16126b;
+            text-decoration: none;
         }
 
         /* Большое изображение */
@@ -444,12 +454,17 @@
             /* Адаптация для секции Rings */
             #rings-section {
                 margin-top: -10px;
-                padding: 35px 0 10px 0; /* Сохраняем поднятие на 35px */
+                padding: 35px 0 10px 0;
             }
             
             .large-image {
                 width: 100%;
                 max-width: 500px;
+            }
+            
+            /* Центрирование кнопок управления на мобильных */
+            .gallery-controls {
+                justify-content: center;
             }
         }
 
@@ -461,10 +476,6 @@
             .gallery-item {
                 width: 150px;
                 height: 320px;
-            }
-            
-            .gallery-controls {
-                justify-content: center;
             }
         }
 
@@ -503,7 +514,7 @@
             /* Адаптация для секции Rings */
             #rings-section {
                 margin-top: -10px;
-                padding: 35px 0 10px 0; /* Сохраняем поднятие на 35px */
+                padding: 35px 0 10px 0;
             }
             
             .gallery-btn {
