@@ -391,16 +391,19 @@
             width: 100%;
         }
 
+        /* ИЗМЕНЕННЫЕ СТИЛИ ДЛЯ ЗАГОЛОВКОВ */
         .title-top {
-            font-size: 24px;
+            font-size: 35px; /* Увеличенный размер */
             font-weight: bold;
-            color: #16126b;
+            color: #d31d6a; /* Новый цвет */
+            text-shadow: 2px 2px 2px #FFF; /* Белая тень */
             margin-bottom: 5px;
         }
 
         .title-bottom {
-            font-size: 20px;
-            color: #292d75;
+            font-size: 20px; /* Увеличенный размер */
+            color: #292d75; /* Цвет сохранен */
+            font-style: italic; /* Курсив */
         }
 
         /* Адаптивность */
@@ -509,6 +512,17 @@
                 justify-content: center;
                 transform: none;
             }
+            
+            /* Адаптация заголовков для мобильных */
+            .title-top {
+                font-size: 28px;
+                text-align: center;
+            }
+            
+            .title-bottom {
+                font-size: 18px;
+                text-align: center;
+            }
         }
 
         @media (max-width: 600px) {
@@ -573,6 +587,16 @@
             .thumbnail {
                 width: 70px;
                 height: 70px;
+            }
+            
+            /* Адаптация заголовков для маленьких экранов */
+            .title-top {
+                font-size: 24px;
+                line-height: 1.2;
+            }
+            
+            .title-bottom {
+                font-size: 16px;
             }
         }
     </style>
