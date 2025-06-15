@@ -304,29 +304,31 @@
         /* Пагинация - ТОЛЬКО ВТОРАЯ СЕКЦИЯ */
         .pagination {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 25px;
-            width: 100%; /* Занимает всю ширину контейнера */
+            width: 100%;
             max-width: calc(75px * 3 + 6px * 2); /* Ширина миниатюр */
             margin-left: auto;
             margin-right: auto;
+            position: relative;
         }
 
         .pagination-group {
             display: flex;
+            position: absolute;
+            top: 0;
         }
 
         .pagination-group.left {
-            justify-content: flex-start;
+            left: 0;
         }
 
         .pagination-group.center {
-            justify-content: center;
-            flex-grow: 1;
+            position: static; /* Центральная группа остается на месте */
         }
 
         .pagination-group.right {
-            justify-content: flex-end;
+            right: 0;
         }
 
         .page-btn {
