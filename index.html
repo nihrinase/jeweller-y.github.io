@@ -62,12 +62,14 @@
             margin-bottom: 20px;
         }
 
-        /* Надпись под логотипом */
+        /* Надпись под логотипом - ОБНОВЛЕННЫЙ ШРИФТ */
         .portfolio-text {
-            font: 18px 'Segoe UI', Verdana, sans-serif;
+            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+            font-size: 18px;
             color: #FFF;
             letter-spacing: 2px;
             text-align: left;
+            white-space: nowrap;
         }
 
         .portfolio-text span {
@@ -389,21 +391,29 @@
         .image-titles {
             text-align: left;
             width: 100%;
+            overflow: hidden;
         }
 
         /* ИЗМЕНЕННЫЕ СТИЛИ ДЛЯ ЗАГОЛОВКОВ */
         .title-top {
-            font-size: 35px; /* Увеличенный размер */
+            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+            font-size: 35px;
             font-weight: bold;
-            color: #d31d6a; /* Новый цвет */
-            text-shadow: 2px 2px 2px #FFF; /* Белая тень */
+            color: #d31d6a;
+            text-shadow: 2px 2px 2px #FFF;
             margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .title-bottom {
-            font-size: 20px; /* Увеличенный размер */
-            color: #292d75; /* Цвет сохранен */
-            font-style: italic; /* Курсив */
+            font-size: 20px;
+            color: #292d75;
+            font-style: italic;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Адаптивность */
