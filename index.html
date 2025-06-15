@@ -304,18 +304,35 @@
         /* Пагинация - ТОЛЬКО ВТОРАЯ СЕКЦИЯ */
         .pagination {
             display: flex;
-            justify-content: center;
-            gap: 5px; /* Уменьшенный отступ между кнопками */
+            justify-content: space-between;
             margin-top: 25px;
-            flex-wrap: nowrap; /* Запрет переноса на новую строку */
-            white-space: nowrap; /* Запрет переноса текста */
+            width: 100%; /* Занимает всю ширину контейнера */
+            max-width: calc(75px * 3 + 6px * 2); /* Ширина миниатюр */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pagination-group {
+            display: flex;
+        }
+
+        .pagination-group.left {
+            justify-content: flex-start;
+        }
+
+        .pagination-group.center {
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .pagination-group.right {
+            justify-content: flex-end;
         }
 
         .page-btn {
             background: transparent;
             color: #16126b;
             border: none;
-            /* Убрана фиксированная ширина и высота */
             padding: 5px 10px;
             cursor: pointer;
             font-family: 'Segoe UI', sans-serif;
@@ -325,7 +342,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            white-space: nowrap; /* Запрет переноса текста */
+            text-transform: lowercase; /* Все буквы строчные */
         }
 
         .page-btn:hover {
@@ -755,30 +772,48 @@
             function createPagination() {
                 paginationContainer.innerHTML = '';
                 
+                // Создаем группы для кнопок
+                const leftGroup = document.createElement('div');
+                leftGroup.className = 'pagination-group left';
+                
+                const centerGroup = document.createElement('div');
+                centerGroup.className = 'pagination-group center';
+                
+                const rightGroup = document.createElement('div');
+                rightGroup.className = 'pagination-group right';
+                
+                // Кнопка < Prev
                 if (currentPage > 1) {
                     const prevPageBtn = document.createElement('button');
                     prevPageBtn.className = 'page-btn';
-                    prevPageBtn.innerHTML = '&lt; Prev';
+                    prevPageBtn.innerHTML = '&lt; prev';
                     prevPageBtn.addEventListener('click', () => setPage(currentPage - 1));
-                    paginationContainer.appendChild(prevPageBtn);
+                    leftGroup.appendChild(prevPageBtn);
                 }
                 
+                // Номера страниц
                 for (let i = 1; i <= totalPages; i++) {
                     const pageBtn = document.createElement('button');
                     pageBtn.className = 'page-btn';
                     if (i === currentPage) pageBtn.classList.add('active');
-                    pageBtn.textContent = i;
+                    pageBtn.textContent = i.toString();
                     pageBtn.addEventListener('click', () => setPage(i));
-                    paginationContainer.appendChild(pageBtn);
+                    centerGroup.appendChild(pageBtn);
                 }
                 
+                // Кнопка Next >
                 if (currentPage < totalPages) {
                     const nextPageBtn = document.createElement('button');
                     nextPageBtn.className = 'page-btn';
-                    nextPageBtn.innerHTML = 'Next &gt;';
+                    nextPageBtn.innerHTML = 'next &gt;';
                     nextPageBtn.addEventListener('click', () => setPage(currentPage + 1));
-                    paginationContainer.appendChild(nextPageBtn);
+                    rightGroup.appendChild(nextPageBtn);
                 }
+                
+                // Добавляем группы в контейнер пагинации
+                paginationContainer.appendChild(leftGroup);
+                paginationContainer.appendChild(centerGroup);
+                paginationContainer.appendChild(rightGroup);
             }
             
             // Установка текущей страницы
