@@ -261,6 +261,12 @@
             margin-bottom: 20px;
         }
 
+        /* Новый контейнер для миниатюр и пагинации */
+        .thumbnails-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
         /* Миниатюры */
         .thumbnails {
             display: grid;
@@ -406,7 +412,7 @@
             }
             
             .thumbnails {
-                margin-bottom: 20px;
+                margin-bottom: 0;
             }
             
             /* Отмена сдвига для мобильных */
@@ -623,9 +629,17 @@
             
             <!-- Контейнер галереи -->
             <div class="gallery-content">
-                <!-- Миниатюры -->
-                <div class="thumbnails" id="thumbnails">
-                    <!-- Миниатюры будут добавлены через JavaScript -->
+                <!-- Контейнер для миниатюр и пагинации -->
+                <div class="thumbnails-wrapper">
+                    <!-- Миниатюры -->
+                    <div class="thumbnails" id="thumbnails">
+                        <!-- Миниатюры будут добавлены через JavaScript -->
+                    </div>
+                    
+                    <!-- Пагинация ПОД миниатюрами -->
+                    <div class="pagination" id="pagination">
+                        <!-- Кнопки пагинации будут добавлены через JavaScript -->
+                    </div>
                 </div>
                 
                 <!-- Большое изображение -->
@@ -640,11 +654,6 @@
                         <div class="title-bottom" id="bottom-title"></div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Пагинация - расположена под галереей миниатюр -->
-            <div class="pagination" id="pagination">
-                <!-- Кнопки пагинации будут добавлены через JavaScript -->
             </div>
         </div>
     </section>
