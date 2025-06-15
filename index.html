@@ -50,7 +50,7 @@
             justify-content: flex-end;
         }
 
-        /* Логотип */
+        /* Логотип с уменьшенным расстоянием и шириной букв */
         .logo {
             font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
@@ -61,6 +61,14 @@
             line-height: 1;
             margin-bottom: 20px;
             letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
+        }
+
+        /* Специальный класс для уменьшения ширины букв */
+        .narrow-letters {
+            display: inline-block;
+            transform: scaleX(0.7); /* Уменьшение ширины на 30% */
+            transform-origin: left;
+            letter-spacing: 2px;
         }
 
         /* Надпись под логотипом */
@@ -302,7 +310,7 @@
             object-fit: cover;
         }
 
-        /* Пагинация - ТОЛЬКО ВТОРАя СЕКЦИЯ */
+        /* Пагинация - ТОЛЬКО ВТОРАЯ СЕКЦИЯ */
         .pagination {
             display: flex;
             justify-content: center;
@@ -618,7 +626,9 @@
     <div class="header-container">
         <header>
             <div class="logo-container">
-                <div class="logo">Одностраничный Сайт</div>
+                <div class="logo">
+                    <span class="narrow-letters">Одностраничный Сайт</span>
+                </div>
                 <div class="portfolio-text">
                     <span>p</span>ortfolio
                 </div>
