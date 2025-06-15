@@ -112,7 +112,7 @@
             color: #292d75;
         }
 
-        /* Контейнер навигации */
+        /* Контейров навигации */
         .nav-container {
             display: flex;
             flex-direction: column;
@@ -1059,6 +1059,43 @@
                 }
                 // Переходим к следующему фото
                 nextPhoto();
+            });
+            
+            // +++ ДОБАВЛЕННЫЙ КОД: Сброс к начальному состоянию +++
+            const homeLink = document.querySelector('nav ul li:first-child a');
+            
+            // Функция полного сброса состояния
+            function resetToInitialState() {
+                // Остановка слайд-шоу
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                    slideshowInterval = null;
+                    playBtn.textContent = 'Play Slideshow';
+                }
+                
+                // Сброс галереи колец
+                currentRing = 1;
+                currentPage = 1;
+                setPage(1);
+                showRing(1);
+                
+                // Прокрутка к началу страницы
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Установка активного пункта меню
+                document.querySelectorAll('nav ul li').forEach(li => {
+                    li.classList.remove('active');
+                });
+                homeNavItem.classList.add('active');
+            }
+            
+            // Обработчик для ссылки "home"
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetToInitialState();
             });
         });
     </script>
