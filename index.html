@@ -1015,8 +1015,8 @@
                         
                         if (targetElement) {
                             const targetPosition = targetElement.offsetTop - 110;
-                            // Увеличиваем длительность на 40% (700мс вместо 500мс)
-                            smoothScrollTo(targetPosition, 700);
+                            // Увеличиваем длительность на 540% (2700мс вместо 500мс)
+                            smoothScrollTo(targetPosition, 2700);
                         }
                     }
                 });
@@ -1442,10 +1442,8 @@
                 necklacesGallery.reset();
                 oeuvreGallery.reset();
                 
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+             // Используем кастомную плавную прокрутку с длительностью 2700ms
+			smoothScrollTo(0, 2700);
                 
                 document.querySelectorAll('nav ul li').forEach(li => {
                     li.classList.remove('active');
