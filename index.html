@@ -305,18 +305,18 @@
         .pagination {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            /* Отступ сверху 25px */
+            gap: 5px; /* Уменьшенный отступ между кнопками */
             margin-top: 25px;
+            flex-wrap: nowrap; /* Запрет переноса на новую строку */
+            white-space: nowrap; /* Запрет переноса текста */
         }
 
         .page-btn {
-            /* Убрали фон, добавили синий цвет */
             background: transparent;
             color: #16126b;
             border: none;
-            width: 36px;
-            height: 36px;
+            /* Убрана фиксированная ширина и высота */
+            padding: 5px 10px;
             cursor: pointer;
             font-family: 'Segoe UI', sans-serif;
             font-size: 16px;
@@ -325,19 +325,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            white-space: nowrap; /* Запрет переноса текста */
         }
 
         .page-btn:hover {
-            /* Убрали фон, добавили подчеркивание */
             background: transparent;
             text-decoration: underline;
         }
 
-        /* Активная кнопка - белый цвет */
+        /* Активная кнопка - без фона, белый текст */
         .page-btn.active {
-            background: white;
-            color: #16126b;
+            background: transparent;
+            color: white;
             text-decoration: none;
+            font-weight: bold;
         }
 
         /* Большое изображение сдвинуто вправо */
