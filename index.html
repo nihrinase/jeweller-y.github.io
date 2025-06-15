@@ -6,6 +6,28 @@
     <title>Ювелирные украшения - Галерея колец</title>
     <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
+	
+		@font-face {
+			font-family: 'economicaregular';
+			src: url('fonts/eco-webfont.eot');
+			src: url('fonts/eco-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('fonts/eco-webfont.woff') format('woff'),
+				 url('fonts/eco-webfont.ttf') format('truetype'),
+				 url('fonts/eco-webfont.svg#economicaregular') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+		
+		@font-face {
+			font-family: 'GOST';
+			src: url('fonts/gost_a_.eot');
+			src: url('fonts/gost_a_.eot') format('embedded-opentype'),
+				 url('fonts/gost_a_.woff2') format('woff2'),
+				 url('fonts/gost_a_.woff') format('woff'),
+				 url('fonts/gost_a_.ttf') format('truetype'),
+				 url('fonts/gost_a_.svg#GOST') format('svg');
+		}
+		
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +37,7 @@
         body {
             background-color: #afe0c9;
             min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		    font-family: 'economicaregular', Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             overflow-x: hidden;
         }
 
@@ -53,7 +75,7 @@
         /* Логотип с уменьшенным расстоянием и шириной букв */
         .logo {
             font-size: 44px;
-            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+		    font-family: 'economicaregular', Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             color: #FFF;
             text-shadow: 2px 2px 2px #d31d6a;
             margin: 0;
@@ -68,7 +90,7 @@
             display: inline-block;
             transform: scaleX(0.7); /* Уменьшение ширины на 30% */
             transform-origin: left;
-            letter-spacing: 2px;
+            letter-spacing: -3px;
         }
 
         /* Надпись под логотипом */
@@ -404,7 +426,7 @@
         /* ВЕРХНИЙ ЗАГОЛОВОК ИДЕНТИЧЕН ЛОГОТИПУ В ШАПКЕ */
         .title-top {
             font-size: 44px;
-            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+		    font-family: 'economicaregular', Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             font-weight: normal;
             color: #d31d6a;
             text-shadow: 2px 2px 2px #FFF;
@@ -414,7 +436,12 @@
             text-overflow: ellipsis;
             line-height: 1;
             margin-bottom: 5px;
-            letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
+            letter-spacing: -3px; /* Уменьшенное расстояние между буквами */
+			
+			/* Новые стили для уменьшения ширины букв */
+			display: inline-block;
+			transform: scaleX(0.7);
+			transform-origin: left;
         }
 
         .title-bottom {
