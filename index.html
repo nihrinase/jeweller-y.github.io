@@ -62,14 +62,12 @@
             margin-bottom: 20px;
         }
 
-        /* Надпись под логотипом - ОБНОВЛЕННЫЙ ШРИФТ */
+        /* Надпись под логотипом - ВОЗВРАЩЕН ИСХОДНЫЙ ШРИФТ */
         .portfolio-text {
-            font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
-            font-size: 18px;
+            font: 18px 'Segoe UI', Verdana, sans-serif; /* Исходный шрифт */
             color: #FFF;
             letter-spacing: 2px;
             text-align: left;
-            white-space: nowrap;
         }
 
         .portfolio-text span {
@@ -394,17 +392,19 @@
             overflow: hidden;
         }
 
-        /* ИЗМЕНЕННЫЕ СТИЛИ ДЛЯ ЗАГОЛОВКОВ */
+        /* ВЕРХНИЙ ЗАГОЛОВОК ТЕПЕРЬ ИДЕНТИЧЕН ЛОГОТИПУ В ШАПКЕ (КРОМЕ ЦВЕТА И ТЕНИ) */
         .title-top {
+            font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
-            font-size: 35px;
-            font-weight: bold;
+            font-weight: normal;
             color: #d31d6a;
             text-shadow: 2px 2px 2px #FFF;
-            margin-bottom: 5px;
+            margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
         .title-bottom {
@@ -525,7 +525,7 @@
             
             /* Адаптация заголовков для мобильных */
             .title-top {
-                font-size: 28px;
+                font-size: 36px; /* Уменьшенный размер для планшетов */
                 text-align: center;
             }
             
@@ -601,7 +601,7 @@
             
             /* Адаптация заголовков для маленьких экранов */
             .title-top {
-                font-size: 24px;
+                font-size: 28px; /* Уменьшенный размер для мобильных */
                 line-height: 1.2;
             }
             
