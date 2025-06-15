@@ -50,7 +50,7 @@
             justify-content: flex-end;
         }
 
-        /* Логотип */
+        /* Логотип с уменьшенным расстоянием и шириной букв */
         .logo {
             font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
@@ -60,11 +60,20 @@
             white-space: nowrap;
             line-height: 1;
             margin-bottom: 20px;
+            letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
         }
 
-        /* Надпись под логотипом - ВОЗВРАЩЕН ИСХОДНЫЙ ШРИФТ */
+        /* Специальный класс для уменьшения ширины букв */
+        .narrow-letters {
+            display: inline-block;
+            transform: scaleX(0.7); /* Уменьшение ширины на 30% */
+            transform-origin: left;
+            letter-spacing: 2px;
+        }
+
+        /* Надпись под логотипом */
         .portfolio-text {
-            font: 18px 'Segoe UI', Verdana, sans-serif; /* Исходный шрифт */
+            font: 18px 'Segoe UI', Verdana, sans-serif;
             color: #FFF;
             letter-spacing: 2px;
             text-align: left;
@@ -392,7 +401,7 @@
             overflow: hidden;
         }
 
-        /* ВЕРХНИЙ ЗАГОЛОВОК ТЕПЕРЬ ИДЕНТИЧЕН ЛОГОТИПУ В ШАПКЕ (КРОМЕ ЦВЕТА И ТЕНИ) */
+        /* ВЕРХНИЙ ЗАГОЛОВОК ИДЕНТИЧЕН ЛОГОТИПУ В ШАПКЕ */
         .title-top {
             font-size: 44px;
             font-family: 'Economica', 'Segoe UI', "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
@@ -405,6 +414,7 @@
             text-overflow: ellipsis;
             line-height: 1;
             margin-bottom: 5px;
+            letter-spacing: 2px; /* Уменьшенное расстояние между буквами */
         }
 
         .title-bottom {
@@ -525,7 +535,7 @@
             
             /* Адаптация заголовков для мобильных */
             .title-top {
-                font-size: 36px; /* Уменьшенный размер для планшетов */
+                font-size: 36px;
                 text-align: center;
             }
             
@@ -601,7 +611,7 @@
             
             /* Адаптация заголовков для маленьких экранов */
             .title-top {
-                font-size: 28px; /* Уменьшенный размер для мобильных */
+                font-size: 28px;
                 line-height: 1.2;
             }
             
@@ -616,7 +626,9 @@
     <div class="header-container">
         <header>
             <div class="logo-container">
-                <div class="logo">Одностраничный Сайт</div>
+                <div class="logo">
+                    <span class="narrow-letters">Одностраничный Сайт</span>
+                </div>
                 <div class="portfolio-text">
                     <span>p</span>ortfolio
                 </div>
