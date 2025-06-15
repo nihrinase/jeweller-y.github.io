@@ -357,6 +357,12 @@
             position: relative;
         }
 
+        /* Скрываем пагинацию для earrings и necklaces */
+        #earrings-section .pagination,
+        #necklaces-section .pagination {
+            display: none !important;
+        }
+
         .pagination-group {
             display: flex;
             position: absolute;
@@ -970,7 +976,35 @@
                 );
             }
             
-            // Обработчик плавной прокрутки
+            // Функция плавной прокрутки с регулируемой скоростью
+            function smoothScrollTo(targetPosition, duration = 1000) {
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (!startTime) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Используем функцию плавности easeInOutCubic
+                    const ease = progress => {
+                        return progress < 0.5 
+                            ? 4 * progress * progress * progress 
+                            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    };
+                    
+                    window.scrollTo(0, startPosition + distance * ease(progress));
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+                
+                requestAnimationFrame(animation);
+            }
+            
+            // Обновленный обработчик плавной прокрутки (на 40% медленнее)
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     if (this.getAttribute('href').startsWith('#')) {
@@ -980,10 +1014,9 @@
                         const targetElement = document.querySelector(targetId);
                         
                         if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 110,
-                                behavior: 'smooth'
-                            });
+                            const targetPosition = targetElement.offsetTop - 110;
+                            // Увеличиваем длительность на 40% (700мс вместо 500мс)
+                            smoothScrollTo(targetPosition, 700);
                         }
                     }
                 });
@@ -1304,7 +1337,7 @@
                 bottomTitleId: 'rings-bottom-title',
                 largeImageContainerSelector: '#rings-section .large-image',
                 paginationContainerId: 'rings-pagination',
-                itemData: ringsData, // Используем подготовленные данные
+                itemData: ringsData,
                 imagesPath: 'images/rings'
             });
             
@@ -1324,7 +1357,7 @@
                 bottomTitleId: 'earrings-bottom-title',
                 largeImageContainerSelector: '#earrings-section .large-image',
                 paginationContainerId: 'earrings-pagination',
-                itemData: earringsData, // Используем подготовленные данные
+                itemData: earringsData,
                 imagesPath: 'images/earrings'
             });
             
@@ -1344,7 +1377,7 @@
                 bottomTitleId: 'necklaces-bottom-title',
                 largeImageContainerSelector: '#necklaces-section .large-image',
                 paginationContainerId: 'necklaces-pagination',
-                itemData: necklacesData, // Используем подготовленные данные
+                itemData: necklacesData,
                 imagesPath: 'images/necklaces'
             });
             
@@ -1364,7 +1397,7 @@
                 bottomTitleId: 'oeuvre-bottom-title',
                 largeImageContainerSelector: '#oeuvre-section .large-image',
                 paginationContainerId: 'oeuvre-pagination',
-                itemData: oeuvreData, // Используем подготовленные данные
+                itemData: oeuvreData,
                 imagesPath: 'images/oeuvre'
             });
             
