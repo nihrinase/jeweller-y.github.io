@@ -733,6 +733,37 @@
             let slideshowInterval = null;
             const totalPages = Math.ceil(totalRings / ringsPerPage);
             
+            // Массив данных для каждого кольца (РЕДАКТИРУЙТЕ ЭТОТ БЛОК)
+            const ringData = [
+                // Кольца 1-12
+                { id: 1, topTitle: "Золотое кольцо с бриллиантом", bottomTitle: "Эксклюзивная модель 2023 года" },
+                { id: 2, topTitle: "Серебряное кольцо с сапфиром", bottomTitle: "Ручная работа, размер 16" },
+                { id: 3, topTitle: "Платиновое обручальное кольцо", bottomTitle: "Классика вечной любви" },
+                { id: 4, topTitle: "Кольцо с александритом", bottomTitle: "Меняет цвет при разном освещении" },
+                { id: 5, topTitle: "Винтажное кольцо с рубином", bottomTitle: "Антикварная коллекция 1920-х" },
+                { id: 6, topTitle: "Кольцо-печатка с гравировкой", bottomTitle: "Персонализация по вашему желанию" },
+                { id: 7, topTitle: "Кольцо с черным бриллиантом", bottomTitle: "Современный дизайн для смелых" },
+                { id: 8, topTitle: "Кольцо с жемчугом и цирконием", bottomTitle: "Нежное сочетание для невесты" },
+                { id: 9, topTitle: "Титановое кольцо с карбоном", bottomTitle: "Современный мужской стиль" },
+                { id: 10, topTitle: "Кольцо с изумрудом и бриллиантами", bottomTitle: "Роскошь королевского уровня" },
+                { id: 11, topTitle: "Кольцо-змея с опалом", bottomTitle: "Мистика и таинственность" },
+                { id: 12, topTitle: "Кольцо с фианитами и эмалью", bottomTitle: "Яркие цвета для повседневности" },
+                
+                // Кольца 13-24
+                { id: 13, topTitle: "Кольцо с танзанитом", bottomTitle: "Редкий минерал из Танзании" },
+                { id: 14, topTitle: "Кольцо с аметистом и гранатами", bottomTitle: "Сочетание глубины и страсти" },
+                { id: 15, topTitle: "Белое золото с бриллиантами", bottomTitle: "Элегантность вне времени" },
+                { id: 16, topTitle: "Кольцо с лунным камнем", bottomTitle: "Мерцание лунного света" },
+                { id: 17, topTitle: "Кольцо-тринити", bottomTitle: "Три переплетенных золотых кольца" },
+                { id: 18, topTitle: "Кольцо с желтым сапфиром", bottomTitle: "Солнечная энергия в камне" },
+                { id: 19, topTitle: "Кольцо с аквамарином", bottomTitle: "Цвет морской волны" },
+                { id: 20, topTitle: "Кольцо-цветок с цитрином", bottomTitle: "Лепестки из белого золота" },
+                { id: 21, topTitle: "Кольцо с турмалином", bottomTitle: "Радужные переливы цвета" },
+                { id: 22, topTitle: "Кольцо с розовым кварцем", bottomTitle: "Нежность и романтика" },
+                { id: 23, topTitle: "Кольцо с ониксом и бриллиантами", bottomTitle: "Контраст черного и белого" },
+                { id: 24, topTitle: "Кольцо с кораллом", bottomTitle: "Средиземноморское вдохновение" }
+            ];
+            
             // Элементы управления
             const thumbnailsContainer = document.getElementById('thumbnails');
             const largeImage = document.getElementById('large-img');
@@ -827,25 +858,30 @@
             
             // Показать кольцо
             function showRing(id) {
-                currentRing = id;
-                largeImage.src = `images/rings/${id}.jpg`;
+                const ring = ringData.find(r => r.id === id);
                 
-                // Обновление активной миниатюры
-                document.querySelectorAll('.thumbnail').forEach(thumb => {
-                    thumb.classList.remove('active');
-                    if (parseInt(thumb.dataset.id) === id) {
-                        thumb.classList.add('active');
+                if (ring) {
+                    currentRing = id;
+                    largeImage.src = `images/rings/${id}.jpg`;
+                    largeImage.alt = `Кольцо ${id}`;
+                    
+                    // Обновление активной миниатюры
+                    document.querySelectorAll('.thumbnail').forEach(thumb => {
+                        thumb.classList.remove('active');
+                        if (parseInt(thumb.dataset.id) === id) {
+                            thumb.classList.add('active');
+                        }
+                    });
+                    
+                    // Обновление заголовков
+                    topTitle.textContent = ring.topTitle;
+                    bottomTitle.textContent = ring.bottomTitle;
+                    
+                    // Обновление текущей страницы
+                    const newPage = Math.ceil(id / ringsPerPage);
+                    if (newPage !== currentPage) {
+                        setPage(newPage);
                     }
-                });
-                
-                // Обновление заголовков
-                topTitle.textContent = `word${id}s`;
-                bottomTitle.textContent = `word${id}`;
-                
-                // Обновление текущей страницы
-                const newPage = Math.ceil(id / ringsPerPage);
-                if (newPage !== currentPage) {
-                    setPage(newPage);
                 }
             }
             
