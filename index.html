@@ -6,7 +6,6 @@
     <title>Ювелирные украшения - Галерея колец</title>
     <link href="https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap" rel="stylesheet">
     <style>
-	
 		@font-face {
 			font-family: 'economicaregular';
 			src: url('fonts/eco-webfont.eot');
@@ -407,6 +406,9 @@
             border: 1px solid #16126b;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            /* Добавлено для кликабельности */
+            cursor: pointer;
+            position: relative;
         }
 
         .large-image img {
@@ -414,6 +416,10 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            /* Добавлено для отключения меню */
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         /* Заголовки выровнены по левому краю */
@@ -453,8 +459,6 @@
             text-overflow: ellipsis;
 			font-weight: bold;
 			text-shadow: 1px 1px 1px #FFF;
-
-
         }
 
         /* Адаптивность */
@@ -810,7 +814,7 @@
             let slideshowInterval = null;
             const totalPages = Math.ceil(totalRings / ringsPerPage);
             
-            // Массив данных для каждого кольца (РЕДАКТИРУЙТЕ ЭТОТ БЛОК)
+            // Массив данных для каждого кольца
             const ringData = [
                 // Кольца 1-12
                 { id: 1, topTitle: "Золотое кольцо с бриллиантом", bottomTitle: "Эксклюзивная модель 2023 года" },
@@ -850,6 +854,7 @@
             const paginationContainer = document.getElementById('pagination');
             const topTitle = document.getElementById('top-title');
             const bottomTitle = document.getElementById('bottom-title');
+            const largeImageContainer = document.querySelector('.large-image');
             
             // Создание миниатюр для текущей страницы
             function createThumbnails() {
@@ -1000,6 +1005,23 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'ArrowLeft') prevPhoto();
                 if (e.key === 'ArrowRight') nextPhoto();
+            });
+            
+            // +++ НОВЫЙ КОД: Клик по большому изображению +++
+            largeImageContainer.addEventListener('click', function() {
+                // Если слайд-шоу активно - останавливаем
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                    slideshowInterval = null;
+                    playBtn.textContent = 'Play Slideshow';
+                }
+                // Переходим к следующему фото
+                nextPhoto();
+            });
+            
+            // Отключаем контекстное меню для всех изображений в секции колец
+            document.querySelectorAll('#rings-section img').forEach(img => {
+                img.addEventListener('contextmenu', e => e.preventDefault());
             });
         });
     </script>
