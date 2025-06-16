@@ -1004,7 +1004,7 @@
                 requestAnimationFrame(animation);
             }
             
-            // Обработчик плавной прокрутки для меню
+            // Обновленный обработчик плавной прокрутки (на 40% медленнее)
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     if (this.getAttribute('href').startsWith('#')) {
@@ -1015,34 +1015,392 @@
                         
                         if (targetElement) {
                             const targetPosition = targetElement.offsetTop - 110;
+                            // Увеличиваем длительность на 540% (2700мс вместо 500мс)
                             smoothScrollTo(targetPosition, 2700);
                         }
                     }
                 });
             });
             
-            // Данные для галерей (остаются без изменений)
-            const ringsData = [ /* ... */ ];
-            const earringsData = [ /* ... */ ];
-            const necklacesData = [ /* ... */ ];
-            const oeuvreData = [ /* ... */ ];
+            // УНИКАЛЬНЫЕ ДАННЫЕ ДЛЯ КАЖДОЙ ГАЛЕРЕИ
+            
+            // Данные для колец (24 фото)
+            const ringsData = [
+                { id: 1, topTitle: "Золотое кольцо с бриллиантом", bottomTitle: "Эксклюзивная модель 2023 года" },
+                { id: 2, topTitle: "Серебряное кольцо с сапфиром", bottomTitle: "Ручная работа, размер 16" },
+                { id: 3, topTitle: "Платиновое обручальное кольцо", bottomTitle: "Классика вечной любви" },
+                { id: 4, topTitle: "Кольцо с александритом", bottomTitle: "Меняет цвет при разном освещении" },
+                { id: 5, topTitle: "Винтажное кольцо с рубином", bottomTitle: "Антикварная коллекция 1920-х" },
+                { id: 6, topTitle: "Кольцо-печатка с гравировкой", bottomTitle: "Персонализация по вашему желанию" },
+                { id: 7, topTitle: "Кольцо с черным бриллиантом", bottomTitle: "Современный дизайн для смелых" },
+                { id: 8, topTitle: "Кольцо с жемчугом и цирконием", bottomTitle: "Нежное сочетание для невесты" },
+                { id: 9, topTitle: "Титановое кольцо с карбоном", bottomTitle: "Современный мужской стиль" },
+                { id: 10, topTitle: "Кольцо с изумрудом и бриллиантами", bottomTitle: "Роскошь королевского уровня" },
+                { id: 11, topTitle: "Кольцо-змея с опалом", bottomTitle: "Мистика и таинственность" },
+                { id: 12, topTitle: "Кольцо с фианитами и эмалью", bottomTitle: "Яркие цвета для повседневности" },
+                { id: 13, topTitle: "Кольцо с танзанитом", bottomTitle: "Редкий минерал из Танзании" },
+                { id: 14, topTitle: "Кольцо с аметистом и гранатами", bottomTitle: "Сочетание глубины и страсти" },
+                { id: 15, topTitle: "Белое золото с бриллиантами", bottomTitle: "Элегантность вне времени" },
+                { id: 16, topTitle: "Кольцо с лунным камнем", bottomTitle: "Мерцание лунного света" },
+                { id: 17, topTitle: "Кольцо-тринити", bottomTitle: "Три переплетенных золотых кольца" },
+                { id: 18, topTitle: "Кольцо с желтым сапфиром", bottomTitle: "Солнечная энергия в камне" },
+                { id: 19, topTitle: "Кольцо с аквамарином", bottomTitle: "Цвет морской волны" },
+                { id: 20, topTitle: "Кольцо-цветок с цитрином", bottomTitle: "Лепестки из белого золота" },
+                { id: 21, topTitle: "Кольцо с турмалином", bottomTitle: "Радужные переливы цвета" },
+                { id: 22, topTitle: "Кольцо с розовым кварцем", bottomTitle: "Нежность и романтика" },
+                { id: 23, topTitle: "Кольцо с ониксом и бриллиантами", bottomTitle: "Контраст черного и белого" },
+                { id: 24, topTitle: "Кольцо с кораллом", bottomTitle: "Средиземноморское вдохновение" }
+            ];
+            
+            // Данные для сережек (12 фото)
+            const earringsData = [
+                { id: 1, topTitle: "Золотые серьги с бриллиантами", bottomTitle: "Классические швензы" },
+                { id: 2, topTitle: "Серьги-гвоздики с сапфирами", bottomTitle: "Минималистичный дизайн" },
+                { id: 3, topTitle: "Серьги-подвески с жемчугом", bottomTitle: "Нежность и элегантность" },
+                { id: 4, topTitle: "Серьги-кольца с фианитами", bottomTitle: "Современный стиль" },
+                { id: 5, topTitle: "Серьги-кисточки с рубинами", bottomTitle: "Вечерний вариант" },
+                { id: 6, topTitle: "Серьги-люстры с изумрудами", bottomTitle: "Роскошный вечерний образ" },
+                { id: 7, topTitle: "Серьги-капли с цитрином", bottomTitle: "Солнечное настроение" },
+                { id: 8, topTitle: "Серьги-бабочки с эмалью", bottomTitle: "Игривый летний дизайн" },
+                { id: 9, topTitle: "Серьги-геометрия с ониксом", bottomTitle: "Современный авангард" },
+                { id: 10, topTitle: "Серьги-цветы с розовым кварцем", bottomTitle: "Романтичный акцент" },
+                { id: 11, topTitle: "Серьги-снежинки с бриллиантами", bottomTitle: "Зимняя сказка" },
+                { id: 12, topTitle: "Серьги-ключики с гранатами", bottomTitle: "Необычная форма" }
+            ];
+            
+            // Данные для ожерелий (12 фото)
+            const necklacesData = [
+                { id: 1, topTitle: "Кулон с бриллиантом", bottomTitle: "Элегантность в каждой детали" },
+                { id: 2, topTitle: "Жемчужное ожерелье", bottomTitle: "Классика вне времени" },
+                { id: 3, topTitle: "Колье с сапфирами", bottomTitle: "Королевская роскошь" },
+                { id: 4, topTitle: "Подвеска с изумрудом", bottomTitle: "Цвет весеннего леса" },
+                { id: 5, topTitle: "Цепочка с рубином", bottomTitle: "Страсть и энергия" },
+                { id: 6, topTitle: "Кулон в форме сердца", bottomTitle: "Символ любви" },
+                { id: 7, topTitle: "Ожерелье с аметистом", bottomTitle: "Фиолетовая глубина" },
+                { id: 8, topTitle: "Колье с цитрином", bottomTitle: "Солнечное сияние" },
+                { id: 9, topTitle: "Подвеска с опалом", bottomTitle: "Игра цветов" },
+                { id: 10, topTitle: "Ожерелье с топазом", bottomTitle: "Небесная чистота" },
+                { id: 11, topTitle: "Кулон с гранатом", bottomTitle: "Огненная страсть" },
+                { id: 12, topTitle: "Колье с аквамарином", bottomTitle: "Морская свежесть" }
+            ];
+            
+            // Данные для oeuvre (24 фото)
+            const oeuvreData = [
+                { id: 1, topTitle: "Брошь 'Стрекоза'", bottomTitle: "Изысканный аксессуар" },
+                { id: 2, topTitle: "Диадема 'Королевская'", bottomTitle: "Для особых случаев" },
+                { id: 3, topTitle: "Запонки 'Геометрия'", bottomTitle: "Мужская элегантность" },
+                { id: 4, topTitle: "Браслет 'Весна'", bottomTitle: "Цветочные мотивы" },
+                { id: 5, topTitle: "Комплект 'Невеста'", bottomTitle: "Для самого важного дня" },
+                { id: 6, topTitle: "Подвеска 'Солнце'", bottomTitle: "Энергия и свет" },
+                { id: 7, topTitle: "Колье 'Русалка'", bottomTitle: "Морская тематика" },
+                { id: 8, topTitle: "Серьги 'Каскад'", bottomTitle: "Длинные подвески" },
+                { id: 9, topTitle: "Кольцо 'Паук'", bottomTitle: "Смелый дизайн" },
+                { id: 10, topTitle: "Брошь 'Бабочка'", bottomTitle: "Нежность и легкость" },
+                { id: 11, topTitle: "Комплект 'Византия'", bottomTitle: "Богатое убранство" },
+                { id: 12, topTitle: "Браслет 'Змея'", bottomTitle: "Гибкость и стиль" },
+                { id: 13, topTitle: "Диадема 'Звездная'", bottomTitle: "Блеск ночного неба" },
+                { id: 14, topTitle: "Запонки 'Классика'", bottomTitle: "Сдержанная роскошь" },
+                { id: 15, topTitle: "Комплект 'Осень'", bottomTitle: "Теплые оттенки" },
+                { id: 16, topTitle: "Колье 'Феникс'", bottomTitle: "Возрождение и сила" },
+                { id: 17, topTitle: "Серьги 'Капли дождя'", bottomTitle: "Легкость и свежесть" },
+                { id: 18, topTitle: "Кольцо 'Дракон'", bottomTitle: "Мифологический мотив" },
+                { id: 19, topTitle: "Брошь 'Роза'", bottomTitle: "Цветочная элегантность" },
+                { id: 20, topTitle: "Браслет 'Волна'", bottomTitle: "Плавные линии" },
+                { id: 21, topTitle: "Комплект 'Авангард'", bottomTitle: "Современное искусство" },
+                { id: 22, topTitle: "Подвеска 'Луна'", bottomTitle: "Таинственный свет" },
+                { id: 23, topTitle: "Колье 'Огненное'", bottomTitle: "Страсть и энергия" },
+                { id: 24, topTitle: "Серьги 'Кристалл'", bottomTitle: "Чистота и прозрачность" }
+            ];
             
             // УНИВЕРСАЛЬНАЯ ФУНКЦИЯ ДЛЯ СОЗДАНИЯ ГАЛЕРЕИ
             function createGallery(config) {
-                // ... реализация функции createGallery без изменений ...
+                const {
+                    galleryId,
+                    totalItems,
+                    itemsPerPage,
+                    thumbnailsContainerId,
+                    largeImageId,
+                    prevBtnId,
+                    nextBtnId,
+                    playBtnId,
+                    topTitleId,
+                    bottomTitleId,
+                    largeImageContainerSelector,
+                    paginationContainerId,
+                    itemData,
+                    imagesPath
+                } = config;
+                
+                let currentItem = 1;
+                let currentPage = 1;
+                let slideshowInterval = null;
+                const totalPages = Math.ceil(totalItems / itemsPerPage);
+                
+                // Элементы управления
+                const thumbnailsContainer = document.getElementById(thumbnailsContainerId);
+                const largeImage = document.getElementById(largeImageId);
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const playBtn = document.getElementById(playBtnId);
+                const topTitle = document.getElementById(topTitleId);
+                const bottomTitle = document.getElementById(bottomTitleId);
+                const largeImageContainer = document.querySelector(largeImageContainerSelector);
+                const paginationContainer = document.getElementById(paginationContainerId);
+                
+                // Создание миниатюр для текущей страницы
+                function createThumbnails() {
+                    thumbnailsContainer.innerHTML = '';
+                    
+                    const start = (currentPage - 1) * itemsPerPage + 1;
+                    const end = Math.min(currentPage * itemsPerPage, totalItems);
+                    
+                    for (let i = start; i <= end; i++) {
+                        const thumbnail = document.createElement('div');
+                        thumbnail.className = 'thumbnail';
+                        if (i === currentItem) thumbnail.classList.add('active');
+                        thumbnail.dataset.id = i;
+                        
+                        const img = document.createElement('img');
+                        img.src = `${imagesPath}/${i}s.jpg`;
+                        img.alt = `${galleryId} ${i}`;
+                        
+                        thumbnail.appendChild(img);
+                        thumbnailsContainer.appendChild(thumbnail);
+                        
+                        // Обработчик клика на миниатюру
+                        thumbnail.addEventListener('click', function() {
+                            showItem(parseInt(this.dataset.id));
+                        });
+                    }
+                }
+                
+                // Создание пагинации
+                function createPagination() {
+                    paginationContainer.innerHTML = '';
+                    
+                    const leftGroup = document.createElement('div');
+                    leftGroup.className = 'pagination-group left';
+                    
+                    const centerGroup = document.createElement('div');
+                    centerGroup.className = 'pagination-group center';
+                    
+                    const rightGroup = document.createElement('div');
+                    rightGroup.className = 'pagination-group right';
+                    
+                    if (currentPage > 1) {
+                        const prevPageBtn = document.createElement('button');
+                        prevPageBtn.className = 'page-btn';
+                        prevPageBtn.innerHTML = '&lt; prev';
+                        prevPageBtn.addEventListener('click', () => setPage(currentPage - 1));
+                        leftGroup.appendChild(prevPageBtn);
+                    }
+                    
+                    for (let i = 1; i <= totalPages; i++) {
+                        const pageBtn = document.createElement('button');
+                        pageBtn.className = 'page-btn';
+                        if (i === currentPage) pageBtn.classList.add('active');
+                        pageBtn.textContent = i.toString();
+                        pageBtn.addEventListener('click', () => setPage(i));
+                        centerGroup.appendChild(pageBtn);
+                    }
+                    
+                    if (currentPage < totalPages) {
+                        const nextPageBtn = document.createElement('button');
+                        nextPageBtn.className = 'page-btn';
+                        nextPageBtn.innerHTML = 'next &gt;';
+                        nextPageBtn.addEventListener('click', () => setPage(currentPage + 1));
+                        rightGroup.appendChild(nextPageBtn);
+                    }
+                    
+                    paginationContainer.appendChild(leftGroup);
+                    paginationContainer.appendChild(centerGroup);
+                    paginationContainer.appendChild(rightGroup);
+                }
+                
+                // Установка текущей страницы
+                function setPage(page) {
+                    currentPage = page;
+                    createThumbnails();
+                    createPagination();
+                }
+                
+                // Показать элемент
+                function showItem(id) {
+                    const item = itemData.find(r => r.id === id);
+                    
+                    if (item) {
+                        currentItem = id;
+                        largeImage.src = `${imagesPath}/${id}.jpg`;
+                        largeImage.alt = `${galleryId} ${id}`;
+                        
+                        // Обновление активной миниатюры
+                        document.querySelectorAll(`#${thumbnailsContainerId} .thumbnail`).forEach(thumb => {
+                            thumb.classList.remove('active');
+                            if (parseInt(thumb.dataset.id) === id) {
+                                thumb.classList.add('active');
+                            }
+                        });
+                        
+                        // Обновление заголовков
+                        topTitle.textContent = item.topTitle;
+                        bottomTitle.textContent = item.bottomTitle;
+                        
+                        // Обновление текущей страницы
+                        const newPage = Math.ceil(id / itemsPerPage);
+                        if (newPage !== currentPage) {
+                            setPage(newPage);
+                        }
+                    }
+                }
+                
+                // Предыдущий элемент
+                function prevItem() {
+                    currentItem = currentItem > 1 ? currentItem - 1 : totalItems;
+                    showItem(currentItem);
+                }
+                
+                // Следующий элемент
+                function nextItem() {
+                    currentItem = currentItem < totalItems ? currentItem + 1 : 1;
+                    showItem(currentItem);
+                }
+                
+                // Запуск/остановка слайд-шоу
+                function toggleSlideshow() {
+                    if (slideshowInterval) {
+                        clearInterval(slideshowInterval);
+                        slideshowInterval = null;
+                        playBtn.textContent = 'Play Slideshow';
+                    } else {
+                        slideshowInterval = setInterval(nextItem, 3000);
+                        playBtn.textContent = 'Stop Slideshow';
+                    }
+                }
+                
+                // Инициализация
+                function init() {
+                    createThumbnails();
+                    createPagination();
+                    showItem(1);
+                    
+                    // Назначение обработчиков
+                    prevBtn.addEventListener('click', prevItem);
+                    nextBtn.addEventListener('click', nextItem);
+                    playBtn.addEventListener('click', toggleSlideshow);
+                    
+                    // Навигация клавиатурой
+                    document.addEventListener('keydown', function(e) {
+                        if (document.getElementById(galleryId + '-section').getBoundingClientRect().top < window.innerHeight) {
+                            if (e.key === 'ArrowLeft') prevItem();
+                            if (e.key === 'ArrowRight') nextItem();
+                        }
+                    });
+                    
+                    // Клик по большому изображению
+                    largeImageContainer.addEventListener('click', function() {
+                        if (slideshowInterval) {
+                            clearInterval(slideshowInterval);
+                            slideshowInterval = null;
+                            playBtn.textContent = 'Play Slideshow';
+                        }
+                        nextItem();
+                    });
+                }
+                
+                return {
+                    init,
+                    reset: function() {
+                        if (slideshowInterval) {
+                            clearInterval(slideshowInterval);
+                            slideshowInterval = null;
+                            playBtn.textContent = 'Play Slideshow';
+                        }
+                        currentItem = 1;
+                        currentPage = 1;
+                        setPage(1);
+                        showItem(1);
+                    }
+                };
             }
             
-            // Инициализация галерей
-            const ringsGallery = createGallery({ /* ... */ });
+            // Инициализация галереи колец (24 фото)
+            const ringsGallery = createGallery({
+                galleryId: 'rings',
+                totalItems: 24,
+                itemsPerPage: 12,
+                thumbnailsContainerId: 'rings-thumbnails',
+                largeImageId: 'rings-large-img',
+                prevBtnId: 'rings-prev-btn',
+                nextBtnId: 'rings-next-btn',
+                playBtnId: 'rings-play-btn',
+                topTitleId: 'rings-top-title',
+                bottomTitleId: 'rings-bottom-title',
+                largeImageContainerSelector: '#rings-section .large-image',
+                paginationContainerId: 'rings-pagination',
+                itemData: ringsData,
+                imagesPath: 'images/rings'
+            });
+            
             ringsGallery.init();
             
-            const earringsGallery = createGallery({ /* ... */ });
+            // Инициализация галереи сережек (12 фото)
+            const earringsGallery = createGallery({
+                galleryId: 'earrings',
+                totalItems: 12,
+                itemsPerPage: 12,
+                thumbnailsContainerId: 'earrings-thumbnails',
+                largeImageId: 'earrings-large-img',
+                prevBtnId: 'earrings-prev-btn',
+                nextBtnId: 'earrings-next-btn',
+                playBtnId: 'earrings-play-btn',
+                topTitleId: 'earrings-top-title',
+                bottomTitleId: 'earrings-bottom-title',
+                largeImageContainerSelector: '#earrings-section .large-image',
+                paginationContainerId: 'earrings-pagination',
+                itemData: earringsData,
+                imagesPath: 'images/earrings'
+            });
+            
             earringsGallery.init();
             
-            const necklacesGallery = createGallery({ /* ... */ });
+            // Инициализация галереи ожерелий (12 фото)
+            const necklacesGallery = createGallery({
+                galleryId: 'necklaces',
+                totalItems: 12,
+                itemsPerPage: 12,
+                thumbnailsContainerId: 'necklaces-thumbnails',
+                largeImageId: 'necklaces-large-img',
+                prevBtnId: 'necklaces-prev-btn',
+                nextBtnId: 'necklaces-next-btn',
+                playBtnId: 'necklaces-play-btn',
+                topTitleId: 'necklaces-top-title',
+                bottomTitleId: 'necklaces-bottom-title',
+                largeImageContainerSelector: '#necklaces-section .large-image',
+                paginationContainerId: 'necklaces-pagination',
+                itemData: necklacesData,
+                imagesPath: 'images/necklaces'
+            });
+            
             necklacesGallery.init();
             
-            const oeuvreGallery = createGallery({ /* ... */ });
+            // Инициализация галереи oeuvre (24 фото)
+            const oeuvreGallery = createGallery({
+                galleryId: 'oeuvre',
+                totalItems: 24,
+                itemsPerPage: 12,
+                thumbnailsContainerId: 'oeuvre-thumbnails',
+                largeImageId: 'oeuvre-large-img',
+                prevBtnId: 'oeuvre-prev-btn',
+                nextBtnId: 'oeuvre-next-btn',
+                playBtnId: 'oeuvre-play-btn',
+                topTitleId: 'oeuvre-top-title',
+                bottomTitleId: 'oeuvre-bottom-title',
+                largeImageContainerSelector: '#oeuvre-section .large-image',
+                paginationContainerId: 'oeuvre-pagination',
+                itemData: oeuvreData,
+                imagesPath: 'images/oeuvre'
+            });
+            
             oeuvreGallery.init();
             
             // Обновленный обработчик скролла для активного меню
@@ -1084,7 +1442,8 @@
                 necklacesGallery.reset();
                 oeuvreGallery.reset();
                 
-                smoothScrollTo(0, 2700);
+             // Используем кастомную плавную прокрутку с длительностью 2700ms
+			smoothScrollTo(0, 2700);
                 
                 document.querySelectorAll('nav ul li').forEach(li => {
                     li.classList.remove('active');
@@ -1095,89 +1454,6 @@
             document.querySelector('nav ul li:first-child a').addEventListener('click', function(e) {
                 e.preventDefault();
                 resetToInitialState();
-            });
-
-            ///////////////////////////////////////////////////////////////////
-            // Код для плавного прилипания секций при скроллинге
-            ///////////////////////////////////////////////////////////////////
-            
-            // Переменные для отслеживания состояния скроллинга
-            let isScrolling = false;
-            let scrollTimeout;
-            let lastScrollPosition = window.pageYOffset;
-            let lastScrollTime = Date.now();
-            
-            // Список позиций секций (с учетом высоты шапки)
-            const sectionPositions = {
-                'home': 0,
-                'rings-section': document.getElementById('rings-section').offsetTop - 110,
-                'earrings-section': document.getElementById('earrings-section').offsetTop - 110,
-                'necklaces-section': document.getElementById('necklaces-section').offsetTop - 110,
-                'oeuvre-section': document.getElementById('oeuvre-section').offsetTop - 110,
-                'contact-section': document.getElementById('contact-section').offsetTop - 110
-            };
-            
-            // Функция для определения ближайшей секции
-            function getNearestSection(currentScroll) {
-                let minDistance = Infinity;
-                let nearestSection = 'home';
-                
-                for (const [section, position] of Object.entries(sectionPositions)) {
-                    const distance = Math.abs(currentScroll - position);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestSection = section;
-                    }
-                }
-                
-                return nearestSection;
-            }
-            
-            // Функция для плавного прилипания к секции
-            function snapToSection() {
-                const currentScroll = window.pageYOffset;
-                const nearestSection = getNearestSection(currentScroll);
-                const targetPosition = sectionPositions[nearestSection];
-                
-                // Если мы уже близко к целевой позиции, не делаем анимацию
-                if (Math.abs(currentScroll - targetPosition) < 5) return;
-                
-                smoothScrollTo(targetPosition, 800);
-            }
-            
-            // Основной обработчик скроллинга
-            window.addEventListener('scroll', function() {
-                const currentTime = Date.now();
-                const currentPosition = window.pageYOffset;
-                
-                // Рассчитываем мгновенную скорость скроллинга (пикселей/секунду)
-                const timeDelta = (currentTime - lastScrollTime) / 1000;
-                const distance = Math.abs(currentPosition - lastScrollPosition);
-                const scrollSpeed = distance / timeDelta;
-                
-                // Обновляем последние значения
-                lastScrollPosition = currentPosition;
-                lastScrollTime = currentTime;
-                
-                // Если скроллинг только начался
-                if (!isScrolling) {
-                    isScrolling = true;
-                }
-                
-                // Сбрасываем предыдущий таймер
-                clearTimeout(scrollTimeout);
-                
-                // Устанавливаем таймер для определения окончания скроллинга
-                scrollTimeout = setTimeout(function() {
-                    if (isScrolling) {
-                        isScrolling = false;
-                        
-                        // Если скорость ниже порога (300 пикселей/сек), делаем прилипание
-                        if (scrollSpeed < 300) {
-                            snapToSection();
-                        }
-                    }
-                }, 100);
             });
         });
     </script>
