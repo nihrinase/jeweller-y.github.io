@@ -46,6 +46,7 @@
             min-height: 100vh;
 		    font-family: 'economicaregular', Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* Фиксированная шапка */
@@ -215,6 +216,7 @@
             background-image: url('images/back29.png');
             background-repeat: repeat;
             z-index: 1;
+            scroll-snap-align: start;
         }
 
         /* Окна между секциями */
@@ -237,6 +239,7 @@
             padding: 35px 0 10px 0;
             z-index: 3;
             margin-top: -10px;
+            scroll-snap-align: start;
         }
 
         .gallery-section::before {
@@ -489,6 +492,7 @@
             align-items: center;
             flex-direction: column;
             text-align: center;
+            scroll-snap-align: start;
         }
 
         .contact-content {
@@ -970,13 +974,14 @@
             // Переменные для управления прилипанием
             let isManualScroll = false;
             let lastScrollPosition = 0;
-            const SNAP_THRESHOLD = 153; // Пороговое значение 53px
+            const SNAP_THRESHOLD = 253; // Пороговое значение 53px
             let touchStartY = 0;
             let scrollTimeout;
+            let isSnapping = false;
             
-            // Функция для прилипания секций
+            // Функция для плавного прилипания секций
             function applySectionSnap() {
-                if (isManualScroll) return;
+                if (isManualScroll || isSnapping) return;
                 
                 const sections = [
                     document.querySelector('.first-section'),
@@ -998,18 +1003,53 @@
                     const distance = Math.abs(currentPosition - sectionTop);
                     
                     if (distance < SNAP_THRESHOLD) {
-                        isManualScroll = true;
-                        window.scrollTo({
-                            top: sectionTop,
-                            behavior: 'smooth'
+                        isSnapping = true;
+                        smoothScrollTo(sectionTop, 800, function() {
+                            isSnapping = false;
+                            // Обновляем активный пункт меню после прилипания
+                            updateActiveMenuItem();
                         });
-                        
-                        setTimeout(() => {
-                            isManualScroll = false;
-                        }, 500);
                         return;
                     }
                 }
+            }
+            
+            // Функция для обновления активного пункта меню
+            function updateActiveMenuItem() {
+                const sections = {
+                    'rings': document.getElementById('rings-section'),
+                    'earrings': document.getElementById('earrings-section'),
+                    'necklaces': document.getElementById('necklaces-section'),
+                    'oeuvre': document.getElementById('oeuvre-section'),
+                    'contact': document.getElementById('contact-section')
+                };
+                
+                let activeSection = 'home';
+                const scrollPosition = window.pageYOffset + 150; // Смещение для точности
+                
+                for (const [sectionId, element] of Object.entries(sections)) {
+                    if (element) {
+                        const sectionTop = element.offsetTop - 150;
+                        const sectionBottom = sectionTop + element.offsetHeight;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            activeSection = sectionId;
+                            break;
+                        }
+                    }
+                }
+                
+                // Обновление активного пункта меню
+                document.querySelectorAll('nav ul li').forEach(li => {
+                    li.classList.remove('active');
+                    
+                    if (activeSection === 'home' && li.querySelector('a').getAttribute('href') === '#') {
+                        li.classList.add('active');
+                    }
+                    else if (li.querySelector('a').getAttribute('href') === `#${activeSection}-section`) {
+                        li.classList.add('active');
+                    }
+                });
             }
             
             // Функция для проверки видимости элемента
@@ -1022,7 +1062,7 @@
             }
             
             // Функция плавной прокрутки с регулируемой скоростью
-            function smoothScrollTo(targetPosition, duration = 1000) {
+            function smoothScrollTo(targetPosition, duration = 1000, onComplete) {
                 isManualScroll = true; // Блокируем прилипание во время анимации
                 
                 const startPosition = window.pageYOffset;
@@ -1048,6 +1088,7 @@
                     } else {
                         setTimeout(() => {
                             isManualScroll = false;
+                            if (onComplete) onComplete();
                         }, 100);
                     }
                 }
@@ -1059,6 +1100,11 @@
             window.addEventListener('scroll', function() {
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(applySectionSnap, 100);
+                
+                // Обновление меню только если не в процессе прилипания
+                if (!isSnapping) {
+                    updateActiveMenuItem();
+                }
             });
             
             // Обработчики для тач-устройств
@@ -1086,7 +1132,10 @@
                         
                         if (targetElement) {
                             const targetPosition = targetElement.offsetTop - 110;
-                            smoothScrollTo(targetPosition, 2700);
+                            smoothScrollTo(targetPosition, 2700, function() {
+                                // Обновляем активный пункт после прокрутки
+                                updateActiveMenuItem();
+                            });
                         }
                     }
                 });
@@ -1473,38 +1522,6 @@
             
             oeuvreGallery.init();
             
-            // Обновленный обработчик скролла для активного меню
-            const sections = {
-                'rings': document.getElementById('rings-section'),
-                'earrings': document.getElementById('earrings-section'),
-                'necklaces': document.getElementById('necklaces-section'),
-                'oeuvre': document.getElementById('oeuvre-section'),
-                'contact': document.getElementById('contact-section')
-            };
-            
-            window.addEventListener('scroll', function() {
-                let activeSection = 'home';
-                
-                for (const [sectionId, element] of Object.entries(sections)) {
-                    if (isInViewport(element)) {
-                        activeSection = sectionId;
-                        break;
-                    }
-                }
-                
-                // Обновление активного пункта меню
-                document.querySelectorAll('nav ul li').forEach(li => {
-                    li.classList.remove('active');
-                    
-                    if (activeSection === 'home' && li.querySelector('a').getAttribute('href') === '#') {
-                        li.classList.add('active');
-                    }
-                    else if (li.querySelector('a').getAttribute('href') === `#${activeSection}-section`) {
-                        li.classList.add('active');
-                    }
-                });
-            });
-            
             // Обновленный сброс состояния
             function resetToInitialState() {
                 ringsGallery.reset();
@@ -1513,7 +1530,10 @@
                 oeuvreGallery.reset();
                 
                 // Используем кастомную плавную прокрутку с длительностью 2700ms
-                smoothScrollTo(0, 2700);
+                smoothScrollTo(0, 2700, function() {
+                    // Обновляем меню после прокрутки
+                    updateActiveMenuItem();
+                });
                 
                 document.querySelectorAll('nav ul li').forEach(li => {
                     li.classList.remove('active');
@@ -1525,6 +1545,9 @@
                 e.preventDefault();
                 resetToInitialState();
             });
+            
+            // Инициализация активного пункта меню
+            updateActiveMenuItem();
         });
     </script>
 </body>
