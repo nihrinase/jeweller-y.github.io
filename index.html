@@ -967,6 +967,51 @@
                 });
             });
             
+            // Переменные для управления прилипанием
+            let isManualScroll = false;
+            let lastScrollPosition = 0;
+            const SNAP_THRESHOLD = 153; // Пороговое значение 53px
+            let touchStartY = 0;
+            let scrollTimeout;
+            
+            // Функция для прилипания секций
+            function applySectionSnap() {
+                if (isManualScroll) return;
+                
+                const sections = [
+                    document.querySelector('.first-section'),
+                    document.getElementById('rings-section'),
+                    document.getElementById('earrings-section'),
+                    document.getElementById('necklaces-section'),
+                    document.getElementById('oeuvre-section'),
+                    document.getElementById('contact-section')
+                ];
+                
+                const currentPosition = window.pageYOffset;
+                const scrollDirection = currentPosition > lastScrollPosition ? 'down' : 'up';
+                lastScrollPosition = currentPosition;
+                
+                for (const section of sections) {
+                    if (!section) continue;
+                    
+                    const sectionTop = section.offsetTop - 110; // Учет высоты шапки
+                    const distance = Math.abs(currentPosition - sectionTop);
+                    
+                    if (distance < SNAP_THRESHOLD) {
+                        isManualScroll = true;
+                        window.scrollTo({
+                            top: sectionTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        setTimeout(() => {
+                            isManualScroll = false;
+                        }, 500);
+                        return;
+                    }
+                }
+            }
+            
             // Функция для проверки видимости элемента
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
@@ -978,6 +1023,8 @@
             
             // Функция плавной прокрутки с регулируемой скоростью
             function smoothScrollTo(targetPosition, duration = 1000) {
+                isManualScroll = true; // Блокируем прилипание во время анимации
+                
                 const startPosition = window.pageYOffset;
                 const distance = targetPosition - startPosition;
                 let startTime = null;
@@ -998,13 +1045,37 @@
                     
                     if (timeElapsed < duration) {
                         requestAnimationFrame(animation);
+                    } else {
+                        setTimeout(() => {
+                            isManualScroll = false;
+                        }, 100);
                     }
                 }
                 
                 requestAnimationFrame(animation);
             }
             
-            // Обновленный обработчик плавной прокрутки (на 40% медленнее)
+            // Обработчик скролла для прилипания
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(applySectionSnap, 100);
+            });
+            
+            // Обработчики для тач-устройств
+            document.addEventListener('touchstart', e => {
+                touchStartY = e.touches[0].clientY;
+            });
+            
+            document.addEventListener('touchend', e => {
+                const touchEndY = e.changedTouches[0].clientY;
+                const distance = Math.abs(touchEndY - touchStartY);
+                
+                if (distance < SNAP_THRESHOLD) {
+                    applySectionSnap();
+                }
+            });
+            
+            // Обновленный обработчик плавной прокрутки
             document.querySelectorAll('nav a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     if (this.getAttribute('href').startsWith('#')) {
@@ -1015,7 +1086,6 @@
                         
                         if (targetElement) {
                             const targetPosition = targetElement.offsetTop - 110;
-                            // Увеличиваем длительность на 540% (2700мс вместо 500мс)
                             smoothScrollTo(targetPosition, 2700);
                         }
                     }
@@ -1454,77 +1524,6 @@
             document.querySelector('nav ul li:first-child a').addEventListener('click', function(e) {
                 e.preventDefault();
                 resetToInitialState();
-            });
-            
-            // Умный скроллинг - автоматическое выравнивание по секциям при замедлении
-            let lastScrollPosition = window.pageYOffset;
-            let scrollTimeout;
-            let isScrollingFast = false;
-            let lastScrollTime = Date.now();
-            
-            // Определяем все секции, включая первую и окна
-            const allSections = [
-                document.querySelector('.first-section'),
-                document.querySelector('#rings-section'),
-                document.querySelector('#earrings-section'),
-                document.querySelector('#necklaces-section'),
-                document.querySelector('#oeuvre-section'),
-                document.querySelector('#contact-section')
-            ];
-            
-            // Функция для поиска ближайшей секции
-            function findNearestSection(currentScroll) {
-                let nearestSection = null;
-                let minDistance = Infinity;
-                
-                allSections.forEach(section => {
-                    if (!section) return;
-                    
-                    const rect = section.getBoundingClientRect();
-                    const sectionTop = rect.top + window.pageYOffset;
-                    const distance = Math.abs(sectionTop - currentScroll);
-                    
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestSection = section;
-                    }
-                });
-                
-                return nearestSection;
-            }
-            
-            // Обработчик скролла с "умным" поведением
-            window.addEventListener('scroll', function() {
-                const currentScroll = window.pageYOffset;
-                const currentTime = Date.now();
-                const timeDiff = currentTime - lastScrollTime;
-                const scrollDiff = Math.abs(currentScroll - lastScrollPosition);
-                const scrollSpeed = scrollDiff / timeDiff;
-                
-                // Определяем, быстрый ли это скролл (эмпирическое значение)
-                isScrollingFast = scrollSpeed > 0.5;
-                
-                // Очищаем предыдущий таймаут
-                clearTimeout(scrollTimeout);
-                
-                // Если скролл быстрый - не вмешиваемся
-                if (isScrollingFast) {
-                    lastScrollPosition = currentScroll;
-                    lastScrollTime = currentTime;
-                    return;
-                }
-                
-                // Если скролл медленный - ждем окончания и выравниваем
-                scrollTimeout = setTimeout(function() {
-                    const nearestSection = findNearestSection(currentScroll);
-                    if (nearestSection) {
-                        const targetPosition = nearestSection.getBoundingClientRect().top + window.pageYOffset - 110;
-                        smoothScrollTo(targetPosition, 800);
-                    }
-                }, 100);
-                
-                lastScrollPosition = currentScroll;
-                lastScrollTime = currentTime;
             });
         });
     </script>
