@@ -30,8 +30,7 @@
         
         body {
             background-color: #afe0c9;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
             position: relative;
             font-family: 'Segoe UI', Verdana, sans-serif;
         }
@@ -610,7 +609,8 @@
         .prev-photo-btn, .next-photo-btn {
             pointer-events: auto;
         }
-     /* ===== БУРГЕР-МЕНЮ ===== */
+        
+        /* ===== БУРГЕР-МЕНЮ ===== */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -624,7 +624,6 @@
             position: absolute;
             left: 20px;
             top: 32px;
-			margin-left: 40px;
             z-index: 200;
         }
 
@@ -640,19 +639,12 @@
             display: flex;
             flex-direction: column;
             position: fixed;
-            top: 60px;
-			
+            top: 90px;
             left: 0;
-            width: 30%;
-         /*   background: rgba(22, 18, 107, 0.95); */
-		 border: solid 1px #16126b;
-		 border-radius: 5px;
-		 box-shadow: 4px 4px 5px rgba(0,0,0,.3);
-		 background: #999;
-		 opacity: .85;
+            width: 100%;
+            background: rgba(22, 18, 107, 0.95);
             padding: 20px 0;
             z-index: 150;
-			margin-left: 30px;
         }
 
         /* ===== АДАПТИВНЫЕ СТИЛИ ===== */
@@ -717,6 +709,7 @@
                 margin: 0 auto;
                 font-size: 32px;
                 text-align: center;
+                margin-left: 0;
             }
             
             .menu {
@@ -739,13 +732,11 @@
             .portfolio-link {
                 top: 10px;
                 left: 10px;
-				margin-left :100px;
             }
             
             .d3-link {
                 top: 10px;
                 right: 10px;
-				margin-right: 50px;
             }
             
             .gallery {
@@ -756,13 +747,13 @@
             }
             
             .gallery-item {
-                width: 250px;
-                height: 350px;
                 display: none;
             }
             
             #dynamic-photo {
                 display: block;
+                width: 250px;
+                height: 350px;
             }
             
             /* Секция 2 */
@@ -811,6 +802,10 @@
                 display: none;
             }
             
+            .left-strip {
+                display: none;
+            }
+            
             /* Секция 6 */
             #section6 {
                 flex-direction: column;
@@ -822,6 +817,7 @@
                 width: 190px;
                 height: 266px;
                 margin: 30px auto;
+                margin-left: 0;
             }
             
             .contact-text {
@@ -849,22 +845,67 @@
                 font-size: 16px;
             }
             
-            /* Общие */
-            .left-strip {
-                display: none;
+            /* Стили для всех секций на мобильных */
+            .section {
+                position: relative !important;
+                min-height: 100vh;
+                transform: none !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .sections-container {
+                position: relative;
+                height: auto;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .section-title {
+                font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
+                font-size: 36px;
+                color: #16126b;
+                text-shadow: 2px 2px 2px #FFF;
+                margin-bottom: 30px;
+            }
+            
+            .section-content {
+                max-width: 90%;
+                color: #16126b;
+                font-size: 18px;
+                line-height: 1.6;
+            }
+            
+            /* Стили для галереи в секции 2 */
+            .mobile-gallery {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                max-width: 500px;
+                margin-top: 20px;
+            }
+            
+            .mobile-gallery-item {
+                width: 100%;
+                height: 200px;
+                background-size: cover;
+                background-position: center;
+                border: 1px solid #16126b;
             }
         }
 
         @media (max-width: 480px) { /* Маленькие телефоны */
             .logo {
                 font-size: 28px;
-				margin-left: 180px;
             }
             
-            .gallery-item {
-                width: 308px;
-                height: 420px;
-				margin-bottom: 60px;
+            #dynamic-photo {
+                width: 220px;
+                height: 300px;
             }
             
             .large-photo-container {
@@ -889,12 +930,20 @@
             .contact-title-1 {
                 font-size: 28px;
             }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .mobile-gallery {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <!-- HEADER SECTION -->
-     <header>
+    <header>
         <button class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
@@ -939,7 +988,41 @@
         </div>
         
         <!-- RINGS SECTION -->
-        <div class="section" id="section2"></div>
+        <div class="section" id="section2">
+            <h2 class="section-title">Rings Collection</h2>
+            <div class="mobile-gallery">
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/1.jpg');"></div>
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/2.jpg');"></div>
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/3.jpg');"></div>
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/4.jpg');"></div>
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/5.jpg');"></div>
+                <div class="mobile-gallery-item" style="background-image: url('images/rings/6.jpg');"></div>
+            </div>
+        </div>
+        
+        <!-- EARRINGS SECTION -->
+        <div class="section" id="section3">
+            <h2 class="section-title">Earrings Collection</h2>
+            <div class="section-content">
+                <p>Discover our exquisite collection of handcrafted earrings, made with precious metals and gemstones.</p>
+            </div>
+        </div>
+        
+        <!-- NECKLACES SECTION -->
+        <div class="section" id="section4">
+            <h2 class="section-title">Necklaces Collection</h2>
+            <div class="section-content">
+                <p>Elegant necklaces that complement any outfit, perfect for special occasions or everyday wear.</p>
+            </div>
+        </div>
+        
+        <!-- OEUVRE SECTION -->
+        <div class="section" id="section5">
+            <h2 class="section-title">Oeuvre Collection</h2>
+            <div class="section-content">
+                <p>Our unique art pieces that combine jewelry craftsmanship with artistic expression.</p>
+            </div>
+        </div>
         
         <!-- CONTACT SECTION -->
         <div class="section" id="section6">
@@ -1038,13 +1121,18 @@
         const elements = {
             section1: document.getElementById('section1'),
             section2: document.getElementById('section2'),
+            section3: document.getElementById('section3'),
+            section4: document.getElementById('section4'),
+            section5: document.getElementById('section5'),
             section6: document.getElementById('section6'),
             leftStrip: document.getElementById('left-strip'),
             menuLinks: document.querySelectorAll('.menu a'),
             d3Link: document.querySelector('.d3-link'),
             dynamicPhotos: document.querySelectorAll('#dynamic-photo .photo'),
             largePhoto1: document.getElementById('largePhoto1'),
-            largePhoto2: document.getElementById('largePhoto2')
+            largePhoto2: document.getElementById('largePhoto2'),
+            menuToggle: document.getElementById('menuToggle'),
+            mainMenu: document.getElementById('mainMenu')
         };
         
         // Cache left and right parts
@@ -1293,6 +1381,19 @@
             if (isAnimating) return;
             isAnimating = true;
             
+            // Для мобильных устройств - обычный скроллинг
+            if (window.innerWidth <= 767) {
+                // Прокручиваем к текущей секции
+                const section = document.getElementById(`section${currentSection}`);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+                
+                isAnimating = false;
+                updateMenuActiveState();
+                return;
+            }
+            
             // Остановка слайдшоу при уходе с секции
             if (currentSection !== 2 && isSlideshowPlaying) {
                 stopSlideshow();
@@ -1303,10 +1404,22 @@
             elements.section2.style.transform = 
                 currentSection < 2 ? 'translateY(100%)' : 
                 currentSection > 2 ? 'translateY(-100%)' : 'translateY(0)';
+            elements.section3.style.transform = 
+                currentSection < 3 ? 'translateY(100%)' : 
+                currentSection > 3 ? 'translateY(-100%)' : 'translateY(0)';
+            elements.section4.style.transform = 
+                currentSection < 4 ? 'translateY(100%)' : 
+                currentSection > 4 ? 'translateY(-100%)' : 'translateY(0)';
+            elements.section5.style.transform = 
+                currentSection < 5 ? 'translateY(100%)' : 
+                currentSection > 5 ? 'translateY(-100%)' : 'translateY(0)';
             elements.section6.style.transform = currentSection < 6 ? 'translateY(100%)' : 'translateY(0)';
             
             elements.section1.style.zIndex = currentSection === 1 ? '100' : '50';
             elements.section2.style.zIndex = currentSection === 2 ? '100' : '50';
+            elements.section3.style.zIndex = currentSection === 3 ? '100' : '50';
+            elements.section4.style.zIndex = currentSection === 4 ? '100' : '50';
+            elements.section5.style.zIndex = currentSection === 5 ? '100' : '50';
             elements.section6.style.zIndex = currentSection === 6 ? '100' : '50';
             
             // Left strip
@@ -1378,6 +1491,42 @@
             return false;
         };
         
+        // ===== TOUCH SCROLLING =====
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let touchStartTime = 0;
+        const TOUCH_THRESHOLD = 50; // минимальное расстояние для свайпа
+        const TOUCH_TIME_THRESHOLD = 300; // максимальное время для свайпа (мс)
+
+        function handleTouchStart(e) {
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = new Date().getTime();
+        }
+
+        function handleTouchMove(e) {
+            touchEndY = e.touches[0].clientY;
+        }
+
+        function handleTouchEnd() {
+            const touchDuration = new Date().getTime() - touchStartTime;
+            const touchDistance = touchStartY - touchEndY;
+            
+            // Определяем был ли это свайп (а не просто касание)
+            if (Math.abs(touchDistance) > TOUCH_THRESHOLD && touchDuration < TOUCH_TIME_THRESHOLD) {
+                if (touchDistance > 0) {
+                    // Свайп вверх - переход вниз
+                    if (handleScroll('down')) {
+                        updateSections();
+                    }
+                } else {
+                    // Свайп вниз - переход вверх
+                    if (handleScroll('up')) {
+                        updateSections();
+                    }
+                }
+            }
+        }
+
         // ===== EVENT HANDLERS =====
         /**
          * Setup all event listeners
@@ -1385,20 +1534,24 @@
         const setupEventListeners = () => {
             // Mouse wheel
             window.addEventListener('wheel', e => {
-                if (handleScroll(e.deltaY > 0 ? 'down' : 'up')) {
-                    updateSections();
-                    e.preventDefault();
+                if (window.innerWidth > 767) {
+                    if (handleScroll(e.deltaY > 0 ? 'down' : 'up')) {
+                        updateSections();
+                        e.preventDefault();
+                    }
                 }
             }, { passive: false });
             
             // Keyboard navigation
             window.addEventListener('keydown', e => {
-                if (e.key === 'ArrowDown' && handleScroll('down')) {
-                    updateSections();
-                    e.preventDefault();
-                } else if (e.key === 'ArrowUp' && handleScroll('up')) {
-                    updateSections();
-                    e.preventDefault();
+                if (window.innerWidth > 767) {
+                    if (e.key === 'ArrowDown' && handleScroll('down')) {
+                        updateSections();
+                        e.preventDefault();
+                    } else if (e.key === 'ArrowUp' && handleScroll('up')) {
+                        updateSections();
+                        e.preventDefault();
+                    }
                 }
             });
             
@@ -1466,6 +1619,7 @@
                 ...document.querySelectorAll('.gallery-item'),
                 ...document.querySelectorAll('.thumb-item'),
                 ...document.querySelectorAll('.large-photo-frame'),
+                ...document.querySelectorAll('.mobile-gallery-item'),
                 document.querySelector('.large-photo-container')
             ];
             
@@ -1479,10 +1633,29 @@
             });
             
             // Click navigation for large photo
-            document.querySelector('.large-photo-container').addEventListener('click', () => {
+            document.querySelector('.large-photo-container')?.addEventListener('click', () => {
                 navigatePhoto('next');
                 if (isSlideshowPlaying) stopSlideshow();
             });
+            
+            // Burger menu functionality
+            elements.menuToggle.addEventListener('click', function() {
+                elements.mainMenu.classList.toggle('active');
+                elements.menuToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking on links
+            document.querySelectorAll('.menu a').forEach(item => {
+                item.addEventListener('click', function() {
+                    elements.mainMenu.classList.remove('active');
+                    elements.menuToggle.classList.remove('active');
+                });
+            });
+            
+            // Touch events for mobile scrolling
+            document.addEventListener('touchstart', handleTouchStart, { passive: true });
+            document.addEventListener('touchmove', handleTouchMove, { passive: true });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
         };
         
         /**
@@ -1514,23 +1687,6 @@
                 img.onerror = () => console.warn('Image failed to load:', src);
             });
         };
-		
-		 // ===== БУРГЕР-МЕНЮ =====
-        const menuToggle = document.getElementById('menuToggle');
-        const mainMenu = document.getElementById('mainMenu');
-
-        menuToggle.addEventListener('click', function() {
-            mainMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-
-        // Закрытие меню при клике на пункт
-        document.querySelectorAll('.menu a').forEach(item => {
-            item.addEventListener('click', function() {
-                mainMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
-        });
         
         // ===== INITIALIZATION =====
         const init = () => {
@@ -1541,9 +1697,13 @@
             elements.dynamicPhotos[0].classList.add('active');
             
             // Initialize both large photo frames
-            elements.largePhoto1.classList.add('active');
-            elements.largePhoto1.style.backgroundImage = "url('images/rings/1.jpg')";
-            elements.largePhoto2.style.backgroundImage = "url('images/rings/1.jpg')";
+            if (elements.largePhoto1) {
+                elements.largePhoto1.classList.add('active');
+                elements.largePhoto1.style.backgroundImage = "url('images/rings/1.jpg')";
+            }
+            if (elements.largePhoto2) {
+                elements.largePhoto2.style.backgroundImage = "url('images/rings/1.jpg')";
+            }
             
             updateSections();
         };
