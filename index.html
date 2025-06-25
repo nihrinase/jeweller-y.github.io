@@ -742,16 +742,16 @@
             menuLinks: document.querySelectorAll('.menu a'),
             d3Link: document.querySelector('.d3-link'),
             dynamicPhotos: document.querySelectorAll('#dynamic-photo .photo'),
-            leftParts: {},
-            rightParts: {},
             largePhoto1: document.getElementById('largePhoto1'),
             largePhoto2: document.getElementById('largePhoto2')
         };
         
         // Cache left and right parts
+        const leftParts = {};
+        const rightParts = {};
         LEFT_PARTS.forEach(i => {
-            elements.leftParts[i] = document.getElementById(`left-part${i}`);
-            elements.rightParts[i] = document.getElementById(`right-part${i}`);
+            leftParts[i] = document.getElementById(`left-part${i}`);
+            rightParts[i] = document.getElementById(`right-part${i}`);
         });
         
         // ===== GALLERY FUNCTIONALITY =====
@@ -888,6 +888,14 @@
             if (page < 1 || page > 2) return;
             
             currentPage = page;
+            
+            // FIX: Set first photo on new page
+            if (page === 1) {
+                currentRingIndex = 0; // First photo on page 1
+            } else {
+                currentRingIndex = 12; // First photo on page 2 (index 12)
+            }
+            
             renderThumbnails();
             updatePagination();
             
@@ -996,16 +1004,16 @@
             
             // Left parts
             LEFT_PARTS.forEach(i => {
-                if (!elements.leftParts[i]) return;
-                elements.leftParts[i].style.transform = 
+                if (!leftParts[i]) return;
+                leftParts[i].style.transform = 
                     i < currentSection ? 'translateY(-100%)' :
                     i > currentSection ? 'translateY(100%)' : 'translateY(0)';
             });
             
             // Right parts
             LEFT_PARTS.forEach(i => {
-                if (elements.rightParts[i]) {
-                    elements.rightParts[i].classList.toggle('active', i === currentSection);
+                if (rightParts[i]) {
+                    rightParts[i].classList.toggle('active', i === currentSection);
                 }
             });
             
@@ -1128,17 +1136,31 @@
             
             document.getElementById('playBtn').addEventListener('click', toggleSlideshow);
             
-            // NEW: Use container instead of photo for click navigation
+            // NEW: Prevent context menu on all gallery elements
+            const preventImageSearch = (e) => {
+                e.preventDefault();
+                return false;
+            };
+            
+            // Add contextmenu prevention to all gallery elements
+            const galleryElements = [
+                ...document.querySelectorAll('.gallery-item'),
+                ...document.querySelectorAll('.thumb-item'),
+                ...document.querySelectorAll('.large-photo-frame'),
+                document.querySelector('.large-photo-container')
+            ];
+            
+            galleryElements.forEach(element => {
+                element.addEventListener('contextmenu', preventImageSearch);
+                element.addEventListener('mousedown', (e) => {
+                    if (e.button === 2) preventImageSearch(e);
+                });
+            });
+            
+            // Click navigation for large photo
             document.querySelector('.large-photo-container').addEventListener('click', () => {
                 navigatePhoto('next');
                 if (isSlideshowPlaying) stopSlideshow();
-            });
-            
-            // NEW: Prevent context menu (image search) on all images
-            document.querySelectorAll('img, .gallery-item, .thumb-item, .large-photo-frame').forEach(element => {
-                element.addEventListener('contextmenu', e => {
-                    e.preventDefault();
-                });
             });
         };
         
@@ -1180,7 +1202,7 @@
             // Initial setup
             elements.dynamicPhotos[0].classList.add('active');
             
-            // NEW: Initialize both large photo frames
+            // Initialize both large photo frames
             elements.largePhoto1.classList.add('active');
             elements.largePhoto1.style.backgroundImage = "url('images/rings/1.jpg')";
             elements.largePhoto2.style.backgroundImage = "url('images/rings/1.jpg')";
