@@ -31,6 +31,7 @@
         body {
             background-color: #afe0c9;
             overflow-x: hidden;
+            height: 100vh;
             position: relative;
             font-family: 'Segoe UI', Verdana, sans-serif;
         }
@@ -593,93 +594,78 @@
             -ms-user-drag: none;
         }
         
-        /* NEW: Prevent image search icon */
-        .large-photo-container, 
-        .large-photo-frame {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            pointer-events: none;
-        }
-        
-        .controls, .nav-buttons, .play-btn, 
-        .prev-photo-btn, .next-photo-btn {
-            pointer-events: auto;
-        }
-        
-        /* ===== БУРГЕР-МЕНЮ ===== */
-        .menu-toggle {
+        /* ===== MOBILE STYLES ===== */
+        .mobile-menu-btn {
             display: none;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px;
-            height: 25px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            position: absolute;
+            position: fixed;
+            top: 20px;
             left: 20px;
-            top: 32px;
-            z-index: 200;
+            z-index: 1000;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background: rgba(22, 18, 107, 0.7);
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-
-        .menu-toggle span {
-            width: 100%;
-            height: 3px;
-            background-color: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .menu.active {
-            display: flex;
-            flex-direction: column;
+        
+        .mobile-menu {
+            display: none;
             position: fixed;
             top: 90px;
             left: 0;
             width: 100%;
             background: rgba(22, 18, 107, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
             padding: 20px 0;
-            z-index: 150;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
         }
-
-        /* ===== АДАПТИВНЫЕ СТИЛИ ===== */
-        @media (max-width: 1024px) { /* Планшеты */
+        
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin: 10px 0;
+            padding: 8px 15px;
+            transition: all 0.3s;
+            border-radius: 4px;
+            width: 80%;
+            text-align: center;
+        }
+        
+        .mobile-menu a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .mobile-menu a.active {
+            background: white;
+            color: #16126b;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 1024px) {
+            /* Tablet styles */
             .logo {
-                margin-left: 20px;
                 font-size: 36px;
+                margin-left: 50px;
             }
             
             .menu {
-                margin-right: 20px;
+                margin-right: 50px;
             }
             
             .gallery-item {
                 width: 150px;
-                height: 320px;
             }
             
-            .contact-photo {
-                width: 200px;
-                height: 280px;
-                margin-left: 30px;
+            .portfolio-link {
+                left: 50px;
             }
             
-            .contact-title-1 {
-                font-size: 36px;
-            }
-            
-            .contact-title-2 {
-                font-size: 28px;
-            }
-            
-            .contact-subtitle-1 {
-                font-size: 24px;
-                margin-top: 80px;
+            .d3-link {
+                right: 50px;
             }
             
             .large-photo-container {
@@ -687,147 +673,230 @@
                 height: 280px;
             }
             
-            .thumb-gallery {
-                grid-template-columns: repeat(3, 60px);
-                grid-template-rows: repeat(4, 60px);
+            .controls {
+                width: 400px;
             }
             
-            .thumb-item {
-                width: 60px;
-                height: 60px;
+            .contact-title-1 {
+                font-size: 40px;
+            }
+            
+            .contact-title-2 {
+                font-size: 30px;
             }
         }
 
-        @media (max-width: 767px) { /* Телефоны */
-            /* Шапка */
+        @media (max-width: 767px) {
+            /* Mobile styles */
+            * {
+                user-select: auto;
+                -webkit-user-select: auto;
+            }
+            
             header {
-                justify-content: center;
-                padding: 0;
+                height: 70px;
             }
             
             .logo {
-                margin: 0 auto;
-                font-size: 32px;
-                text-align: center;
                 margin-left: 0;
+                font-size: 28px;
+                position: fixed;
+                top: 20px;
+                right: 20px;
             }
             
             .menu {
                 display: none;
-                margin-right: 0;
-                padding-bottom: 0;
             }
             
-            .menu-toggle {
-                display: flex;
+            .mobile-menu-btn {
+                display: block;
             }
             
-            /* Секция 1 */
+            .sections-container {
+                top: 70px;
+                height: calc(100vh - 70px);
+            }
+            
+            /* Section 1 - Home */
             #section1 {
                 flex-direction: column;
                 align-items: center;
-                padding-top: 30px;
+                padding-top: 20px;
             }
             
             .portfolio-link {
-                top: 10px;
-                left: 10px;
+                position: static;
+                margin: 10px 0 15px;
+                align-self: flex-start;
+                margin-left: 10%;
+                top: 0;
+                left: 0;
             }
             
             .d3-link {
-                top: 10px;
-                right: 10px;
+                position: static;
+                margin: 10px 0 15px;
+                align-self: flex-end;
+                margin-right: 10%;
+                top: 0;
+                right: 0;
             }
             
             .gallery {
                 flex-direction: column;
                 height: auto;
-                margin-top: 30px;
-                gap: 15px;
+                width: 80%;
+                margin-top: 0;
             }
             
             .gallery-item {
                 display: none;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 3/4;
+                margin-bottom: 10px;
             }
             
             #dynamic-photo {
                 display: block;
-                width: 250px;
-                height: 350px;
+                background-image: url('images/pendant.jpg');
+                background-size: cover;
+                background-position: center;
+                height: 60vh;
             }
             
-            /* Секция 2 */
+            #dynamic-photo .photo {
+                display: none;
+            }
+            
+            /* Section 2 - Rings */
             #section2 {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 20px;
-                overflow-y: auto;
+                padding: 20px 0;
             }
             
-            .preview-container {
-                padding-right: 0;
-                padding-bottom: 30px;
-                align-items: center;
-            }
-            
-            .controls {
-                width: 100%;
-                max-width: 500px;
+            .mobile-section2 {
+                display: flex;
                 flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-buttons {
+                align-items: center;
                 width: 100%;
-                justify-content: space-between;
             }
             
-            .large-photo-container {
-                width: 100%;
-                max-width: 500px;
-                height: 300px;
+            .mobile-large-photo {
+                width: 80%;
+                height: auto;
+                aspect-ratio: 4/3;
+                background-size: cover;
+                background-position: center;
+                background-color: #f5f5f5;
+                border: 1px solid #16126b;
+                margin-bottom: 20px;
             }
             
-            .thumb-gallery {
-                margin-top: 20px;
-            }
-            
-            .titles {
+            .mobile-titles {
                 text-align: center;
+                margin-bottom: 20px;
+                width: 80%;
             }
             
-            .left-parts-container, 
-            .right-parts-container {
-                display: none;
+            .mobile-title-top {
+                font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
+                font-size: 32px;
+                color: #d31d6a;
+                text-shadow: 1px 1px 1px #FFF;
+                margin-bottom: 10px;
             }
             
-            .left-strip {
-                display: none;
+            .mobile-title-bottom {
+                font-family: 'Segoe UI', Verdana, sans-serif;
+                font-size: 16px;
+                color: #16126b;
+                text-shadow: 1px 1px 1px #FFF;
             }
             
-            /* Секция 6 */
+            .mobile-thumb-gallery {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                width: 80%;
+                margin-bottom: 20px;
+            }
+            
+            .mobile-thumb-item {
+                aspect-ratio: 1/1;
+                background-size: cover;
+                background-position: center;
+                border: 1px solid #16126b;
+                cursor: pointer;
+            }
+            
+            .mobile-thumb-item.active {
+                border: 2px solid #d31d6a;
+            }
+            
+            .mobile-pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 80%;
+            }
+            
+            .mobile-prev-btn, .mobile-next-btn {
+                background: none;
+                border: none;
+                color: #16126b;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            
+            .mobile-page-btns {
+                display: flex;
+                gap: 15px;
+                margin: 0 15px;
+            }
+            
+            .mobile-page-btn {
+                background: none;
+                border: none;
+                color: #16126b;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            
+            .mobile-page-btn.active {
+                color: #FFF;
+            }
+            
+            /* Section 6 - Contact */
             #section6 {
                 flex-direction: column;
                 align-items: center;
-                padding: 30px 20px 0;
+                padding: 20px 0;
             }
             
             .contact-photo {
-                width: 190px;
-                height: 266px;
-                margin: 30px auto;
+                width: 80%;
+                height: auto;
+                aspect-ratio: 3/4;
                 margin-left: 0;
+                margin-top: 20px;
+                order: 3;
             }
             
             .contact-text {
+                order: 1;
+                width: 80%;
                 top: 0;
                 left: 0;
-                order: -1;
+                padding: 0;
             }
             
             .contact-title-1 {
                 font-size: 32px;
+                margin-top: 0;
             }
             
             .contact-title-2 {
@@ -835,122 +904,116 @@
                 margin-top: 15px;
             }
             
-            .contact-subtitle-1 {
-                font-size: 20px;
-                margin-top: 30px;
-            }
-            
+            .contact-subtitle-1,
             .contact-subtitle-2,
             .contact-subtitle-3 {
                 font-size: 16px;
-            }
-            
-            /* Стили для всех секций на мобильных */
-            .section {
-                position: relative !important;
-                min-height: 100vh;
-                transform: none !important;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 20px;
-                text-align: center;
-            }
-            
-            .sections-container {
-                position: relative;
                 height: auto;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
+                margin-top: 8px;
+                order: 4;
             }
             
-            .section-title {
-                font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
-                font-size: 36px;
-                color: #16126b;
-                text-shadow: 2px 2px 2px #FFF;
-                margin-bottom: 30px;
+            /* Порядок элементов */
+            .contact-title-1,
+            .contact-title-2 {
+                order: 1;
             }
             
-            .section-content {
-                max-width: 90%;
-                color: #16126b;
-                font-size: 18px;
-                line-height: 1.6;
+            .contact-photo {
+                order: 2;
             }
             
-            /* Стили для галереи в секции 2 */
-            .mobile-gallery {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-                max-width: 500px;
-                margin-top: 20px;
+            .contact-subtitle-1,
+            .contact-subtitle-2,
+            .contact-subtitle-3 {
+                order: 3;
             }
             
-            .mobile-gallery-item {
-                width: 100%;
-                height: 200px;
-                background-size: cover;
-                background-position: center;
-                border: 1px solid #16126b;
+            /* Hide desktop elements on mobile */
+            .left-strip,
+            .left-parts-container,
+            .right-parts-container {
+                display: none;
+            }
+            
+            .preview-container {
+                display: none;
             }
         }
 
-        @media (max-width: 480px) { /* Маленькие телефоны */
+        @media (max-width: 767px) and (orientation: landscape) {
+            /* Mobile landscape orientation */
             .logo {
-                font-size: 28px;
+                font-size: 24px;
+                top: 15px;
+                right: 15px;
             }
             
-            #dynamic-photo {
-                width: 220px;
-                height: 300px;
+            .mobile-menu-btn {
+                top: 15px;
+                left: 15px;
             }
             
-            .large-photo-container {
-                height: 250px;
+            .sections-container {
+                top: 60px;
+                height: calc(100vh - 60px);
             }
             
-            .thumb-gallery {
-                grid-template-columns: repeat(3, 50px);
-                grid-template-rows: repeat(4, 50px);
-                gap: 8px;
+            .gallery {
+                width: 70%;
             }
             
-            .thumb-item {
-                width: 50px;
-                height: 50px;
+            .mobile-section2 {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-start;
             }
             
-            .title-top {
-                font-size: 36px;
+            .mobile-large-photo {
+                width: 45%;
+                margin-right: 5%;
             }
             
-            .contact-title-1 {
-                font-size: 28px;
+            .mobile-titles {
+                width: 45%;
+                text-align: left;
+                margin-bottom: 0;
             }
             
-            .section-title {
-                font-size: 28px;
+            .mobile-thumb-gallery {
+                width: 90%;
+                grid-template-columns: repeat(4, 1fr);
             }
             
-            .mobile-gallery {
-                grid-template-columns: 1fr;
+            .contact-text {
+                width: 90%;
+            }
+            
+            .contact-photo {
+                width: 60%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn" id="mobileMenuBtn">☰</div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" data-section="1" class="active">home</a>
+        <a href="#" data-section="2">rings</a>
+        <a href="#" data-section="3">earrings</a>
+        <a href="#" data-section="4">necklaces</a>
+        <a href="#" data-section="5">ouevre</a>
+        <a href="#" data-section="6">contact</a>
+    </div>
+    
     <!-- HEADER SECTION -->
     <header>
-        <button class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <div class="logo">Apertura JewelrY</div>
-        <nav class="menu" id="mainMenu">
+        <nav class="menu">
             <a href="#" data-section="1" class="active">home</a>
             <a href="#" data-section="2">rings</a>
             <a href="#" data-section="3">earrings</a>
@@ -989,40 +1052,33 @@
         
         <!-- RINGS SECTION -->
         <div class="section" id="section2">
-            <h2 class="section-title">Rings Collection</h2>
-            <div class="mobile-gallery">
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/1.jpg');"></div>
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/2.jpg');"></div>
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/3.jpg');"></div>
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/4.jpg');"></div>
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/5.jpg');"></div>
-                <div class="mobile-gallery-item" style="background-image: url('images/rings/6.jpg');"></div>
+            <!-- Mobile version of rings section -->
+            <div class="mobile-section2">
+                <div class="mobile-large-photo" id="mobileLargePhoto"></div>
+                <div class="mobile-titles">
+                    <h1 class="mobile-title-top" id="mobileTitleTop">Celestial Harmony</h1>
+                    <h2 class="mobile-title-bottom" id="mobileTitleBottom">Diamond & Platinum</h2>
+                </div>
+                <div class="mobile-thumb-gallery" id="mobileThumbGallery"></div>
+                <div class="mobile-pagination">
+                    <button class="mobile-prev-btn" id="mobilePrevBtn">&#10094; Prev</button>
+                    <div class="mobile-page-btns">
+                        <button class="mobile-page-btn active" data-page="1">1</button>
+                        <button class="mobile-page-btn" data-page="2">2</button>
+                    </div>
+                    <button class="mobile-next-btn" id="mobileNextBtn">Next &#10095;</button>
+                </div>
             </div>
         </div>
         
         <!-- EARRINGS SECTION -->
-        <div class="section" id="section3">
-            <h2 class="section-title">Earrings Collection</h2>
-            <div class="section-content">
-                <p>Discover our exquisite collection of handcrafted earrings, made with precious metals and gemstones.</p>
-            </div>
-        </div>
+        <div class="section" id="section3"></div>
         
         <!-- NECKLACES SECTION -->
-        <div class="section" id="section4">
-            <h2 class="section-title">Necklaces Collection</h2>
-            <div class="section-content">
-                <p>Elegant necklaces that complement any outfit, perfect for special occasions or everyday wear.</p>
-            </div>
-        </div>
+        <div class="section" id="section4"></div>
         
         <!-- OEUVRE SECTION -->
-        <div class="section" id="section5">
-            <h2 class="section-title">Oeuvre Collection</h2>
-            <div class="section-content">
-                <p>Our unique art pieces that combine jewelry craftsmanship with artistic expression.</p>
-            </div>
-        </div>
+        <div class="section" id="section5"></div>
         
         <!-- CONTACT SECTION -->
         <div class="section" id="section6">
@@ -1078,7 +1134,6 @@
                         <button class="next-photo-btn" id="nextPhotoBtn">Next Photo &#10095;</button>
                     </div>
                 </div>
-                <!-- Updated with smooth transition container -->
                 <div class="large-photo-container">
                     <div class="large-photo-frame" id="largePhoto1"></div>
                     <div class="large-photo-frame" id="largePhoto2"></div>
@@ -1121,9 +1176,6 @@
         const elements = {
             section1: document.getElementById('section1'),
             section2: document.getElementById('section2'),
-            section3: document.getElementById('section3'),
-            section4: document.getElementById('section4'),
-            section5: document.getElementById('section5'),
             section6: document.getElementById('section6'),
             leftStrip: document.getElementById('left-strip'),
             menuLinks: document.querySelectorAll('.menu a'),
@@ -1131,8 +1183,14 @@
             dynamicPhotos: document.querySelectorAll('#dynamic-photo .photo'),
             largePhoto1: document.getElementById('largePhoto1'),
             largePhoto2: document.getElementById('largePhoto2'),
-            menuToggle: document.getElementById('menuToggle'),
-            mainMenu: document.getElementById('mainMenu')
+            mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+            mobileMenu: document.getElementById('mobileMenu'),
+            mobileLargePhoto: document.getElementById('mobileLargePhoto'),
+            mobileTitleTop: document.getElementById('mobileTitleTop'),
+            mobileTitleBottom: document.getElementById('mobileTitleBottom'),
+            mobileThumbGallery: document.getElementById('mobileThumbGallery'),
+            mobilePrevBtn: document.getElementById('mobilePrevBtn'),
+            mobileNextBtn: document.getElementById('mobileNextBtn')
         };
         
         // Cache left and right parts
@@ -1146,7 +1204,7 @@
         // ===== GALLERY FUNCTIONALITY =====
         // Ring gallery data
         const ringTitles = [
-            { top: "r2errrony", bottom: "Diamond & Platinum" },
+            { top: "Celestial Harmony", bottom: "Diamond & Platinum" },
             { top: "Eternal Bloom", bottom: "Sapphire & Gold" },
             { top: "Twilight Spark", bottom: "Emerald & Silver" },
             { top: "Ocean Whisper", bottom: "Aquamarine & White Gold" },
@@ -1184,12 +1242,6 @@
             renderThumbnails();
             updateLargePhoto(0);
             updatePagination();
-            
-            // Disable pointer events for photos
-            document.querySelector('.large-photo-container').style.pointerEvents = 'none';
-            document.querySelectorAll('.large-photo-frame').forEach(frame => {
-                frame.style.pointerEvents = 'none';
-            });
         };
         
         // Render thumbnails based on current page
@@ -1282,14 +1334,9 @@
         const changePage = (page) => {
             if (page < 1 || page > 2) return;
             
-            // Stop slideshow when changing pages
-            if (isSlideshowPlaying) {
-                stopSlideshow();
-            }
-            
             currentPage = page;
             
-            // Set first photo on new page
+            // FIX: Set first photo on new page
             if (page === 1) {
                 currentRingIndex = 0; // First photo on page 1
             } else {
@@ -1354,6 +1401,104 @@
             }
         };
         
+        // ===== MOBILE GALLERY FUNCTIONALITY =====
+        // Initialize mobile gallery
+        const initMobileGallery = () => {
+            const thumbGallery = document.getElementById('mobileThumbGallery');
+            thumbGallery.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * 12;
+            const endIndex = Math.min(startIndex + 12, 24);
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                const thumbItem = document.createElement('div');
+                thumbItem.className = 'mobile-thumb-item';
+                thumbItem.dataset.index = i;
+                thumbItem.style.backgroundImage = `url('images/rings/${i + 1}s.jpg')`;
+                
+                if (i === currentRingIndex) {
+                    thumbItem.classList.add('active');
+                }
+                
+                thumbItem.addEventListener('click', () => {
+                    currentRingIndex = i;
+                    updateMobileLargePhoto(i);
+                    updateActiveMobileThumb();
+                });
+                
+                thumbGallery.appendChild(thumbItem);
+            }
+            
+            updateMobileLargePhoto(currentRingIndex);
+        };
+        
+        const updateMobileLargePhoto = (index) => {
+            elements.mobileLargePhoto.style.backgroundImage = `url('images/rings/${index + 1}.jpg')`;
+            elements.mobileTitleTop.textContent = ringTitles[index].top;
+            elements.mobileTitleBottom.textContent = ringTitles[index].bottom;
+            
+            updateActiveMobileThumb();
+        };
+        
+        const updateActiveMobileThumb = () => {
+            document.querySelectorAll('.mobile-thumb-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            const currentThumb = document.querySelector(`.mobile-thumb-item[data-index="${currentRingIndex}"]`);
+            if (currentThumb) {
+                currentThumb.classList.add('active');
+            }
+        };
+        
+        // Mobile pagination
+        const changeMobilePage = (page) => {
+            if (page < 1 || page > 2) return;
+            
+            currentPage = page;
+            
+            // Set first photo on new page
+            if (page === 1) {
+                currentRingIndex = 0; // First photo on page 1
+            } else {
+                currentRingIndex = 12; // First photo on page 2 (index 12)
+            }
+            
+            initMobileGallery();
+            updateMobilePagination();
+        };
+        
+        const updateMobilePagination = () => {
+            const prevBtn = document.getElementById('mobilePrevBtn');
+            const nextBtn = document.getElementById('mobileNextBtn');
+            
+            // Hide/show buttons based on current page
+            prevBtn.style.visibility = currentPage === 1 ? 'hidden' : 'visible';
+            nextBtn.style.visibility = currentPage === 2 ? 'hidden' : 'visible';
+            
+            // Update active page button
+            document.querySelectorAll('.mobile-page-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.page) === currentPage);
+            });
+        };
+        
+        // Navigate to next/previous photo
+        const navigateMobilePhoto = (direction) => {
+            if (direction === 'next') {
+                currentRingIndex = (currentRingIndex + 1) % 24;
+            } else {
+                currentRingIndex = (currentRingIndex - 1 + 24) % 24;
+            }
+            
+            // Update page if needed
+            const newPage = Math.floor(currentRingIndex / 12) + 1;
+            if (newPage !== currentPage) {
+                changeMobilePage(newPage);
+            } else {
+                updateMobileLargePhoto(currentRingIndex);
+            }
+        };
+        
         // ===== UTILITY FUNCTIONS =====
         /**
          * Rotates photos in the gallery
@@ -1381,19 +1526,6 @@
             if (isAnimating) return;
             isAnimating = true;
             
-            // Для мобильных устройств - обычный скроллинг
-            if (window.innerWidth <= 767) {
-                // Прокручиваем к текущей секции
-                const section = document.getElementById(`section${currentSection}`);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                }
-                
-                isAnimating = false;
-                updateMenuActiveState();
-                return;
-            }
-            
             // Остановка слайдшоу при уходе с секции
             if (currentSection !== 2 && isSlideshowPlaying) {
                 stopSlideshow();
@@ -1404,22 +1536,10 @@
             elements.section2.style.transform = 
                 currentSection < 2 ? 'translateY(100%)' : 
                 currentSection > 2 ? 'translateY(-100%)' : 'translateY(0)';
-            elements.section3.style.transform = 
-                currentSection < 3 ? 'translateY(100%)' : 
-                currentSection > 3 ? 'translateY(-100%)' : 'translateY(0)';
-            elements.section4.style.transform = 
-                currentSection < 4 ? 'translateY(100%)' : 
-                currentSection > 4 ? 'translateY(-100%)' : 'translateY(0)';
-            elements.section5.style.transform = 
-                currentSection < 5 ? 'translateY(100%)' : 
-                currentSection > 5 ? 'translateY(-100%)' : 'translateY(0)';
             elements.section6.style.transform = currentSection < 6 ? 'translateY(100%)' : 'translateY(0)';
             
             elements.section1.style.zIndex = currentSection === 1 ? '100' : '50';
             elements.section2.style.zIndex = currentSection === 2 ? '100' : '50';
-            elements.section3.style.zIndex = currentSection === 3 ? '100' : '50';
-            elements.section4.style.zIndex = currentSection === 4 ? '100' : '50';
-            elements.section5.style.zIndex = currentSection === 5 ? '100' : '50';
             elements.section6.style.zIndex = currentSection === 6 ? '100' : '50';
             
             // Left strip
@@ -1458,8 +1578,13 @@
             }
             
             // Initialize gallery when section 2 is active
-            if (currentSection === 2 && !document.getElementById('thumbGallery').innerHTML) {
+            if (currentSection === 2 && window.innerWidth > 767 && !document.getElementById('thumbGallery').innerHTML) {
                 initGallery();
+            }
+            
+            // Initialize mobile gallery when section 2 is active
+            if (currentSection === 2 && window.innerWidth <= 767 && !document.querySelector('.mobile-thumb-item')) {
+                initMobileGallery();
             }
             
             // Reset animation state
@@ -1491,42 +1616,6 @@
             return false;
         };
         
-        // ===== TOUCH SCROLLING =====
-        let touchStartY = 0;
-        let touchEndY = 0;
-        let touchStartTime = 0;
-        const TOUCH_THRESHOLD = 50; // минимальное расстояние для свайпа
-        const TOUCH_TIME_THRESHOLD = 300; // максимальное время для свайпа (мс)
-
-        function handleTouchStart(e) {
-            touchStartY = e.touches[0].clientY;
-            touchStartTime = new Date().getTime();
-        }
-
-        function handleTouchMove(e) {
-            touchEndY = e.touches[0].clientY;
-        }
-
-        function handleTouchEnd() {
-            const touchDuration = new Date().getTime() - touchStartTime;
-            const touchDistance = touchStartY - touchEndY;
-            
-            // Определяем был ли это свайп (а не просто касание)
-            if (Math.abs(touchDistance) > TOUCH_THRESHOLD && touchDuration < TOUCH_TIME_THRESHOLD) {
-                if (touchDistance > 0) {
-                    // Свайп вверх - переход вниз
-                    if (handleScroll('down')) {
-                        updateSections();
-                    }
-                } else {
-                    // Свайп вниз - переход вверх
-                    if (handleScroll('up')) {
-                        updateSections();
-                    }
-                }
-            }
-        }
-
         // ===== EVENT HANDLERS =====
         /**
          * Setup all event listeners
@@ -1534,24 +1623,20 @@
         const setupEventListeners = () => {
             // Mouse wheel
             window.addEventListener('wheel', e => {
-                if (window.innerWidth > 767) {
-                    if (handleScroll(e.deltaY > 0 ? 'down' : 'up')) {
-                        updateSections();
-                        e.preventDefault();
-                    }
+                if (handleScroll(e.deltaY > 0 ? 'down' : 'up')) {
+                    updateSections();
+                    e.preventDefault();
                 }
             }, { passive: false });
             
             // Keyboard navigation
             window.addEventListener('keydown', e => {
-                if (window.innerWidth > 767) {
-                    if (e.key === 'ArrowDown' && handleScroll('down')) {
-                        updateSections();
-                        e.preventDefault();
-                    } else if (e.key === 'ArrowUp' && handleScroll('up')) {
-                        updateSections();
-                        e.preventDefault();
-                    }
+                if (e.key === 'ArrowDown' && handleScroll('down')) {
+                    updateSections();
+                    e.preventDefault();
+                } else if (e.key === 'ArrowUp' && handleScroll('up')) {
+                    updateSections();
+                    e.preventDefault();
                 }
             });
             
@@ -1567,6 +1652,24 @@
                 }
             });
             
+            // Mobile menu navigation
+            document.querySelector('.mobile-menu').addEventListener('click', e => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    const section = parseInt(e.target.dataset.section);
+                    if (section && section !== currentSection && !isAnimating) {
+                        currentSection = section;
+                        updateSections();
+                    }
+                }
+            });
+            
+            // Mobile menu toggle
+            elements.mobileMenuBtn.addEventListener('click', () => {
+                elements.mobileMenu.style.display = 
+                    elements.mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
             // Manual hover for 3D link
             elements.d3Link.addEventListener('mouseenter', () => {
                 elements.d3Link.querySelector('.default-img').style.opacity = 0;
@@ -1579,15 +1682,8 @@
             });
             
             // Gallery event listeners
-            document.getElementById('prevBtn').addEventListener('click', () => {
-                if (isSlideshowPlaying) stopSlideshow();
-                changePage(1);
-            });
-            
-            document.getElementById('nextBtn').addEventListener('click', () => {
-                if (isSlideshowPlaying) stopSlideshow();
-                changePage(2);
-            });
+            document.getElementById('prevBtn').addEventListener('click', () => changePage(1));
+            document.getElementById('nextBtn').addEventListener('click', () => changePage(2));
             
             document.querySelectorAll('.page-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -1608,7 +1704,18 @@
             
             document.getElementById('playBtn').addEventListener('click', toggleSlideshow);
             
-            // NEW: Enhanced image protection
+            // Mobile gallery event listeners
+            document.getElementById('mobilePrevBtn').addEventListener('click', () => changeMobilePage(1));
+            document.getElementById('mobileNextBtn').addEventListener('click', () => changeMobilePage(2));
+            
+            document.querySelectorAll('.mobile-page-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = parseInt(btn.dataset.page);
+                    changeMobilePage(page);
+                });
+            });
+            
+            // Prevent context menu on all gallery elements
             const preventImageSearch = (e) => {
                 e.preventDefault();
                 return false;
@@ -1619,43 +1726,21 @@
                 ...document.querySelectorAll('.gallery-item'),
                 ...document.querySelectorAll('.thumb-item'),
                 ...document.querySelectorAll('.large-photo-frame'),
-                ...document.querySelectorAll('.mobile-gallery-item'),
                 document.querySelector('.large-photo-container')
             ];
             
             galleryElements.forEach(element => {
                 element.addEventListener('contextmenu', preventImageSearch);
-                element.addEventListener('dragstart', preventImageSearch);
-                element.addEventListener('selectstart', preventImageSearch);
                 element.addEventListener('mousedown', (e) => {
-                    if (e.button === 2 || e.button === 0) preventImageSearch(e);
+                    if (e.button === 2) preventImageSearch(e);
                 });
             });
             
             // Click navigation for large photo
-            document.querySelector('.large-photo-container')?.addEventListener('click', () => {
+            document.querySelector('.large-photo-container').addEventListener('click', () => {
                 navigatePhoto('next');
                 if (isSlideshowPlaying) stopSlideshow();
             });
-            
-            // Burger menu functionality
-            elements.menuToggle.addEventListener('click', function() {
-                elements.mainMenu.classList.toggle('active');
-                elements.menuToggle.classList.toggle('active');
-            });
-
-            // Close menu when clicking on links
-            document.querySelectorAll('.menu a').forEach(item => {
-                item.addEventListener('click', function() {
-                    elements.mainMenu.classList.remove('active');
-                    elements.menuToggle.classList.remove('active');
-                });
-            });
-            
-            // Touch events for mobile scrolling
-            document.addEventListener('touchstart', handleTouchStart, { passive: true });
-            document.addEventListener('touchmove', handleTouchMove, { passive: true });
-            document.addEventListener('touchend', handleTouchEnd, { passive: true });
         };
         
         /**
@@ -1697,13 +1782,9 @@
             elements.dynamicPhotos[0].classList.add('active');
             
             // Initialize both large photo frames
-            if (elements.largePhoto1) {
-                elements.largePhoto1.classList.add('active');
-                elements.largePhoto1.style.backgroundImage = "url('images/rings/1.jpg')";
-            }
-            if (elements.largePhoto2) {
-                elements.largePhoto2.style.backgroundImage = "url('images/rings/1.jpg')";
-            }
+            elements.largePhoto1.classList.add('active');
+            elements.largePhoto1.style.backgroundImage = "url('images/rings/1.jpg')";
+            elements.largePhoto2.style.backgroundImage = "url('images/rings/1.jpg')";
             
             updateSections();
         };
