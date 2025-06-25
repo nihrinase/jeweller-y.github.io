@@ -34,7 +34,6 @@
             height: 100vh;
             position: relative;
             font-family: 'Segoe UI', Verdana, sans-serif;
-            touch-action: pan-y; /* Разрешаем вертикальный скролл на тач-устройствах */
         }
         
         body::before {
@@ -45,7 +44,6 @@
             width: 100%;
             height: 100%;
             background-image: url('images/back29.png');
-            background-size: cover;
             z-index: 1;
         }
         
@@ -55,10 +53,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 10vh; /* Резиновая высота */
-            min-height: 70px;
+            height: 90px;
             background: url('images/back29.png');
-            background-size: cover;
             z-index: 100;
             display: flex;
             justify-content: space-between;
@@ -68,26 +64,25 @@
         
         .logo {
             font-family: 'Economica', sans-serif;
-            font-size: 4.5vmin; /* Резиновый размер шрифта */
+            font-size: 44px;
             color: #FFF;
             text-shadow: 2px 2px 2px #d31d6a;
             font-weight: 600;
-            margin-left: 5%; /* Резиновый отступ */
+            margin-left: 134px;
         }
         
         .menu {
             display: flex;
-            padding-bottom: 2vh; /* Резиновый отступ */
-            margin-right: 5%; /* Резиновый отступ */
+            padding-bottom: 27px;
+            margin-right: 134px;
         }
         
         .menu a {
-            font-size: 2vmin; /* Резиновый размер шрифта */
+            font-size: 18px;
             color: #FFF;
             text-decoration: none;
-            margin-left: 1.5vmin; /* Резиновый отступ */
+            margin-left: 20px;
             transition: all 0.3s ease;
-            white-space: nowrap; /* Предотвращаем перенос */
         }
         
         .menu a:hover {
@@ -101,10 +96,10 @@
         /* ===== SECTIONS CONTAINER ===== */
         .sections-container {
             position: absolute;
-            top: 10vh; /* Резиновая высота */
+            top: 90px;
             left: 0;
             width: 100%;
-            height: 90vh; /* Резиновая высота */
+            height: calc(100vh - 90px);
             overflow: hidden;
             z-index: 1;
         }
@@ -118,7 +113,6 @@
             transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             will-change: transform;
             background: url('images/back29.png');
-            background-size: cover;
             backface-visibility: hidden;
             transform-style: preserve-3d;
         }
@@ -127,24 +121,20 @@
         #section1 {
             display: flex;
             justify-content: center;
-            padding-top: 5vh; /* Резиновый отступ */
+            padding-top: 48px;
             position: relative;
         }
         
         .gallery {
             display: flex;
-            gap: 1vmin; /* Резиновый отступ */
-            height: 45vh; /* Резиновая высота */
-            margin-top: 1vh; /* Резиновый отступ */
-            flex-wrap: wrap; /* Перенос на маленьких экранах */
-            justify-content: center;
+            gap: 6px;
+            height: 400px;
+            margin-top: 5px;
         }
         
         .gallery-item {
-            width: 20vmin; /* Резиновая ширина */
-            height: 45vh; /* Резиновая высота */
-            max-width: 189px;
-            max-height: 400px;
+            width: 189px;
+            height: 400px;
             border: 1px solid #16126b;
             background-size: cover;
             background-position: center;
@@ -178,9 +168,9 @@
         /* ===== UI ELEMENTS ===== */
         .portfolio-link {
             position: absolute;
-            top: 1vh; /* Резиновый отступ */
-            left: 10%; /* Резиновый отступ */
-            font-size: 2vmin; /* Резиновый размер шрифта */
+            top: 5px;
+            left: 204px;
+            font-size: 18px;
             color: #FFF;
             z-index: 10;
             letter-spacing: 2px;
@@ -192,12 +182,10 @@
         
         .d3-link {
             position: absolute;
-            top: 1vh; /* Резиновый отступ */
-            right: 10%; /* Резиновый отступ */
-            width: 4vmin; /* Резиновая ширина */
-            min-width: 30px;
-            height: 3vmin; /* Резиновая высота */
-            min-height: 20px;
+            top: 5px;
+            right: 214px;
+            width: 40px;
+            height: 30px;
             z-index: 1000;
         }
         
@@ -231,13 +219,11 @@
         /* ===== SIDE PANELS ===== */
         .left-strip {
             position: absolute;
-            top: 10vh; /* Резиновая высота */
+            top: 90px;
             left: 0;
-            width: 3vmin; /* Резиновая ширина */
-            min-width: 20px;
-            height: 90vh; /* Резиновая высота */
+            width: 30px;
+            height: calc(100vh - 90px);
             background: url('images/back29.png');
-            background-size: cover;
             z-index: 4;
             transform: translateY(100%);
             transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -245,20 +231,20 @@
         
         .left-parts-container {
             position: absolute;
-            top: 12vh; /* Резиновая высота */
-            left: 3vmin; /* Резиновая ширина */
+            top: 120px;
+            left: 30px;
             width: 40%;
-            height: 88vh; /* Резиновая высота */
+            height: calc(100vh - 90px);
             z-index: 10;
             overflow: hidden;
         }
         
         .right-parts-container {
             position: absolute;
-            top: 10vh; /* Резиновая высота */
+            top: 90px;
             right: 0;
-            width: calc(60% - 3vmin); /* Резиновая ширина */
-            height: calc(100vh - 3vmin); /* Резировая высота */
+            width: calc(60% - 30px);
+            height: calc(100vh - 30px);
             pointer-events: none;
         }
         
@@ -273,12 +259,11 @@
             backface-visibility: hidden;
             transform-style: preserve-3d;
             background: url('images/back29.png');
-            background-size: cover;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding-top: 5vh; /* Резировая высота */
+            padding-top: 50px;
             box-sizing: border-box;
         }
         
@@ -293,7 +278,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3vmin; /* Резиновый размер шрифта */
+            font-size: 32px;
             color: white;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -320,11 +305,11 @@
             position: relative;
             z-index: 2;
             color: white;
-            font-size: 2.5vmin; /* Резиновый размер шрифта */
+            font-size: 24px;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
             text-align: center;
-            padding: 1vmin; /* Резировый отступ */
+            padding: 10px;
             background: rgba(0,0,0,0.3);
             border-radius: 5px;
         }
@@ -336,7 +321,7 @@
             transform: translate(-50%, -50%);
             z-index: 2;
             color: white;
-            font-size: 8vmin; /* Резиновый размер шрифта */
+            font-size: 80px;
             font-weight: bold;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
         }
@@ -345,31 +330,30 @@
         #section6 {
             display: flex;
             justify-content: space-between;
-            padding: 6vh 5% 0; /* Резировые отступы */
+            padding: 60px 134px 0;
             align-items: flex-start;
-            flex-wrap: wrap; /* Перенос на маленьких экранах */
         }
         
         .contact-photo {
-            width: 25vmin; /* Резировая ширина */
-            height: 35vh; /* Резировая высота */
-            min-width: 200px;
-            min-height: 250px;
+            width: 250px;
+            height: 350px;
             border: 1px solid #16126b;
             background-image: url('images/foto3.jpg');
             background-size: cover;
             background-position: center;
-            margin: 0 auto 3vh; /* Центрирование на маленьких экранах */
+            margin-left: 70px;
+            flex-shrink: 0;
         }
         
         .contact-text {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            position: relative;
+            top: -10px;
+            left: -40px;
             align-items: center;
             width: 100%;
-            padding: 0 5%;
-            text-align: center;
         }
         
         .contact-title-1, 
@@ -383,7 +367,7 @@
         
         .contact-title-1 {
             font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
-            font-size: 4.5vmin; /* Резиновый размер шрифта */
+            font-size: 48px;
             color: #16126b;
             text-shadow: 2px 2px 2px #FFF;
             line-height: 1.2;
@@ -391,55 +375,60 @@
         
         .contact-title-2 {
             font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
-            font-size: 3.5vmin; /* Резиновый размер шрифта */
+            font-size: 36px;
             color: #16126b;
             text-shadow: 2px 2px 2px #FFF;
-            margin-top: 3vh; /* Резировый отступ */
+            margin-top: 30px;
             line-height: 1.2;
         }
         
         .contact-subtitle-1 {
             font-family: 'Segoe UI', Verdana, sans-serif;
-            font-size: 3vmin; /* Резиновый размер шрифта */
+            font-size: 30px;
             color: #16126b;
-            margin-top: 13vh; /* Резировый отступ */
+            margin-top: 130px;
+            height: 30px;
+            line-height: 30px;
         }
         
         .contact-subtitle-2 {
             font-family: 'Segoe UI', Verdana, sans-serif;
-            font-size: 2vmin; /* Резиновый размер шрифта */
+            font-size: 18px;
             color: #16126b;
-            margin-top: 1.5vh; /* Резировый отступ */
+            margin-top: 15px;
+            height: 18px;
+            line-height: 18px;
         }
         
         .contact-subtitle-3 {
             font-family: 'Segoe UI', Verdana, sans-serif;
-            font-size: 2vmin; /* Резиновый размер шрифта */
+            font-size: 18px;
             color: #16126b;
-            margin-top: 1.5vh; /* Резировый отступ */
+            margin-top: 15px;
+            height: 18px;
+            line-height: 18px;
         }
         
         /* ===== RINGS GALLERY SECTION ===== */
         .thumb-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 10vmin); /* Резировая ширина */
-            grid-template-rows: repeat(4, 10vmin); /* Резировая высота */
-            gap: 1vmin; /* Резировый отступ */
-            margin-top: 1vmin; /* Резировый отступ */
+            grid-template-columns: repeat(3, 75px);
+            grid-template-rows: repeat(4, 75px);
+            gap: 10px;
+            margin-top: 5px;
             z-index: 10;
-            max-width: 400px;
-            margin: 0 auto;
         }
         
         .thumb-item {
-            width: 100%;
-            height: 100%;
+            width: 75px;
+            height: 75px;
             background-color: #f5f5f5;
             border: 1px solid #16126b;
             background-size: cover;
             background-position: center;
             cursor: pointer;
             position: relative;
+            /* Исправление для промежутка */
             background-origin: content-box;
             padding: 2px;
             background-clip: content-box;
@@ -458,7 +447,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 7vh; /* Резировый отступ */
+            margin-top: 70px;
             width: 100%;
             position: relative;
             z-index: 10;
@@ -469,11 +458,10 @@
             border: none;
             color: #16126b;
             cursor: pointer;
-            font-size: 1.8vmin; /* Резиновый размер шрифта */
+            font-size: 14px;
             position: absolute;
             top: 0;
             transition: color 0.3s;
-            white-space: nowrap;
         }
         
         .prev-btn:hover, .next-btn:hover {
@@ -482,17 +470,18 @@
         
         .prev-btn {
             left: 0;
-            margin-left: 10%; /* Резировый отступ */
+            margin-left: 155px;
+            visibility: hidden;
         }
         
         .next-btn {
             right: 0;
-            margin-right: 10%; /* Резировый отступ */
+            margin-right: 155px;
         }
         
         .page-btns {
             display: flex;
-            gap: 2vmin; /* Резировый отступ */
+            gap: 20px;
         }
         
         .page-btn {
@@ -500,7 +489,7 @@
             border: none;
             color: #16126b;
             cursor: pointer;
-            font-size: 1.8vmin; /* Резиновый размер шрифта */
+            font-size: 14px;
             transition: color 0.3s;
         }
         
@@ -515,19 +504,16 @@
         .preview-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 0 5% 10vh; /* Резировые отступы */
+            align-items: flex-start;
+            padding-right: 104px;
+            padding-bottom: 100px;
         }
         
         .controls {
             display: flex;
-            flex-wrap: wrap; /* Перенос на маленьких экранах */
-            justify-content: center;
-            gap: 2vmin; /* Резировый отступ */
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 3vh; /* Резировый отступ */
+            justify-content: space-between;
+            width: 500px;
+            margin-bottom: 30px;
         }
         
         .play-btn, .prev-photo-btn, .next-photo-btn {
@@ -535,10 +521,8 @@
             border: none;
             color: #16126b;
             cursor: pointer;
-            font-size: 1.8vmin; /* Резиновый размер шрифта */
+            font-size: 14px;
             transition: color 0.3s;
-            padding: 1vmin 2vmin; /* Резировые отступы */
-            white-space: nowrap;
         }
         
         .play-btn:hover, .prev-photo-btn:hover, .next-photo-btn:hover {
@@ -551,18 +535,15 @@
         
         .nav-buttons {
             display: flex;
-            gap: 2vmin; /* Резировый отступ */
+            gap: 20px;
         }
         
         /* Smooth photo transition container */
         .large-photo-container {
             position: relative;
-            width: 50vmin; /* Резировая ширина */
-            height: 35vh; /* Резировая высота */
-            max-width: 500px;
-            max-height: 350px;
+            width: 500px;
+            height: 350px;
             overflow: hidden;
-            margin: 0 auto;
         }
         
         .large-photo-frame {
@@ -587,21 +568,20 @@
         }
         
         .titles {
-            margin-top: 4.5vh; /* Резировый отступ */
-            text-align: center;
+            margin-top: 45px;
         }
         
         .title-top {
             font-family: 'Economica', 'Segoe UI', Verdana, sans-serif;
-            font-size: 4.5vmin; /* Резиновый размер шрифта */
+            font-size: 44px;
             color: #d31d6a;
             text-shadow: 2px 2px 2px #FFF;
-            margin-bottom: 1.5vh; /* Резировый отступ */
+            margin-bottom: 15px;
         }
         
         .title-bottom {
             font-family: 'Segoe UI', Verdana, sans-serif;
-            font-size: 2vmin; /* Резиновый размер шрифта */
+            font-size: 18px;
             color: #16126b;
             text-shadow: 2px 2px 2px #FFF;
         }
@@ -614,7 +594,7 @@
             -ms-user-drag: none;
         }
         
-        /* Prevent image search icon */
+        /* NEW: Prevent image search icon */
         .large-photo-container, 
         .large-photo-frame {
             -webkit-touch-callout: none;
@@ -630,97 +610,286 @@
         .prev-photo-btn, .next-photo-btn {
             pointer-events: auto;
         }
-        
-        /* ===== MEDIA QUERIES ===== */
-        @media (max-width: 768px) {
+     /* ===== БУРГЕР-МЕНЮ ===== */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            position: absolute;
+            left: 20px;
+            top: 32px;
+            z-index: 200;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu.active {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 18, 107, 0.95);
+            padding: 20px 0;
+            z-index: 150;
+        }
+
+        /* ===== АДАПТИВНЫЕ СТИЛИ ===== */
+        @media (max-width: 1024px) { /* Планшеты */
+            .logo {
+                margin-left: 20px;
+                font-size: 36px;
+            }
+            
             .menu {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding-bottom: 1vh;
-            }
-            
-            .menu a {
-                font-size: 2.5vmin;
-                margin: 0 1.5vmin;
-            }
-            
-            .gallery {
-                height: auto;
-                padding: 1vh;
+                margin-right: 20px;
             }
             
             .gallery-item {
-                width: 45%;
-                height: 30vh;
-                margin-bottom: 1vh;
+                width: 150px;
+                height: 320px;
             }
             
             .contact-photo {
-                width: 80%;
-                height: 40vh;
-                margin-bottom: 3vh;
-            }
-            
-            .thumb-gallery {
-                grid-template-columns: repeat(3, 15vmin);
-                grid-template-rows: repeat(4, 15vmin);
-            }
-            
-            .large-photo-container {
-                width: 80vw;
-                height: 40vh;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 5vmin;
-                margin-left: 2%;
-            }
-            
-            .menu a {
-                font-size: 3vmin;
-                margin: 0 1vmin;
-            }
-            
-            .gallery-item {
-                width: 90%;
-                height: 25vh;
+                width: 200px;
+                height: 280px;
+                margin-left: 30px;
             }
             
             .contact-title-1 {
-                font-size: 5vmin;
+                font-size: 36px;
             }
             
             .contact-title-2 {
-                font-size: 4vmin;
+                font-size: 28px;
             }
             
             .contact-subtitle-1 {
-                font-size: 4vmin;
+                font-size: 24px;
+                margin-top: 80px;
             }
             
-            .contact-subtitle-2, .contact-subtitle-3 {
-                font-size: 3vmin;
+            .large-photo-container {
+                width: 400px;
+                height: 280px;
             }
             
-            .controls {
+            .thumb-gallery {
+                grid-template-columns: repeat(3, 60px);
+                grid-template-rows: repeat(4, 60px);
+            }
+            
+            .thumb-item {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 767px) { /* Телефоны */
+            /* Шапка */
+            header {
+                justify-content: center;
+                padding: 0;
+            }
+            
+            .logo {
+                margin: 0 auto;
+                font-size: 32px;
+                text-align: center;
+            }
+            
+            .menu {
+                display: none;
+                margin-right: 0;
+                padding-bottom: 0;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            /* Секция 1 */
+            #section1 {
                 flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+            }
+            
+            .portfolio-link {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .d3-link {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .gallery {
+                flex-direction: column;
+                height: auto;
+                margin-top: 30px;
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                width: 250px;
+                height: 350px;
+                display: none;
+            }
+            
+            #dynamic-photo {
+                display: block;
+            }
+            
+            /* Секция 2 */
+            #section2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                overflow-y: auto;
+            }
+            
+            .preview-container {
+                padding-right: 0;
+                padding-bottom: 30px;
                 align-items: center;
             }
             
-            .nav-buttons {
+            .controls {
+                width: 100%;
+                max-width: 500px;
                 flex-direction: column;
-                gap: 1vmin;
+                gap: 15px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .large-photo-container {
+                width: 100%;
+                max-width: 500px;
+                height: 300px;
+            }
+            
+            .thumb-gallery {
+                margin-top: 20px;
+            }
+            
+            .titles {
+                text-align: center;
+            }
+            
+            .left-parts-container, 
+            .right-parts-container {
+                display: none;
+            }
+            
+            /* Секция 6 */
+            #section6 {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 20px 0;
+            }
+            
+            .contact-photo {
+                width: 190px;
+                height: 266px;
+                margin: 30px auto;
+            }
+            
+            .contact-text {
+                top: 0;
+                left: 0;
+                order: -1;
+            }
+            
+            .contact-title-1 {
+                font-size: 32px;
+            }
+            
+            .contact-title-2 {
+                font-size: 24px;
+                margin-top: 15px;
+            }
+            
+            .contact-subtitle-1 {
+                font-size: 20px;
+                margin-top: 30px;
+            }
+            
+            .contact-subtitle-2,
+            .contact-subtitle-3 {
+                font-size: 16px;
+            }
+            
+            /* Общие */
+            .left-strip {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) { /* Маленькие телефоны */
+            .logo {
+                font-size: 28px;
+            }
+            
+            .gallery-item {
+                width: 220px;
+                height: 300px;
+            }
+            
+            .large-photo-container {
+                height: 250px;
+            }
+            
+            .thumb-gallery {
+                grid-template-columns: repeat(3, 50px);
+                grid-template-rows: repeat(4, 50px);
+                gap: 8px;
+            }
+            
+            .thumb-item {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .title-top {
+                font-size: 36px;
+            }
+            
+            .contact-title-1 {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
     <!-- HEADER SECTION -->
-    <header>
+     <header>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="logo">Apertura JewelrY</div>
-        <nav class="menu">
+        <nav class="menu" id="mainMenu">
             <a href="#" data-section="1" class="active">home</a>
             <a href="#" data-section="2">rings</a>
             <a href="#" data-section="3">earrings</a>
@@ -852,11 +1021,6 @@
         let animationTimeout = null;
         let photoInterval = null;
         let currentPhotoIndex = 0;
-        
-        // Touch support variables
-        let touchStartY = 0;
-        let touchStartX = 0;
-        let touchThreshold = 50;
         
         // ===== DOM ELEMENTS CACHE =====
         const elements = {
@@ -1202,33 +1366,6 @@
             return false;
         };
         
-        // ===== TOUCH SUPPORT =====
-        const handleTouchStart = (e) => {
-            touchStartY = e.touches[0].clientY;
-            touchStartX = e.touches[0].clientX;
-        };
-        
-        const handleTouchMove = (e) => {
-            if (isAnimating) return;
-            
-            const touchEndY = e.touches[0].clientY;
-            const touchEndX = e.touches[0].clientX;
-            
-            const diffY = touchStartY - touchEndY;
-            const diffX = touchStartX - touchEndX;
-            
-            // Проверяем, что это вертикальный свайп
-            if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > touchThreshold) {
-                const direction = diffY > 0 ? 'down' : 'up';
-                if (handleScroll(direction)) {
-                    updateSections();
-                    e.preventDefault();
-                }
-                touchStartY = touchEndY;
-                touchStartX = touchEndX;
-            }
-        };
-        
         // ===== EVENT HANDLERS =====
         /**
          * Setup all event listeners
@@ -1241,10 +1378,6 @@
                     e.preventDefault();
                 }
             }, { passive: false });
-            
-            // Touch events
-            window.addEventListener('touchstart', handleTouchStart, { passive: false });
-            window.addEventListener('touchmove', handleTouchMove, { passive: false });
             
             // Keyboard navigation
             window.addEventListener('keydown', e => {
@@ -1310,7 +1443,7 @@
             
             document.getElementById('playBtn').addEventListener('click', toggleSlideshow);
             
-            // Enhanced image protection
+            // NEW: Enhanced image protection
             const preventImageSearch = (e) => {
                 e.preventDefault();
                 return false;
@@ -1369,6 +1502,23 @@
                 img.onerror = () => console.warn('Image failed to load:', src);
             });
         };
+		
+		 // ===== БУРГЕР-МЕНЮ =====
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на пункт
+        document.querySelectorAll('.menu a').forEach(item => {
+            item.addEventListener('click', function() {
+                mainMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
         
         // ===== INITIALIZATION =====
         const init = () => {
